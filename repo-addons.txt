@@ -1,9 +1,0 @@
-# One add-on id per line. Build-Repo.ps1 will package these from your installed Kodi add-ons folder.
-# Version is NOT hardcoded here. The builder reads each version from the add-on's own addon.xml.
-script.artwork.curator
-script.library.ratings.scraper
-context.tpdb.artwork
-script.akl.texture.cache.cleaner
-
-# Planned Steam standalone addon. Leave it here; builder skips it if not installed yet.
-plugin.program.steam.collections

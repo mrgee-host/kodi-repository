@@ -1,193 +1,152 @@
 param(
-    [Parameter(Mandatory=$true)]
-    [string]$RepoRoot
+    [Parameter(Mandatory=$true)][string]$RepoRoot
 )
 
-$ErrorActionPreference = "Stop"
+$ErrorActionPreference = 'Stop'
 
 function Clean-PathArg([string]$p) {
     if ($null -eq $p) { return $p }
     return $p.Trim().Trim('"')
 }
 
-function Get-RelativePathPs51([string]$BasePath, [string]$TargetPath) {
-    $base = [System.IO.Path]::GetFullPath($BasePath).TrimEnd('\','/') + [System.IO.Path]::DirectorySeparatorChar
-    $target = [System.IO.Path]::GetFullPath($TargetPath)
-    $baseUri = New-Object System.Uri($base)
-    $targetUri = New-Object System.Uri($target)
-    $relUri = $baseUri.MakeRelativeUri($targetUri)
-    return [System.Uri]::UnescapeDataString($relUri.ToString()).Replace('\\','/')
+function Ensure-ZipFileSystem {
+    if (-not ([System.Management.Automation.PSTypeName]'System.IO.Compression.ZipFile').Type) {
+        Add-Type -AssemblyName System.IO.Compression.FileSystem
+    }
 }
 
-function Get-AddonXmlFromZip([string]$ZipPath) {
-    $tmp = Join-Path $env:TEMP ("kodi_repo_zipread_" + [guid]::NewGuid().ToString("N"))
-    New-Item -ItemType Directory -Force -Path $tmp | Out-Null
+function Get-RelativeWebPath([string]$BaseDir, [string]$FullPath) {
+    $base = (Resolve-Path $BaseDir).Path.TrimEnd('\') + '\'
+    $full = (Resolve-Path $FullPath).Path
+    $baseUri = New-Object System.Uri ($base.Replace('\','/'))
+    $fullUri = New-Object System.Uri ($full.Replace('\','/'))
+    $rel = $baseUri.MakeRelativeUri($fullUri).ToString()
+    return [System.Uri]::UnescapeDataString($rel)
+}
+
+function Read-AddonXml-FromZip([string]$ZipFile) {
+    Ensure-ZipFileSystem
+    $temp = Join-Path $env:TEMP ("kodi_index_" + [Guid]::NewGuid().ToString('N'))
+    New-Item -ItemType Directory -Force -Path $temp | Out-Null
     try {
-        Expand-Archive -LiteralPath $ZipPath -DestinationPath $tmp -Force
-        $xmlFile = Get-ChildItem -LiteralPath $tmp -Recurse -File -Filter "addon.xml" -ErrorAction SilentlyContinue |
-            Sort-Object { $_.FullName.Length } |
+        [System.IO.Compression.ZipFile]::ExtractToDirectory($ZipFile, $temp)
+        $addonXml = Get-ChildItem -LiteralPath $temp -Filter addon.xml -Recurse -Force |
+            Where-Object { $_.FullName -notmatch '__MACOSX' } |
             Select-Object -First 1
-        if (-not $xmlFile) { return $null }
-        [xml]$xml = Get-Content -LiteralPath $xmlFile.FullName -Raw -Encoding UTF8
-        if (-not $xml.addon -or -not $xml.addon.id -or -not $xml.addon.version) { return $null }
+        if (-not $addonXml) { return $null }
+        [xml]$xml = Get-Content -LiteralPath $addonXml.FullName -Raw
+        $id = [string]$xml.addon.id
+        $version = [string]$xml.addon.version
+        if ([string]::IsNullOrWhiteSpace($id) -or [string]::IsNullOrWhiteSpace($version)) { return $null }
+        $raw = Get-Content -LiteralPath $addonXml.FullName -Raw
+        $raw = $raw -replace '^\s*<\?xml[^>]*\?>\s*', ''
         return [pscustomobject]@{
-            Xml = $xml
-            XmlPath = $xmlFile.FullName
-            Id = [string]$xml.addon.id
-            Version = [string]$xml.addon.version
-            Source = $ZipPath
+            Id = $id
+            Version = $version
+            Xml = $raw.Trim()
+            Zip = $ZipFile
         }
     }
     finally {
-        Remove-Item -LiteralPath $tmp -Recurse -Force -ErrorAction SilentlyContinue
+        if (Test-Path $temp) { Remove-Item -LiteralPath $temp -Recurse -Force -ErrorAction SilentlyContinue }
     }
 }
 
-function Get-AddonXmlFromFolder([string]$FolderPath) {
-    $xmlPath = Join-Path $FolderPath "addon.xml"
-    if (-not (Test-Path -LiteralPath $xmlPath)) { return $null }
-    [xml]$xml = Get-Content -LiteralPath $xmlPath -Raw -Encoding UTF8
-    if (-not $xml.addon -or -not $xml.addon.id -or -not $xml.addon.version) { return $null }
-    return [pscustomobject]@{
-        Xml = $xml
-        XmlPath = $xmlPath
-        Id = [string]$xml.addon.id
-        Version = [string]$xml.addon.version
-        Source = $xmlPath
-    }
-}
-
-function Compare-KodiVersion([string]$A, [string]$B) {
+function Compare-VersionString([string]$a, [string]$b) {
     try {
-        $va = New-Object System.Version($A)
-        $vb = New-Object System.Version($B)
+        $va = [version]$a
+        $vb = [version]$b
         return $va.CompareTo($vb)
     } catch {
-        return [string]::Compare($A, $B, $true)
+        return [string]::Compare($a, $b, $true)
     }
-}
-
-function Strip-XmlDeclaration([string]$s) {
-    return ($s -replace '^\s*<\?xml[^>]*\?>\s*', '').Trim()
 }
 
 $RepoRoot = Clean-PathArg $RepoRoot
-$RepoRoot = (Resolve-Path -LiteralPath $RepoRoot).Path
+$RepoRoot = (Resolve-Path $RepoRoot).Path
 Write-Host "[repo] Updating index: $RepoRoot"
 
-$excludeNames = @('_tools', '_incoming_addons', '.git', '.github', '__pycache__')
-$itemsById = @{}
-$warnings = New-Object System.Collections.Generic.List[string]
+$all = @()
+$dirs = Get-ChildItem -LiteralPath $RepoRoot -Directory -Force | Where-Object {
+    $_.Name -notin @('_tools','.git','.github','_incoming_addons')
+}
 
-# Scan immediate add-on folders only. Kodi repo layout = repoRoot\addon.id\addon.id-version.zip
-$folders = Get-ChildItem -LiteralPath $RepoRoot -Directory -ErrorAction SilentlyContinue |
-    Where-Object { $excludeNames -notcontains $_.Name -and -not $_.Name.StartsWith('.') }
-
-foreach ($folder in $folders) {
-    $candidates = New-Object System.Collections.Generic.List[object]
-
-    $folderXml = Get-AddonXmlFromFolder $folder.FullName
-    if ($folderXml) { $candidates.Add($folderXml) | Out-Null }
-
-    $zips = Get-ChildItem -LiteralPath $folder.FullName -File -Filter "*.zip" -ErrorAction SilentlyContinue |
-        Sort-Object Name
-
+foreach ($dir in $dirs) {
+    $zips = Get-ChildItem -LiteralPath $dir.FullName -Filter '*.zip' -File -ErrorAction SilentlyContinue
     foreach ($zip in $zips) {
-        $zi = Get-AddonXmlFromZip $zip.FullName
-        if ($zi) {
-            $candidates.Add($zi) | Out-Null
+        $item = Read-AddonXml-FromZip $zip.FullName
+        if ($null -eq $item) {
+            Write-Warning "addon.xml not found/readable inside zip: $($zip.FullName)"
         } else {
-            $warnings.Add("WARNING: addon.xml not found/readable inside zip: $($zip.FullName)") | Out-Null
+            $all += $item
         }
-    }
-
-    if ($candidates.Count -eq 0) { continue }
-
-    # For this folder, choose highest version. Prefer zip over folder when equal, because zip is the downloadable artifact.
-    $best = $null
-    foreach ($c in $candidates) {
-        if (-not $best) { $best = $c; continue }
-        $cmp = Compare-KodiVersion $c.Version $best.Version
-        if ($cmp -gt 0) { $best = $c; continue }
-        if ($cmp -eq 0 -and $c.Source.ToLowerInvariant().EndsWith('.zip')) { $best = $c }
-    }
-
-    if (-not $itemsById.ContainsKey($best.Id)) {
-        $itemsById[$best.Id] = $best
-    } else {
-        $old = $itemsById[$best.Id]
-        if ((Compare-KodiVersion $best.Version $old.Version) -gt 0) { $itemsById[$best.Id] = $best }
     }
 }
 
-foreach ($w in $warnings) { Write-Warning $w }
-
-if ($itemsById.Count -eq 0) {
-    Write-Error "No valid Kodi add-on zips/folders found. addons.xml was not updated."
+if ($all.Count -lt 1) {
+    Write-Error "No valid Kodi add-on zips found. addons.xml was not updated."
     exit 1
 }
 
-$ordered = $itemsById.Values | Sort-Object Id
-$addonXmlParts = New-Object System.Collections.Generic.List[string]
-$linkItems = New-Object System.Collections.Generic.List[string]
-
-foreach ($item in $ordered) {
-    $addonXmlParts.Add((Strip-XmlDeclaration $item.Xml.OuterXml)) | Out-Null
-
-    # Find downloadable zip for the same add-on/version if possible.
-    $folder = Join-Path $RepoRoot $item.Id
-    $zipFile = $null
-    if (Test-Path -LiteralPath $folder) {
-        $zipFile = Get-ChildItem -LiteralPath $folder -File -Filter "*.zip" -ErrorAction SilentlyContinue |
-            Where-Object { $_.Name -like "$($item.Id)-*.zip" } |
-            Sort-Object Name -Descending |
-            Select-Object -First 1
+# Keep only latest per addon id.
+$latest = @()
+foreach ($group in ($all | Group-Object Id)) {
+    $best = $group.Group | Sort-Object -Property @{ Expression = { $_.Version }; Descending = $true } | Select-Object -First 1
+    foreach ($candidate in $group.Group) {
+        if ((Compare-VersionString $candidate.Version $best.Version) -gt 0) { $best = $candidate }
     }
-    if ($zipFile) {
-        $rel = Get-RelativePathPs51 $RepoRoot $zipFile.FullName
-        $safeRel = [System.Net.WebUtility]::HtmlEncode($rel)
-        $safeText = [System.Net.WebUtility]::HtmlEncode("$($item.Id) v$($item.Version)")
-        $linkItems.Add("<li><a href=""$safeRel"">$safeText</a></li>") | Out-Null
-    }
+    $latest += $best
+}
+$latest = $latest | Sort-Object Id
 
+$addonsXml = "<?xml version=`"1.0`" encoding=`"UTF-8`"?>`r`n<addons>`r`n"
+foreach ($item in $latest) {
     Write-Host ("  OK {0} v{1}" -f $item.Id, $item.Version)
+    $addonsXml += $item.Xml + "`r`n"
+}
+$addonsXml += "</addons>`r`n"
+
+$addonsPath = Join-Path $RepoRoot 'addons.xml'
+$md5Path = Join-Path $RepoRoot 'addons.xml.md5'
+$indexPath = Join-Path $RepoRoot 'index.html'
+
+[System.IO.File]::WriteAllText($addonsPath, $addonsXml, [System.Text.UTF8Encoding]::new($false))
+$md5 = (Get-FileHash -LiteralPath $addonsPath -Algorithm MD5).Hash.ToLowerInvariant()
+[System.IO.File]::WriteAllText($md5Path, $md5, [System.Text.UTF8Encoding]::new($false))
+
+$repoZip = Get-ChildItem -LiteralPath (Join-Path $RepoRoot 'repository.mrgee.kodi') -Filter 'repository.mrgee.kodi-*.zip' -File -ErrorAction SilentlyContinue | Select-Object -First 1
+$repoZipRel = if ($repoZip) { Get-RelativeWebPath $RepoRoot $repoZip.FullName } else { '' }
+
+$itemsHtml = ""
+foreach ($item in $latest) {
+    $rel = Get-RelativeWebPath $RepoRoot $item.Zip
+    $itemsHtml += "    <li><a href=`"$rel`">$($item.Id) v$($item.Version)</a></li>`r`n"
 }
 
-$addonsXml = "<addons>`n" + (($addonXmlParts | ForEach-Object { $_ }) -join "`n") + "`n</addons>`n"
-$addonsPath = Join-Path $RepoRoot "addons.xml"
-$md5Path = Join-Path $RepoRoot "addons.xml.md5"
-$indexPath = Join-Path $RepoRoot "index.html"
-
-$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
-[System.IO.File]::WriteAllText($addonsPath, $addonsXml, $utf8NoBom)
-
-$md5 = (Get-FileHash -LiteralPath $addonsPath -Algorithm MD5).Hash.ToLowerInvariant()
-[System.IO.File]::WriteAllText($md5Path, $md5, $utf8NoBom)
-
-$links = ($linkItems -join "`n")
-$indexHtml = @"
+$repoLink = if ($repoZipRel) { "<p><a href=`"$repoZipRel`">Install repository zip</a></p>" } else { "" }
+$html = @"
 <!doctype html>
 <html>
-<head><meta charset="utf-8"><title>MrGee Kodi Repository</title></head>
+<head>
+  <meta charset="utf-8">
+  <title>MrGee Kodi Repository</title>
+</head>
 <body>
-<h1>MrGee Kodi Repository</h1>
-<ul>
-<li><a href="addons.xml">addons.xml</a></li>
-<li><a href="addons.xml.md5">addons.xml.md5</a></li>
-</ul>
-<h2>Add-ons</h2>
-<ul>
-$links
-</ul>
+  <h1>MrGee Kodi Repository</h1>
+  $repoLink
+  <p><a href="addons.xml">addons.xml</a> | <a href="addons.xml.md5">addons.xml.md5</a></p>
+  <h2>Add-ons</h2>
+  <ul>
+$itemsHtml  </ul>
 </body>
 </html>
 "@
-[System.IO.File]::WriteAllText($indexPath, $indexHtml, $utf8NoBom)
+[System.IO.File]::WriteAllText($indexPath, $html, [System.Text.UTF8Encoding]::new($false))
 
 Write-Host ""
-Write-Host "[repo] Updated:"
+Write-Host "[repo] Updated:" -ForegroundColor Green
 Write-Host "  $addonsPath"
 Write-Host "  $md5Path"
 Write-Host "  $indexPath"
-Write-Host ("[repo] Add-ons indexed: {0}" -f $itemsById.Count)
+Write-Host "[repo] Add-ons indexed: $($latest.Count)"
 exit 0

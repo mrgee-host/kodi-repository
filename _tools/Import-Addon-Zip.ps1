@@ -1,21 +1,25 @@
 param(
-    [Parameter(Mandatory=$true)]
-    [string]$ZipPath,
-    [Parameter(Mandatory=$true)]
-    [string]$RepoRoot
+    [Parameter(Mandatory=$true)][string]$RepoRoot,
+    [Parameter(Mandatory=$true)][string]$ZipPath
 )
 
-$ErrorActionPreference = "Stop"
+$ErrorActionPreference = 'Stop'
 
 function Clean-PathArg([string]$p) {
     if ($null -eq $p) { return $p }
     return $p.Trim().Trim('"')
 }
 
-function Copy-DirectoryContents([string]$SourceDir, [string]$DestDir) {
-    New-Item -ItemType Directory -Force -Path $DestDir | Out-Null
-    Get-ChildItem -LiteralPath $SourceDir -Force | ForEach-Object {
-        $dest = Join-Path $DestDir $_.Name
+function Ensure-ZipFileSystem {
+    if (-not ([System.Management.Automation.PSTypeName]'System.IO.Compression.ZipFile').Type) {
+        Add-Type -AssemblyName System.IO.Compression.FileSystem
+    }
+}
+
+function Copy-DirectoryContents($Source, $Destination) {
+    if (-not (Test-Path $Destination)) { New-Item -ItemType Directory -Force -Path $Destination | Out-Null }
+    Get-ChildItem -LiteralPath $Source -Force | ForEach-Object {
+        $dest = Join-Path $Destination $_.Name
         if ($_.PSIsContainer) {
             Copy-Item -LiteralPath $_.FullName -Destination $dest -Recurse -Force
         } else {
@@ -24,58 +28,62 @@ function Copy-DirectoryContents([string]$SourceDir, [string]$DestDir) {
     }
 }
 
-$ZipPath = Clean-PathArg $ZipPath
 $RepoRoot = Clean-PathArg $RepoRoot
-$ZipPath = (Resolve-Path -LiteralPath $ZipPath).Path
-$RepoRoot = (Resolve-Path -LiteralPath $RepoRoot).Path
-$toolDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$ZipPath = Clean-PathArg $ZipPath
+$RepoRoot = (Resolve-Path $RepoRoot).Path
+$ZipPath = (Resolve-Path $ZipPath).Path
 
-$tmp = Join-Path $env:TEMP ("kodi_repo_import_" + [guid]::NewGuid().ToString("N"))
-$extractDir = Join-Path $tmp "extract"
-$zipRoot = Join-Path $tmp "ziproot"
-New-Item -ItemType Directory -Force -Path $extractDir, $zipRoot | Out-Null
+if ([IO.Path]::GetExtension($ZipPath).ToLowerInvariant() -ne '.zip') {
+    throw "Not a zip file: $ZipPath"
+}
+
+Ensure-ZipFileSystem
+$temp = Join-Path $env:TEMP ("kodi_import_" + [Guid]::NewGuid().ToString('N'))
+$norm = Join-Path $env:TEMP ("kodi_norm_" + [Guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Force -Path $temp | Out-Null
+New-Item -ItemType Directory -Force -Path $norm | Out-Null
 
 try {
-    Expand-Archive -LiteralPath $ZipPath -DestinationPath $extractDir -Force
+    [System.IO.Compression.ZipFile]::ExtractToDirectory($ZipPath, $temp)
 
-    $addonXmlFile = Get-ChildItem -LiteralPath $extractDir -Recurse -File -Filter "addon.xml" -ErrorAction SilentlyContinue |
-        Sort-Object { $_.FullName.Length } |
+    $addonXml = Get-ChildItem -LiteralPath $temp -Filter addon.xml -Recurse -Force |
+        Where-Object { $_.FullName -notmatch '__MACOSX' } |
         Select-Object -First 1
 
-    if (-not $addonXmlFile) {
-        throw "addon.xml tidak ditemukan di dalam zip: $ZipPath"
+    if (-not $addonXml) {
+        throw "addon.xml not found inside zip: $ZipPath"
     }
 
-    [xml]$addonXml = Get-Content -LiteralPath $addonXmlFile.FullName -Raw -Encoding UTF8
-    if (-not $addonXml.addon -or -not $addonXml.addon.id -or -not $addonXml.addon.version) {
-        throw "addon.xml tidak valid: $($addonXmlFile.FullName)"
+    [xml]$xml = Get-Content -LiteralPath $addonXml.FullName -Raw
+    $id = [string]$xml.addon.id
+    $version = [string]$xml.addon.version
+
+    if ([string]::IsNullOrWhiteSpace($id)) { throw "addon id missing in addon.xml" }
+    if ([string]::IsNullOrWhiteSpace($version)) { throw "addon version missing in addon.xml" }
+
+    $addonRoot = $addonXml.Directory.FullName
+    $normAddon = Join-Path $norm $id
+    New-Item -ItemType Directory -Force -Path $normAddon | Out-Null
+    Copy-DirectoryContents -Source $addonRoot -Destination $normAddon
+
+    $targetDir = Join-Path $RepoRoot $id
+    New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
+
+    # Remove older zips for the same addon id only.
+    Get-ChildItem -LiteralPath $targetDir -Filter "$id-*.zip" -File -ErrorAction SilentlyContinue | ForEach-Object {
+        Remove-Item -LiteralPath $_.FullName -Force
     }
 
-    $id = [string]$addonXml.addon.id
-    $version = [string]$addonXml.addon.version
-    $addonSourceRoot = Split-Path -Parent $addonXmlFile.FullName
+    $targetZip = Join-Path $targetDir ("$id-$version.zip")
+    if (Test-Path $targetZip) { Remove-Item -LiteralPath $targetZip -Force }
 
-    $normalizedAddonRoot = Join-Path $zipRoot $id
-    if (Test-Path -LiteralPath $normalizedAddonRoot) { Remove-Item -LiteralPath $normalizedAddonRoot -Recurse -Force }
-    New-Item -ItemType Directory -Force -Path $normalizedAddonRoot | Out-Null
-    Copy-DirectoryContents $addonSourceRoot $normalizedAddonRoot
+    [System.IO.Compression.ZipFile]::CreateFromDirectory($norm, $targetZip)
+    Write-Host "[import] $id v$version -> $targetZip" -ForegroundColor Green
 
-    $destFolder = Join-Path $RepoRoot $id
-    New-Item -ItemType Directory -Force -Path $destFolder | Out-Null
-
-    # Remove old versions for same add-on, to avoid Kodi/index confusion.
-    Get-ChildItem -LiteralPath $destFolder -File -Filter "$id-*.zip" -ErrorAction SilentlyContinue |
-        Remove-Item -Force -ErrorAction SilentlyContinue
-
-    $destZip = Join-Path $destFolder ("$id-$version.zip")
-    if (Test-Path -LiteralPath $destZip) { Remove-Item -LiteralPath $destZip -Force }
-
-    Compress-Archive -LiteralPath $normalizedAddonRoot -DestinationPath $destZip -Force
-    Write-Host "[import] $id v$version -> $destZip"
+    & (Join-Path $PSScriptRoot 'Update-Repo-Index.ps1') -RepoRoot $RepoRoot
+    if ($LASTEXITCODE -ne 0) { throw "Update-Repo-Index failed." }
 }
 finally {
-    Remove-Item -LiteralPath $tmp -Recurse -Force -ErrorAction SilentlyContinue
+    if (Test-Path $temp) { Remove-Item -LiteralPath $temp -Recurse -Force -ErrorAction SilentlyContinue }
+    if (Test-Path $norm) { Remove-Item -LiteralPath $norm -Recurse -Force -ErrorAction SilentlyContinue }
 }
-
-& (Join-Path $toolDir "Update-Repo-Index.ps1") -RepoRoot $RepoRoot
-if ($LASTEXITCODE -ne 0) { throw "Update-Repo-Index gagal." }
