@@ -1,0 +1,4 @@
+v3 hotfix:
+- Fixed RepoRoot path quoting issue from %%~dp0 ending with a trailing backslash.
+- CHECK-INSTALLED-ADDONS.bat now passes %%CD%% after cd /d.
+- PowerShell scripts now trim stray quotes from RepoRoot and Kodi addon paths before Resolve-Path.

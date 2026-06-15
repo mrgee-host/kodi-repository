@@ -1,0 +1,335 @@
+﻿<addons>
+<addon id="repository.mrgee.kodi" name="MrGee Kodi Repository" version="1.0.0" provider-name="Miftahul Ginda / MrGee">
+    <extension point="xbmc.addon.repository" name="MrGee Kodi Repository">
+        <dir minversion="20.0.0">
+            <info compressed="false">https://mrgee-host.github.io/kodi-repository/addons.xml</info>
+            <checksum>https://mrgee-host.github.io/kodi-repository/addons.xml.md5</checksum>
+            <datadir zip="true">https://mrgee-host.github.io/kodi-repository/</datadir>
+            <hashes>false</hashes>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">MrGee Kodi Repository</summary>
+        <description lang="en_GB">Private Kodi repository for MrGee custom addons.</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
+
+<addon id="script.artwork.curator" name="Artwork Curator" version="0.30.16" provider-name="rmrector + Artwork Curator custom fork">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="xbmc.json" version="6.20.0" />
+        <import addon="script.module.simplejson" version="3.3.0" />
+        <import addon="script.module.requests" version="2.9.1" />
+        <import addon="script.common.plugin.cache" version="2.5.8" />
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <menu id="kodi.core.manage">
+                <item library="context.py">
+                    <label>AC: add missing artwork</label>
+                    <visible>!Skin.HasSetting(disablecontext:script.artwork.curator) + [String.IsEqual(ListItem.DBTYPE, movie) | String.IsEqual(ListItem.DBTYPE, set) | String.IsEqual(ListItem.DBTYPE, tvshow) | String.IsEqual(ListItem.DBTYPE, season) | String.IsEqual(ListItem.DBTYPE, episode)]</visible>
+                </item>
+                <item library="context_gui.py">
+                    <label>AC: select artwork</label>
+                    <visible>!Skin.HasSetting(disablecontext:script.artwork.curator) + [String.IsEqual(ListItem.DBTYPE, movie) | String.IsEqual(ListItem.DBTYPE, set) | String.IsEqual(ListItem.DBTYPE, tvshow) | String.IsEqual(ListItem.DBTYPE, season) | String.IsEqual(ListItem.DBTYPE, episode)]</visible>
+                </item>
+                <item library="context_debug_remove.py">
+                    <label>AC: remove artwork references</label>
+                    <visible>Skin.HasSetting(enablecontext:script.artwork.curator.debug) + [String.IsEqual(ListItem.DBTYPE, movie) | String.IsEqual(ListItem.DBTYPE, set) | String.IsEqual(ListItem.DBTYPE, tvshow) | String.IsEqual(ListItem.DBTYPE, season) | String.IsEqual(ListItem.DBTYPE, episode)]</visible>
+                </item>
+                <item library="context_debug_logitem.py">
+                    <label>AC: log item debug info</label>
+                    <visible>Skin.HasSetting(enablecontext:script.artwork.curator.debug) + [String.IsEqual(ListItem.DBTYPE, movie) | String.IsEqual(ListItem.DBTYPE, set) | String.IsEqual(ListItem.DBTYPE, tvshow) | String.IsEqual(ListItem.DBTYPE, season) | String.IsEqual(ListItem.DBTYPE, episode)]</visible>
+                </item>
+            </menu>
+        </menu>
+    </extension>
+    <extension point="xbmc.service" start="login" library="service.py" />
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
+        <description lang="en">Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
+        <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
+        <news>v0.30.16 Artwork Curator movie-only-Indonesian beta
+- Limit Indonesian-language specialization to movies inside Indonesian Movies collection folders.
+- Remove Indonesian-specific handling for movie sets, TV shows, seasons, and episodes.
+- Add explicit details fallback chain: configured/Kodi language, then en-US, then raw details.
+- Keep provider/API index order for /images extras and fallback artwork.
+- Rename the manual command to Refresh Indonesian movie artwork.
+
+v0.30.15 Artwork Curator provider-index-order beta
+- Remove rating-based filtering and sorting from automatic artwork selection.
+- Keep ratings and likes only as diagnostic information in logs.
+- Select artwork deterministically by language priority, provider priority, provider/API index order, and minimum resolution.
+- Remove the visible minimum-rating slider because it no longer affects selection.
+- Keep localized Indonesian primary-poster handling and TPDb preservation.
+
+v0.30.14 Artwork Curator rating-tier-fix beta
+- Make all explicitly rated non-poster artwork rank above Not rated artwork.
+- Treat the minimum-rating setting as a preferred tier instead of a hard rejection threshold.
+- Sort non-poster artwork as: high-rated, low-rated, then unrated fallback.
+- Keep poster selection independent from vote ratings.
+
+v0.30.13 Artwork Curator unrated-fallback beta
+- Treat unrated TMDb, fanart.tv, and TheTVDB artwork as fallback-only candidates instead of assigning a neutral rating of 5.
+- Prefer rated non-poster artwork that meets the configured threshold.
+- Allow unrated candidates only when no viable rated candidate remains.
+- For multi-fanart slots, fill rated candidates first and use unrated rows only for remaining gaps.
+- Keep poster selection independent from vote ratings.
+
+v0.30.12 Artwork Curator poster-selection-fix beta
+- Stop applying minimum vote-rating filtering to posters.
+- Select posters by localized language priority, localized-primary promotion, TMDb gallery order, and minimum height.
+- Keep minimum rating filtering for non-poster artwork.
+- Fix cases where an unrated lower-priority poster incorrectly beat the localized TMDb primary poster.
+
+v0.30.11 Artwork Curator dialog-fix beta
+- Fix Refresh Indonesian artwork confirmation dialog labels.
+- Move the TPDb preservation note into the message body.
+- Use short Refresh and Cancel button labels.
+
+v0.30.10 Artwork Curator debug-log-fix beta
+- Fix Indonesian refresh debug logging on Kodi portable profiles.
+- Replace unsupported xbmcvfs append mode with translated local-path append writes.
+- Keep the full Indonesian poster diagnostic output unchanged.
+
+v0.30.9 Artwork Curator Indonesian-debug beta
+- Add a dedicated Indonesian refresh debug log viewer.
+- Log scan inclusion, TMDb IDs, current poster URLs, candidate posters, sizes, ratings, localized-primary flags, selected URL, update URL, and JSON-RPC verification.
+- Recognize Indonesian Movies (Collection) folder names in addition to [Collection] and plain variants.
+- Keep the localized-poster flow unchanged while gathering actionable diagnostics.
+
+v0.30.8 Artwork Curator beta
+- For Indonesian media, promote localized TMDb details.poster_path from language=id-ID as the main poster.
+- Reuse /images metadata for the promoted poster so minimum-height filtering still applies.
+- Keep /images gallery order for fallbacks and retain extra-artwork provider logic.
+- Preserve TPDb and other manual non-curator URLs during Indonesian refresh.
+
+v0.30.7 Artwork Curator beta
+- Follow TMDb poster-gallery order within the selected language and provider.
+- Stop forcing details-endpoint poster_path ahead of TMDb gallery candidates.
+- Use poster_path only as a fallback when TMDb /images has no poster rows.
+- Retain minimum poster-height filtering and Indonesian language priority.
+
+v0.30.6 Artwork Curator beta
+- Enable automatic processing for new library items once after upgrade.
+- Add clear log messages when automatic processing is queued.
+- Write and read the latest-run report through xbmcvfs for better Kodi profile compatibility.
+- Add a configurable minimum poster height and default it to 1000px.
+- Prevent TMDb details-endpoint primary posters from bypassing poster quality filtering.
+
+v0.30.5 Artwork Curator report-fix beta
+- Always write a dedicated latest-run summary when processing finishes.
+- Make final notification totals and visible report totals use the same completed-run data.
+- Show artwork counts grouped by type and scanned items grouped by media type.
+- Keep the rolling history report below the latest summary.
+
+v0.30.4 Artwork Curator beta
+- Add a new manual menu action: Refresh Indonesian artwork.
+- Re-check Indonesian movies, TV shows, episodes, and the Indonesian Movies Collection using language priority id -> en -> no language.
+- Preserve existing TPDb and other manually chosen non-curator remote URLs while refreshing curator-managed artwork.
+- Keep TV-show season artwork in sync during Indonesian refresh.
+
+v0.30.3 Artwork Curator stability beta
+- Prevent screensaver and idle shutdown while artwork scans, cache warming, and pruning are running.
+- Recover from malformed individual library items and provider-response errors without stopping the full scan.
+- Write recovered Python tracebacks clearly to kodi.log.
+- Add top-level service exception recovery.
+
+v0.30.2 Artwork Curator beta
+- Automatically migrate legacy profile data after the add-on ID rename.
+- Import old artwork reports, processed-item state, and missing settings such as API keys.
+- Rename the internal Home-window busy property to ArtworkCurator.Status.
+- Show a clear message when no report exists yet.
+
+v0.30.0 Artwork Curator beta
+- Renamed the visible add-on from Artwork Beef Video Remote to Artwork Curator.
+- Added a new Artwork Curator icon.
+- Simplified settings into General, Artwork, Providers, and Advanced.
+- Standard movie, set, TV-show, season, and episode artwork remains enabled automatically.
+- Internal add-on ID changed to script.artwork.curator. Uninstall the older custom build with the old ID to avoid duplicate services.
+
+v0.29.8 custom fast beta
+- Episode artwork is simplified to thumb and landscape only.
+- Legacy episode fanart and fanart# references are removed during the next normal episode scan.
+- Movie, set, TV-show, and season fanart behavior is unchanged.
+
+v0.29.7 custom fast beta
+- Bulk artwork scans now assign remote URLs without downloading texture-cache files by default.
+- Use Cache missing remote artwork separately after the scan when desired.
+- Batch texture-cache downloads now use a bounded four-worker pool.
+- Texture index is reused for the whole run and the artificial per-item delay is reduced.
+
+v0.29.6 custom beta
+- Compact progress actions are now English, title case, and exactly one word: Checking, Reading, Searching, Selecting, Adding, Downloading, Removing, Cleaning, Skipping, Missing, and Done.
+- Artwork type remains visible when relevant, for example: Artwork Curator: Downloading · fanart3.
+
+v0.29.4 custom beta
+- Detailed compact progress stages: checking slots, remote search, library updates, and texture-cache downloads.
+- Progress headings include artwork types such as poster, fanart3, clearlogo, and landscape.
+
+v0.29.3 custom beta
+- Restore compact persistent Kodi background progress notification.
+
+v0.29.2 custom beta
+- Manual artwork scans now use the original compact persistent Kodi background progress notification.
+- Cache-missing, prune-cache, and force-recache actions use the same visible background progress style.
+
+v0.29.1 custom beta
+- Removed music, music-video, artist, album, and song workflows.
+- Remote-only artwork references. No media-folder artwork downloads or extrafanart folders.
+- Added TMDb TV-show and season artwork provider.
+- Indonesian artwork priority and raster-only filter.
+- Added missing-cache, prune-cache, and force-recache menu actions.
+- Preserve manually selected extensionless remote artwork URLs, including TPDb-style asset URLs.</news>
+        <source>https://github.com/rmrector/script.artwork.curator</source>
+        <website>https://rmrector.github.io/script.artwork.curator/</website>
+        <license>The MIT License</license>
+        <platform>all</platform>
+        <assets><icon>icon.png</icon></assets>
+    </extension>
+</addon>
+
+<addon id="script.library.ratings.scraper"
+       name="Library Ratings Scraper"
+       version="1.3.8"
+       provider-name="OpenAI">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.service" library="service.py" />
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Scrape, cache and auto-refresh library ratings, episodes and IMDb Top 250 rank</summary>
+        <summary lang="id_ID">Scrape, cache, dan refresh otomatis rating seluruh library, episode, serta ranking IMDb Top 250</summary>
+        <description lang="en_GB">Scans Kodi movies, TV shows and individual episodes. Stores normalized and raw rating data from the Kodi library, MDBList, TMDb and OMDb in an independent cache. Stores rating cache independently, refreshes expired items automatically in the background, publishes cached values for Arctic Fuse 3, preloads the next Arctic Mirage slide, and safely updates Kodi movie Top 250 rank through JSON-RPC. Manual full-library scans are handed to the service and shown as a non-blocking background progress notification. Does not write to TMDbHelper private cache. Version 1.3.5 adds per-media-type rating source checkboxes for movies, TV shows and episodes, keeps the Hub bridge, and keeps percent values unconverted.</description>
+        <description lang="id_ID">Memindai film, serial, dan setiap episode di library Kodi. Menyimpan data rating terstandardisasi dan data mentah dari library Kodi, MDBList, TMDb, dan OMDb dalam cache terpisah. Menyimpan cache rating secara terpisah, memperbarui item kedaluwarsa secara otomatis di latar belakang, menyajikan cache untuk Arctic Fuse 3, melakukan preload slide Arctic Mirage berikutnya, serta memperbarui ranking Top 250 film melalui JSON-RPC. Pemindaian manual seluruh library diserahkan ke service dan ditampilkan sebagai notifikasi progres latar belakang yang tidak mengunci antarmuka. Tidak menulis ke cache internal TMDbHelper. Versi 1.3.5 menambahkan checkbox sumber rating per jenis media untuk film, serial, dan episode, tetap memakai Hub bridge, dan tetap tanpa konversi otomatis persen.</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon>
+
+<addon id="context.tpdb.artwork" name="TPDb Artwork Picker" version="0.2.6" provider-name="OpenAI">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+  </requires>
+  <extension point="xbmc.python.script" library="default.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="kodi.context.item">
+    <menu id="kodi.core.main">
+      <item library="contextitem_auto.py">
+        <label>32002</label>
+        <visible>true</visible>
+      </item>
+    </menu>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Choose TPDb posters and apply TPDb collection sets from Kodi</summary>
+    <description lang="en_GB">Native Kodi artwork picker for The Poster Database. Searches movies and collections, previews poster sets, supports a saved TPDb login session, stores selected artwork as remote URLs by default, and updates Kodi library artwork through JSON-RPC.</description>
+    <summary lang="id_ID">Choose TPDb posters and apply TPDb poster sets from Kodi</summary>
+    <description lang="id_ID">Native Kodi artwork picker for The Poster Database. Searches movies and collections, previews poster sets, supports a saved TPDb login session, stores selected artwork as remote URLs by default, and updates Kodi library artwork through JSON-RPC.</description>
+    <platform>all</platform>
+    <license>MIT</license>
+    <news>v0.2.6
+- Replaced the add-on icon with a new TPDb Artwork Picker icon.
+- Uses a high-quality 512x512 PNG suitable for Kodi library and add-on views.
+
+v0.2.5
+- Stores selected library artwork using TPDb full-size remote view endpoints: /index.php/api/assets/{asset_id}/view.
+- Keeps optimized images.theposterdb.com URLs only for fast picker thumbnails.
+- Falls back to an optimized thumbnail only when TPDb does not expose an asset ID.
+
+v0.2.4
+- Changed all visible add-on UI text to English, including the Indonesian locale override.
+- Replaced the awkward poster-set wording with poster set and Set by.
+- Shortened the native FileBrowser action label to APPLY.
+
+v0.2.3
+- Filters TPDb collection-page search results conservatively before showing them in Kodi.
+- Opens an exact normalized collection-title result immediately when TPDb provides one.
+- Hides unrelated loose website-search suggestions such as events, unrelated titles, and partial single-word matches.
+- Keeps close title variants only as fallback candidates when no exact collection page exists.
+
+v0.2.2
+- Fixed the missing APPLY action in Arctic Fuse 3 native FileBrowser preview.
+- Uses the skin-visible native action control 9001, which forwards to hidden FileBrowser proxy control 413.
+- Keeps an empty native directory list control 450 active behind the read-only artwork panel 451 because Arctic Fuse 3 requires control 450 to be visible before rendering the native APPLY action.
+- Poster cards remain preview-only; physical BACK still returns to the poster-set chooser.
+
+v0.2.1
+- Collection-set preview now loads the active skin's actual FileBrowser.xml, matching Kodi's native Choose art window.
+- Uses FileBrowser.xml thumbnail panel control 451 for a read-only poster grid.
+- Poster cards can be focused for inspection but cannot be applied individually.
+- Uses native FileBrowser.xml control 413 as the only visible APPLY action.
+- Hides the native Close, Create folder, and Mirror controls in collection-set preview mode.
+- Physical BACK still returns to the poster-set chooser.
+
+v0.2.0
+- Replaced the custom collection-set preview window with Kodi's native DialogSelect.xml artwork grid.
+- The preview now follows the active skin exactly, matching the normal TPDb poster picker layout.
+- Added a first native grid card named APPLY.
+- Poster cards are preview-only: selecting a poster never applies it individually and simply reopens the preview grid.
+- Closing the native dialog returns to the poster-set chooser.
+
+v0.1.8
+- Replaced the list-style uploader preview with a large read-only 4x2 artwork grid inspired by Arctic Fuse's Choose art dialog.
+- Poster cards are display-only images: they cannot be clicked, selected, or applied individually.
+- The preview now exposes only one focusable action: APPLY.
+- Removed the visible BACK button. Pressing the physical Back action still returns to the poster-set chooser.
+- Added reliable APPLY handling through onClick, onControl, and remote SELECT fallbacks.
+- Large sets can be previewed page-by-page with arrow keys or the mouse wheel without extra on-screen buttons.
+
+v0.1.7
+- Replaced the custom collection-set preview window with Kodi's skin-native detailed select dialog.
+- APPLY and BACK are now normal skin controls handled by Kodi, fixing unresponsive preview buttons.
+- Removed custom preview paging; the native dialog scrolls naturally and shows poster thumbnails.
+- Selecting an artwork row is preview-only and does not accidentally apply the set.
+
+v0.1.6
+- Stores TPDb public artwork URLs directly in Kodi's art table by default instead of downloading selected images into the add-on profile cache.
+- Selects the largest public TPDb srcset image candidate for remote artwork.
+- Falls back to the local cache only when a public remote image URL is unavailable.
+- Added a Program add-on action to clear artwork files previously downloaded by older versions.
+
+v0.1.5
+- Collection-page search now uses a compact names-only list.
+- Added a large five-poster-per-page collection-set preview with a distinct APPLY button.
+- BACK from the set preview now returns to the poster-set chooser instead of closing the workflow.
+- Replaced unsupported report glyphs with OK, SKIP, and FAIL labels.
+- Renamed the collection artwork report entry to [Collection].</news>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+
+<addon id="script.akl.texture.cache.cleaner" name="AKL Texture Cache Cleaner" version="1.0.4" provider-name="OpenAI">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Clean Kodi texture cache for AKL artwork only</summary>
+        <description>Deletes Textures DB entries and cached thumbnails only for plugin.program.akl asset-art paths.</description>
+        <platform>all</platform>
+    </extension>
+</addon>
+</addons>
+
