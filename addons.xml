@@ -1,5 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
+<addon id="context.tpdb.artwork" name="TPDb Artwork Picker" version="0.2.7" provider-name="OpenAI">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+  </requires>
+  <extension point="xbmc.python.script" library="default.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="kodi.context.item">
+    <menu id="kodi.core.main">
+      <item library="contextitem_auto.py">
+        <label>32002</label>
+        <visible>true</visible>
+      </item>
+    </menu>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Choose TPDb posters and apply TPDb collection sets from Kodi</summary>
+    <description lang="en_GB">Native Kodi artwork picker for The Poster Database. Searches movies and collections, previews poster sets, supports a saved TPDb login session, stores selected artwork as remote URLs by default, and updates Kodi library artwork through JSON-RPC.</description>
+    <summary lang="id_ID">Choose TPDb posters and apply TPDb poster sets from Kodi</summary>
+    <description lang="id_ID">Native Kodi artwork picker for The Poster Database. Searches movies and collections, previews poster sets, supports a saved TPDb login session, stores selected artwork as remote URLs by default, and updates Kodi library artwork through JSON-RPC.</description>
+    <platform>all</platform>
+    <license>MIT</license>
+    <news>v0.2.6
+- Replaced the add-on icon with a new TPDb Artwork Picker icon.
+- Uses a high-quality 512x512 PNG suitable for Kodi library and add-on views.
+
+v0.2.5
+- Stores selected library artwork using TPDb full-size remote view endpoints: /index.php/api/assets/{asset_id}/view.
+- Keeps optimized images.theposterdb.com URLs only for fast picker thumbnails.
+- Falls back to an optimized thumbnail only when TPDb does not expose an asset ID.
+
+v0.2.4
+- Changed all visible add-on UI text to English, including the Indonesian locale override.
+- Replaced the awkward poster-set wording with poster set and Set by.
+- Shortened the native FileBrowser action label to APPLY.
+
+v0.2.3
+- Filters TPDb collection-page search results conservatively before showing them in Kodi.
+- Opens an exact normalized collection-title result immediately when TPDb provides one.
+- Hides unrelated loose website-search suggestions such as events, unrelated titles, and partial single-word matches.
+- Keeps close title variants only as fallback candidates when no exact collection page exists.
+
+v0.2.2
+- Fixed the missing APPLY action in Arctic Fuse 3 native FileBrowser preview.
+- Uses the skin-visible native action control 9001, which forwards to hidden FileBrowser proxy control 413.
+- Keeps an empty native directory list control 450 active behind the read-only artwork panel 451 because Arctic Fuse 3 requires control 450 to be visible before rendering the native APPLY action.
+- Poster cards remain preview-only; physical BACK still returns to the poster-set chooser.
+
+v0.2.1
+- Collection-set preview now loads the active skin's actual FileBrowser.xml, matching Kodi's native Choose art window.
+- Uses FileBrowser.xml thumbnail panel control 451 for a read-only poster grid.
+- Poster cards can be focused for inspection but cannot be applied individually.
+- Uses native FileBrowser.xml control 413 as the only visible APPLY action.
+- Hides the native Close, Create folder, and Mirror controls in collection-set preview mode.
+- Physical BACK still returns to the poster-set chooser.
+
+v0.2.0
+- Replaced the custom collection-set preview window with Kodi's native DialogSelect.xml artwork grid.
+- The preview now follows the active skin exactly, matching the normal TPDb poster picker layout.
+- Added a first native grid card named APPLY.
+- Poster cards are preview-only: selecting a poster never applies it individually and simply reopens the preview grid.
+- Closing the native dialog returns to the poster-set chooser.
+
+v0.1.8
+- Replaced the list-style uploader preview with a large read-only 4x2 artwork grid inspired by Arctic Fuse's Choose art dialog.
+- Poster cards are display-only images: they cannot be clicked, selected, or applied individually.
+- The preview now exposes only one focusable action: APPLY.
+- Removed the visible BACK button. Pressing the physical Back action still returns to the poster-set chooser.
+- Added reliable APPLY handling through onClick, onControl, and remote SELECT fallbacks.
+- Large sets can be previewed page-by-page with arrow keys or the mouse wheel without extra on-screen buttons.
+
+v0.1.7
+- Replaced the custom collection-set preview window with Kodi's skin-native detailed select dialog.
+- APPLY and BACK are now normal skin controls handled by Kodi, fixing unresponsive preview buttons.
+- Removed custom preview paging; the native dialog scrolls naturally and shows poster thumbnails.
+- Selecting an artwork row is preview-only and does not accidentally apply the set.
+
+v0.1.6
+- Stores TPDb public artwork URLs directly in Kodi's art table by default instead of downloading selected images into the add-on profile cache.
+- Selects the largest public TPDb srcset image candidate for remote artwork.
+- Falls back to the local cache only when a public remote image URL is unavailable.
+- Added a Program add-on action to clear artwork files previously downloaded by older versions.
+
+v0.1.5
+- Collection-page search now uses a compact names-only list.
+- Added a large five-poster-per-page collection-set preview with a distinct APPLY button.
+- BACK from the set preview now returns to the poster-set chooser instead of closing the workflow.
+- Replaced unsupported report glyphs with OK, SKIP, and FAIL labels.
+- Renamed the collection artwork report entry to [Collection].</news>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
 <addon id="repository.mrgee.kodi"
        name="MrGee Kodi Repository"
        version="1.0.0"
