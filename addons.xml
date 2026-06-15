@@ -22,6 +22,19 @@
         </assets>
     </extension>
 </addon>
+<addon id="script.akl.texture.cache.cleaner" name="AKL Texture Cache Cleaner" version="1.0.5" provider-name="OpenAI">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Clean Kodi texture cache for AKL artwork only</summary>
+        <description>Deletes Textures DB entries and cached thumbnails only for plugin.program.akl asset-art paths.</description>
+        <platform>all</platform>
+    </extension>
+</addon>
 <addon id="script.artwork.curator" name="Artwork Curator" version="0.30.16" provider-name="rmrector + Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
