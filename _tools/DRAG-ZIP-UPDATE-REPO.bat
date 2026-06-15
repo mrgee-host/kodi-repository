@@ -54,5 +54,5 @@ if errorlevel 1 (
 )
 
 echo.
-echo Done. Kodi can now Check for updates.
+echo Done. ZIP and icon.png are published. Kodi can now Check for updates.
 pause

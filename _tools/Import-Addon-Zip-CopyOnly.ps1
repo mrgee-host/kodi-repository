@@ -10,6 +10,47 @@ function Clean-Arg([string]$s) {
     return $s.Trim().Trim('"')
 }
 
+function Join-RelativePath([string]$Base, [string]$Relative) {
+    $p = $Base
+    foreach ($part in ($Relative -split '[\\/]')) {
+        if (-not [string]::IsNullOrWhiteSpace($part)) {
+            $p = Join-Path $p $part
+        }
+    }
+    return $p
+}
+
+function Find-AddonIcon([string]$AddonRoot, [xml]$AddonXml) {
+    $tryList = @()
+
+    try {
+        foreach ($ext in @($AddonXml.addon.extension)) {
+            if ($ext.point -eq 'kodi.addon.metadata' -and $ext.assets) {
+                foreach ($iconNode in @($ext.assets.icon)) {
+                    $v = ([string]$iconNode).Trim()
+                    if (-not [string]::IsNullOrWhiteSpace($v)) { $tryList += $v }
+                }
+            }
+        }
+    } catch { }
+
+    $tryList += @('icon.png', 'resources/icon.png', 'resources/media/icon.png')
+
+    foreach ($rel in $tryList) {
+        if ([string]::IsNullOrWhiteSpace($rel)) { continue }
+        if ($rel -match '^[a-zA-Z]+://') { continue }
+        $candidate = Join-RelativePath $AddonRoot $rel
+        if (Test-Path -LiteralPath $candidate -PathType Leaf) {
+            return (Resolve-Path -LiteralPath $candidate).Path
+        }
+    }
+
+    $fallback = Get-ChildItem -LiteralPath $AddonRoot -Filter 'icon.png' -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($fallback) { return $fallback.FullName }
+
+    return $null
+}
+
 $RepoRoot = Clean-Arg $RepoRoot
 $ZipPath  = Clean-Arg $ZipPath
 
@@ -63,6 +104,18 @@ try {
 
     $destZip = Join-Path $destDir ("$id-$version.zip")
     Copy-Item -LiteralPath $ZipPath -Destination $destZip -Force
+
+    # Also publish icon.png next to the ZIP for Kodi repository browsing.
+    # Kodi does not reliably read the repo list icon from inside the ZIP before install/update.
+    $addonRoot = Split-Path -Parent $chosen.FullName
+    $iconSource = Find-AddonIcon -AddonRoot $addonRoot -AddonXml $chosenXml
+    if ($iconSource -and (Test-Path -LiteralPath $iconSource -PathType Leaf)) {
+        $destIcon = Join-Path $destDir 'icon.png'
+        Copy-Item -LiteralPath $iconSource -Destination $destIcon -Force
+        Write-Host "[icon]   $destIcon"
+    } else {
+        Write-Host "[icon]   skipped: icon.png not found inside ZIP"
+    }
 
     Write-Host "[import] $id v$version"
     Write-Host "[copy]   $ZipPath"

@@ -36,5 +36,5 @@ if "%FAILED%"=="1" (
 )
 
 echo.
-echo Import complete. Not uploaded.
+echo Import complete. ZIP and icon.png copied. Not uploaded.
 pause
