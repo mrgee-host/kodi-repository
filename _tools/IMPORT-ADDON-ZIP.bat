@@ -7,6 +7,6 @@ if "%~1"=="" (
   pause
   exit /b 1
 )
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0Import-Addon-Zip.ps1" -RepoRoot "%~dp0.." -ZipPath "%~1" -Upload
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0Import-Addon-Zip.ps1" -RepoRoot "%~dp0.." -ZipPath "%~1"
 echo.
 pause

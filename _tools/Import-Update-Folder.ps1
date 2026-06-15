@@ -1,57 +1,35 @@
 param(
-    [string]$FolderPath = "",
+    [string]$InputDir = "",
     [string]$RepoRoot = "",
-    [switch]$Upload,
-    [switch]$KeepOld
+    [switch]$Upload
 )
 
 $ErrorActionPreference = "Stop"
-function Normalize-PathArg([string]$p) {
-    if ([string]::IsNullOrWhiteSpace($p)) { return $p }
-    return $p.Trim().Trim('"')
-}
-function Get-DefaultRepoRoot {
-    $scriptDir = Split-Path -Parent $PSCommandPath
-    if ((Split-Path -Leaf $scriptDir) -ieq "_tools") { return (Resolve-Path (Join-Path $scriptDir "..")).Path }
-    return (Resolve-Path $scriptDir).Path
-}
 
-$scriptDir = Split-Path -Parent $PSCommandPath
-$RepoRoot = Normalize-PathArg $RepoRoot
-if ([string]::IsNullOrWhiteSpace($RepoRoot)) { $RepoRoot = Get-DefaultRepoRoot }
-$RepoRoot = (Resolve-Path $RepoRoot).Path
-
-$FolderPath = Normalize-PathArg $FolderPath
-if ([string]::IsNullOrWhiteSpace($FolderPath)) {
-    $FolderPath = Join-Path $RepoRoot "_incoming_addons"
-}
-$resolved = (Resolve-Path $FolderPath).Path
-
-$zipFiles = @()
-$tempDir = $null
-
-if (Test-Path -LiteralPath $resolved -PathType Container) {
-    $zipFiles = Get-ChildItem -LiteralPath $resolved -Recurse -Filter "*.zip" -File | Select-Object -ExpandProperty FullName
-}
-elseif (Test-Path -LiteralPath $resolved -PathType Leaf) {
-    # If a single file is dropped, pass it to importer. It can be an addon zip.
-    $zipFiles = @($resolved)
-}
-else {
-    throw "Folder/file tidak ditemukan: $FolderPath"
+function Resolve-RepoRoot([string]$PathValue) {
+    if ([string]::IsNullOrWhiteSpace($PathValue)) {
+        $scriptDir = Split-Path -Parent $PSCommandPath
+        return (Resolve-Path (Join-Path $scriptDir "..")).Path
+    }
+    return (Resolve-Path ($PathValue.Trim().Trim('"').Trim("'"))).Path
 }
 
-if (-not $zipFiles -or $zipFiles.Count -eq 0) {
-    throw "Tidak ada file .zip di: $resolved"
+$RepoRoot = Resolve-RepoRoot $RepoRoot
+$toolDir = Split-Path -Parent $PSCommandPath
+if ([string]::IsNullOrWhiteSpace($InputDir)) { $InputDir = Join-Path $RepoRoot "_incoming_addons" }
+$InputDir = (Resolve-Path ($InputDir.Trim().Trim('"').Trim("'"))).Path
+
+$zips = @(Get-ChildItem -LiteralPath $InputDir -Filter "*.zip" -File -ErrorAction SilentlyContinue)
+if ($zips.Count -eq 0) { throw "Tidak ada file .zip di $InputDir" }
+
+foreach ($zip in $zips) {
+    & (Join-Path $toolDir "Import-Addon-Zip.ps1") -RepoRoot $RepoRoot -ZipPath $zip.FullName
+    if ($LASTEXITCODE -ne 0) { throw "Import gagal: $($zip.FullName)" }
 }
 
-Write-Host "[import-folder] Found zip files:" $zipFiles.Count
-foreach ($z in $zipFiles) { Write-Host "  - $z" }
+& (Join-Path $toolDir "Update-Repo-Index.ps1") -RepoRoot $RepoRoot
+if ($LASTEXITCODE -ne 0) { throw "Update-Repo-Index gagal." }
 
-$argsList = @()
-$argsList += $zipFiles
-$argsList += "-RepoRoot"; $argsList += $RepoRoot
-if ($Upload) { $argsList += "-Upload" }
-if ($KeepOld) { $argsList += "-KeepOld" }
-
-& (Join-Path $scriptDir "Import-Addon-Zip.ps1") @argsList
+if ($Upload) {
+    & (Join-Path $toolDir "Upload-Repo.ps1") -RepoRoot $RepoRoot -Message "Import addon update pack"
+}
