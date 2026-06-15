@@ -1,8 +1,0 @@
-﻿Kodi repository installed add-ons check - 2026-06-15 11:59:32
-Repo root: D:\Others\KodiRepo\kodi-repository
-
-FOUND    script.artwork.curator v0.30.16 | Artwork Curator | E:\Kodi\portable_data\addons\script.artwork.curator
-FOUND    script.library.ratings.scraper v1.3.8 | Library Ratings Scraper | E:\Kodi\portable_data\addons\script.library.ratings.scraper
-FOUND    context.tpdb.artwork v0.2.6 | TPDb Artwork Picker | E:\Kodi\portable_data\addons\context.tpdb.artwork
-FOUND    script.akl.texture.cache.cleaner v1.0.4 | AKL Texture Cache Cleaner | E:\Kodi\portable_data\addons\script.akl.texture.cache.cleaner
-MISSING  plugin.program.steam.collections
