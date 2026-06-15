@@ -1,5 +1,7 @@
 @echo off
-setlocal
-cd /d "%~dp0.."
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0Upload-Repo.ps1" -RepoRoot "%CD%" -Message "Update Kodi repository add-ons"
+setlocal EnableExtensions DisableDelayedExpansion
+set "TOOLDIR=%~dp0"
+for %%I in ("%TOOLDIR%..") do set "REPOROOT=%%~fI"
+powershell -NoProfile -ExecutionPolicy Bypass -File "%TOOLDIR%Upload-Repo.ps1" -RepoRoot "%REPOROOT%"
+echo.
 pause

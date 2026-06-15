@@ -1,50 +1,41 @@
 param(
-    [Parameter(Mandatory=$true)]
-    [string]$RepoRoot,
-
-    [string]$Message = "Update Kodi repository"
+    [Parameter(Mandatory=$true)][string]$RepoRoot
 )
 
-$ErrorActionPreference = "Stop"
+$ErrorActionPreference = 'Stop'
 
-function Clean-PathArg([string]$p) {
-    if ($null -eq $p) { return $p }
-    return ($p.Trim() -replace '^[`" ]+', '' -replace '[`" ]+$', '')
+function Clean-Arg([string]$s) {
+    if ($null -eq $s) { return $null }
+    return $s.Trim().Trim('"')
 }
 
-$RepoRoot = Clean-PathArg $RepoRoot
+$RepoRoot = Clean-Arg $RepoRoot
 $RepoRoot = (Resolve-Path -LiteralPath $RepoRoot).Path
 
-if (-not (Test-Path -LiteralPath (Join-Path $RepoRoot ".git"))) {
-    throw ".git folder not found in $RepoRoot. Reconnect this folder to GitHub first."
+if (-not (Test-Path -LiteralPath (Join-Path $RepoRoot '.git') -PathType Container)) {
+    throw ".git not found in $RepoRoot. Restore/clone the GitHub repo first."
 }
 
-$oldLocation = Get-Location
+Push-Location $RepoRoot
 try {
-    Set-Location -LiteralPath $RepoRoot
+    git add -A
+    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    Write-Host ""
-    Write-Host "============================================================"
-    Write-Host "Uploading repository to GitHub"
-    Write-Host "============================================================"
-
-    & git add -A
-    if ($LASTEXITCODE -ne 0) { throw "git add failed." }
-
-    $changes = & git status --porcelain
-    if ([string]::IsNullOrWhiteSpace(($changes -join "`n"))) {
-        Write-Host "No changes to upload."
-        return
+    $status = git status --porcelain
+    if (-not [string]::IsNullOrWhiteSpace(($status -join "`n"))) {
+        $stamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+        git commit -m "Update Kodi repository $stamp"
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+    } else {
+        Write-Host "[git] Nothing to commit."
     }
 
-    & git commit -m $Message
-    if ($LASTEXITCODE -ne 0) { throw "git commit failed." }
+    git push origin main
+    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    & git push origin main
-    if ($LASTEXITCODE -ne 0) { throw "git push failed." }
-
-    Write-Host ""
-    Write-Host "Upload complete."
-} finally {
-    Set-Location $oldLocation
+    Write-Host "[git] Upload complete."
+    exit 0
+}
+finally {
+    Pop-Location
 }

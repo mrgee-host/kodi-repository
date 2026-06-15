@@ -1,5 +1,7 @@
 @echo off
-setlocal
-cd /d "%~dp0.."
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0Update-Repo-Index.ps1" -RepoRoot "%CD%"
+setlocal EnableExtensions DisableDelayedExpansion
+set "TOOLDIR=%~dp0"
+for %%I in ("%TOOLDIR%..") do set "REPOROOT=%%~fI"
+powershell -NoProfile -ExecutionPolicy Bypass -File "%TOOLDIR%Update-Repo-Index.ps1" -RepoRoot "%REPOROOT%"
+echo.
 pause

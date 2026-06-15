@@ -1,19 +1,58 @@
 @echo off
-setlocal
-cd /d "%~dp0.."
+setlocal EnableExtensions DisableDelayedExpansion
+
+set "TOOLDIR=%~dp0"
+for %%I in ("%TOOLDIR%..") do set "REPOROOT=%%~fI"
+
 if "%~1"=="" (
+  echo.
   echo Drag one or more Kodi addon zip files onto this BAT.
   echo.
+  echo Tool:
+  echo   %~f0
+  echo Repo:
+  echo   %REPOROOT%
+  echo.
   pause
   exit /b 1
 )
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0Import-Addon-Zip.ps1" -RepoRoot "%CD%" -Upload -ZipPath %*
+
+set "FAILED=0"
+
+:IMPORT_LOOP
+if "%~1"=="" goto AFTER_IMPORT
+
+echo.
+echo ============================================================
+echo Importing: %~nx1
+echo ============================================================
+
+powershell -NoProfile -ExecutionPolicy Bypass -File "%TOOLDIR%Import-Addon-Zip-CopyOnly.ps1" -RepoRoot "%REPOROOT%" -ZipPath "%~f1"
+if errorlevel 1 set "FAILED=1"
+shift
+goto IMPORT_LOOP
+
+:AFTER_IMPORT
+if "%FAILED%"=="1" (
+  echo.
+  echo Import failed. Not uploading.
+  pause
+  exit /b 1
+)
+
+echo.
+echo ============================================================
+echo Uploading repository to GitHub
+echo ============================================================
+
+powershell -NoProfile -ExecutionPolicy Bypass -File "%TOOLDIR%Upload-Repo.ps1" -RepoRoot "%REPOROOT%"
 if errorlevel 1 (
   echo.
-  echo FAILED. Not uploading.
+  echo Upload failed.
   pause
   exit /b 1
 )
+
 echo.
 echo Done. Kodi can now Check for updates.
 pause
