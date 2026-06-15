@@ -1,48 +1,50 @@
 param(
-    [Parameter(Mandatory=$true)][string]$RepoRoot,
-    [string]$Message = 'Update Kodi repository'
+    [Parameter(Mandatory=$true)]
+    [string]$RepoRoot,
+
+    [string]$Message = "Update Kodi repository"
 )
 
-$ErrorActionPreference = 'Stop'
+$ErrorActionPreference = "Stop"
 
 function Clean-PathArg([string]$p) {
     if ($null -eq $p) { return $p }
-    return $p.Trim().Trim('"')
+    return ($p.Trim() -replace '^[`" ]+', '' -replace '[`" ]+$', '')
 }
 
 $RepoRoot = Clean-PathArg $RepoRoot
-$RepoRoot = (Resolve-Path $RepoRoot).Path
-Set-Location $RepoRoot
+$RepoRoot = (Resolve-Path -LiteralPath $RepoRoot).Path
 
-if (-not (Test-Path (Join-Path $RepoRoot '.git'))) {
-    throw "This folder is not a git repository: $RepoRoot. Clone https://github.com/mrgee-host/kodi-repository first, or keep the .git folder."
+if (-not (Test-Path -LiteralPath (Join-Path $RepoRoot ".git"))) {
+    throw ".git folder not found in $RepoRoot. Reconnect this folder to GitHub first."
 }
 
-$git = Get-Command git -ErrorAction SilentlyContinue
-if (-not $git) { throw "git.exe not found. Install Git for Windows first." }
+$oldLocation = Get-Location
+try {
+    Set-Location -LiteralPath $RepoRoot
 
-Write-Host "[git] add -A"
-& git add -A
-if ($LASTEXITCODE -ne 0) { throw "git add failed" }
+    Write-Host ""
+    Write-Host "============================================================"
+    Write-Host "Uploading repository to GitHub"
+    Write-Host "============================================================"
 
-$changes = & git diff --cached --name-only
-if ([string]::IsNullOrWhiteSpace(($changes -join ''))) {
-    Write-Host "[git] No local changes to commit. Pushing anyway..."
-} else {
-    Write-Host "[git] commit"
-    & git commit -m $Message
-    if ($LASTEXITCODE -ne 0) {
-        Write-Host ""
-        Write-Host "If this is author identity error, run once:" -ForegroundColor Yellow
-        Write-Host 'git config --global user.name "Miftahul Ginda"'
-        Write-Host 'git config --global user.email "miftahulginda01@gmail.com"'
-        throw "git commit failed"
+    & git add -A
+    if ($LASTEXITCODE -ne 0) { throw "git add failed." }
+
+    $changes = & git status --porcelain
+    if ([string]::IsNullOrWhiteSpace(($changes -join "`n"))) {
+        Write-Host "No changes to upload."
+        return
     }
+
+    & git commit -m $Message
+    if ($LASTEXITCODE -ne 0) { throw "git commit failed." }
+
+    & git push origin main
+    if ($LASTEXITCODE -ne 0) { throw "git push failed." }
+
+    Write-Host ""
+    Write-Host "Upload complete."
+} finally {
+    Set-Location $oldLocation
 }
-
-Write-Host "[git] push origin main"
-& git push origin main
-if ($LASTEXITCODE -ne 0) { throw "git push failed" }
-
-Write-Host "[git] Upload complete." -ForegroundColor Green
-Write-Host "Check: https://mrgee-host.github.io/kodi-repository/addons.xml"
