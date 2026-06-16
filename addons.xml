@@ -21,7 +21,7 @@
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.3.29"
+       version="1.3.31"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -33,8 +33,8 @@
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and auto-refresh library ratings, episodes and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache, dan refresh otomatis rating seluruh library, episode, serta ranking IMDb Top 250</summary>
-        <description lang="en_GB">Scans Kodi movies, TV shows and individual episodes. Stores normalized and raw rating data from the Kodi library, MDBList, TMDb and OMDb in an independent cache. Stores rating cache independently, refreshes expired items automatically in the background, publishes cached values for Arctic Fuse 3, preloads the next Arctic Mirage slide, and safely updates Kodi movie Top 250 rank through JSON-RPC, and fills Oscar/Emmy wins from OMDb Awards. Manual full-library scans are handed to the service and shown as a non-blocking background progress notification. Does not write to TMDbHelper private cache. Version 1.3.27 adds a movie filter for Indonesian Movies Collection and stores no-rating markers for enabled fields that providers checked but cannot fill, so missing-only scrapes do not retry them endlessly.</description>
-        <description lang="id_ID">Memindai film, serial, dan setiap episode di library Kodi. Menyimpan data rating terstandardisasi dan data mentah dari library Kodi, MDBList, TMDb, dan OMDb dalam cache terpisah. Menyimpan cache rating secara terpisah, memperbarui item kedaluwarsa secara otomatis di latar belakang, menyajikan cache untuk Arctic Fuse 3, melakukan preload slide Arctic Mirage berikutnya, serta memperbarui ranking Top 250 film melalui JSON-RPC. Pemindaian manual seluruh library diserahkan ke service dan ditampilkan sebagai notifikasi progres latar belakang yang tidak mengunci antarmuka. Tidak menulis ke cache internal TMDbHelper. Versi 1.3.27 menambahkan filter film untuk Indonesian Movies Collection dan menyimpan penanda no-rating untuk field aktif yang sudah dicek provider tetapi tidak punya nilai, agar scrape missing-only tidak mengulang terus.</description>
+        <description lang="en_GB">Scans Kodi movies, TV shows and individual episodes. Stores normalized and raw rating data from the Kodi library, MDBList, TMDb and OMDb in an independent cache. Stores rating cache independently, refreshes expired items automatically in the background, publishes cached values for Arctic Fuse 3, preloads the next Arctic Mirage slide, and safely updates Kodi movie Top 250 rank through JSON-RPC, and fills Oscar/Emmy wins from OMDb Awards. Manual full-library scans are handed to the service and shown as a non-blocking background progress notification. Does not write to TMDbHelper private cache. Version 1.3.31 keeps IMDb Top 250 movie/TV sync online-only and removes the static TV safety fallback from 1.3.30.</description>
+        <description lang="id_ID">Memindai film, serial, dan setiap episode di library Kodi. Menyimpan data rating terstandardisasi dan data mentah dari library Kodi, MDBList, TMDb, dan OMDb dalam cache terpisah. Menyimpan cache rating secara terpisah, memperbarui item kedaluwarsa secara otomatis di latar belakang, menyajikan cache untuk Arctic Fuse 3, melakukan preload slide Arctic Mirage berikutnya, serta memperbarui ranking Top 250 film melalui JSON-RPC. Pemindaian manual seluruh library diserahkan ke service dan ditampilkan sebagai notifikasi progres latar belakang yang tidak mengunci antarmuka. Tidak menulis ke cache internal TMDbHelper. Versi 1.3.31 membuat sinkronisasi IMDb Top 250 film/serial tetap online-only dan menghapus fallback TV statis dari 1.3.30.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
