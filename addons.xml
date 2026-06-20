@@ -21,7 +21,7 @@
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.3.73"
+       version="1.3.74"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -41,8 +41,8 @@
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.3.73 fixes addon packaging and adds sticky AF3/LRS display integration, display toggles, Rotten icon publishing, memory-cache publishing, and local IMDb Top250 DB support.</description>
-        <description lang="id_ID">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.3.73 fixes addon packaging and adds sticky AF3/LRS display integration, display toggles, Rotten icon publishing, memory-cache publishing, and local IMDb Top250 DB support.</description>
+        <description lang="en_GB">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.3.74 fixes AF3/LRS display integration: LibraryRatings-only publishing by default, sticky hub bridge support, faster polling, display toggles, Rotten image keys, local Top250 DB, and AF3 1080i screensaver patch support.</description>
+        <description lang="id_ID">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.3.74 fixes AF3/LRS display integration: LibraryRatings-only publishing by default, sticky hub bridge support, faster polling, display toggles, Rotten image keys, local Top250 DB, and AF3 1080i screensaver patch support.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
