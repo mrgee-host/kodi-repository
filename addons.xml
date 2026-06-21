@@ -21,7 +21,7 @@
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.3.82"
+       version="1.3.83"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -41,8 +41,8 @@
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.3.82 fixes the broken 1.3.81 addon.xml, keeps scrape data always-on, adds Display toggles for Top 250, Awards, and TV Status, fixes AF3 rating slot icon filenames, and ships a no-Python PowerShell patcher.</description>
-        <description lang="id_ID">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.3.82 fixes the broken 1.3.81 addon.xml, keeps scrape data always-on, adds Display toggles for Top 250, Awards, and TV Status, fixes AF3 rating slot icon filenames, and ships a no-Python PowerShell patcher.</description>
+        <description lang="en_GB">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.3.83 fixes Rating 6 label parsing, preserves IMDb-then-TMDb fallback order, makes Display extra toggles truly obey settings, improves Arctic Mirage CropV2 clearlogo detection, widens screensaver rating labels, and adds Includes_Hubs patch/restore/status to the no-Python PowerShell patcher.</description>
+        <description lang="id_ID">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.3.83 fixes Rating 6 label parsing, preserves IMDb-then-TMDb fallback order, makes Display extra toggles truly obey settings, improves Arctic Mirage CropV2 clearlogo detection, widens screensaver rating labels, and adds Includes_Hubs patch/restore/status to the no-Python PowerShell patcher.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
