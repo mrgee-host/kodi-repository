@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 $DefaultSkin1080i = "E:\Kodi\portable_data\addons\skin.arctic.fuse.3\1080i"
 $Skin1080i = $DefaultSkin1080i
-$PatchVersion = "1.3.86"
+$PatchVersion = "1.3.87-r4"
 function Read-Text($Path) { return [System.IO.File]::ReadAllText($Path, [System.Text.Encoding]::UTF8) }
 function Write-Text($Path, $Text) { [System.IO.File]::WriteAllText($Path, $Text, [System.Text.UTF8Encoding]::new($false)) }
 function Backup-Once($Path) { $b = "$Path.lrs-1386-before"; if ((Test-Path $Path) -and !(Test-Path $b)) { Copy-Item -LiteralPath $Path -Destination $b -Force } }
@@ -12,16 +12,16 @@ function Replace-Regex($Text, $Pattern, $Replacement, $Count = 0) {
 }
 $RatingCall = @'
                     <!-- Ratings -->
-                    <!-- LRS-AF3-META-CALL-START-1.3.86 -->
+                    <!-- LRS-AF3-META-CALL-START-1.3.87 -->
                     <include content="LRS_Info_Meta_Ratings">
                         <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | $PARAM[override_movie] | $PARAM[override_tvshow] | Window.IsActive(videoosd)</param>
                         <param name="colordiffuse">main_fg</param>
                     </include>
-                    <!-- LRS-AF3-META-CALL-END-1.3.86 -->
+                    <!-- LRS-AF3-META-CALL-END-1.3.87 -->
 '@
 $LrsIncludeDef = @'
     <!-- LRS-AF3-INCLUDE-DEF-START -->
-    <!-- LRS-AF3-1.3.86: AF3-native spacing. IMDb icon_w=52, all other icons default 32. -->
+    <!-- LRS-AF3-1.3.87: AF3-native spacing. IMDb icon_w=52, all other icons default 32. -->
     <include name="LRS_Info_Meta_Ratings">
         <param name="visible">true</param>
         <param name="colordiffuse">main_fg</param>
@@ -127,7 +127,7 @@ $LrsIncludeDef = @'
     <!-- LRS-AF3-INCLUDE-DEF-END -->
 '@
 $CropBlock = @'
-                    <!-- AFM-CROPV2-CLEARLOGO-LRS-START-1.3.86 -->
+                    <!-- AFM-CROPV2-CLEARLOGO-LRS-START-1.3.87 -->
                     <control type="image">
                         <texture background="true">$INFO[Window(Home).Property(LibraryRatings.Screensaver.CropV2Image)]</texture>
                         <aspectratio aligny="bottom">keep</aspectratio>
@@ -138,10 +138,10 @@ $CropBlock = @'
                         <aspectratio aligny="bottom">keep</aspectratio>
                         <visible>String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.CropV2Image)) + !String.IsEmpty(Container(1297).ListItem.Art(clearlogo))</visible>
                     </control>
-                    <!-- AFM-CROPV2-CLEARLOGO-LRS-END-1.3.86 -->
+                    <!-- AFM-CROPV2-CLEARLOGO-LRS-END-1.3.87 -->
 '@
 $ScreenRatingRow = @'
-                <!-- LRS-AF3-SCREENSAVER-AF3-ROW-START-1.3.86 -->
+                <!-- LRS-AF3-SCREENSAVER-AF3-ROW-START-1.3.87 -->
                 <control type="grouplist">
                     <orientation>horizontal</orientation>
                     <align>center</align>
@@ -288,7 +288,7 @@ $ScreenRatingRow = @'
                     </control>
                     <control type="group"><visible>String.IsEqual(Window(Home).Property(LibraryRatings.Display.TVStatus),true) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.Series_StatusLabel))</visible><width>-4</width></control>
                 </control>
-                <!-- LRS-AF3-SCREENSAVER-AF3-ROW-END-1.3.86 -->
+                <!-- LRS-AF3-SCREENSAVER-AF3-ROW-END-1.3.87 -->
 '@
 function Patch-IncludesInfo {
     $path = Join-Path $Skin1080i "Includes_Info.xml"
@@ -304,13 +304,13 @@ function Patch-IncludesInfo {
 ?
 \s*<!-- Awards -->\s*
 ?
-\s*<include content="Info_Meta_Object" condition="\$EXP\[Exp_TMDbHelper_IsData\][^"]*">.*?</include>\s*' '                    <!-- LRS-AF3-NATIVE-STATUS-AWARDS-DISABLED-1.3.86 -->' 1
+\s*<include content="Info_Meta_Object" condition="\$EXP\[Exp_TMDbHelper_IsData\][^"]*">.*?</include>\s*' '                    <!-- LRS-AF3-NATIVE-STATUS-AWARDS-DISABLED-1.3.87 -->' 1
     $t = Replace-Regex $t '(?ms)^\s*<!-- Status -->\s*
 ?
-\s*<include content="Info_Meta_Object" condition="\$EXP\[Exp_TMDbHelper_IsData\]">.*?</include>\s*' '                    <!-- LRS-AF3-NATIVE-STATUS-DISABLED-1.3.86 -->' 1
+\s*<include content="Info_Meta_Object" condition="\$EXP\[Exp_TMDbHelper_IsData\]">.*?</include>\s*' '                    <!-- LRS-AF3-NATIVE-STATUS-DISABLED-1.3.87 -->' 1
     $t = Replace-Regex $t '(?ms)^\s*<!-- Awards -->\s*
 ?
-\s*<include content="Info_Meta_Object" condition="\$EXP\[Exp_TMDbHelper_IsData\][^"]*">.*?</include>\s*' '                    <!-- LRS-AF3-NATIVE-AWARDS-DISABLED-1.3.86 -->' 1
+\s*<include content="Info_Meta_Object" condition="\$EXP\[Exp_TMDbHelper_IsData\][^"]*">.*?</include>\s*' '                    <!-- LRS-AF3-NATIVE-AWARDS-DISABLED-1.3.87 -->' 1
     if ($t.Contains('</includes>')) { $t = $t.Replace('</includes>', $LrsIncludeDef + "`r`n</includes>") } else { throw "Includes_Info.xml tidak punya </includes>" }
     Write-Text $path $t
     Write-Host "[OK] Includes_Info.xml patched"
@@ -342,18 +342,18 @@ function Patch-IncludesHubs {
             $anchors++
             $indent = ([regex]::Match($line, '^\s*')).Value
             $newLine = $line.Replace('TMDbHelper.WidgetContainer','LRS.Active.ContainerID').Replace('Property(TMDbHelper.WidgetContainer)','Property(LRS.Active.ContainerID)')
-            $out.Add($indent + '<!-- LRS-AF3-ACTIVE-BRIDGE-1.3.86 -->')
+            $out.Add($indent + '<!-- LRS-AF3-ACTIVE-BRIDGE-1.3.87 -->')
             $out.Add($newLine)
         }
     }
     $new = [string]::Join("`r`n", $out)
     $needle = '<ondown>SetFocus($INFO[Container(601).ListItem.Property(widget_id)])</ondown>'
-    $selector = $needle + "`r`n                    <!-- LRS-AF3-ACTIVE-BRIDGE-1.3.86 -->`r`n                    <onfocus condition=`"!String.IsEmpty(Container(601).ListItem.Property(widget_id))`">SetProperty(LRS.Active.ContainerID,`$INFO[Container(601).ListItem.Property(widget_id)])</onfocus>"
+    $selector = $needle + "`r`n                    <!-- LRS-AF3-ACTIVE-BRIDGE-1.3.87 -->`r`n                    <onfocus condition=`"!String.IsEmpty(Container(601).ListItem.Property(widget_id))`">SetProperty(LRS.Active.ContainerID,`$INFO[Container(601).ListItem.Property(widget_id)])</onfocus>"
     if($new -notmatch 'SetProperty\(LRS\.Active\.ContainerID,\$INFO\[Container\(601\)') {
         if($new.Contains($needle)) {
             $new = $new.Replace($needle, $selector)
         } elseif($new -match 'Container\(601\)\.ListItem\.Property\(widget_id\)') {
-            $new = Replace-Regex $new '(?m)^(\s*<on[^>]+Container\(601\)\.ListItem\.Property\(widget_id\).*?</on[^>]+>)' ('$1' + "`r`n                    <!-- LRS-AF3-ACTIVE-BRIDGE-1.3.86 -->`r`n                    <onfocus condition=`"!String.IsEmpty(Container(601).ListItem.Property(widget_id))`">SetProperty(LRS.Active.ContainerID,`$INFO[Container(601).ListItem.Property(widget_id)])</onfocus>") 1
+            $new = Replace-Regex $new '(?m)^(\s*<on[^>]+Container\(601\)\.ListItem\.Property\(widget_id\).*?</on[^>]+>)' ('$1' + "`r`n                    <!-- LRS-AF3-ACTIVE-BRIDGE-1.3.87 -->`r`n                    <onfocus condition=`"!String.IsEmpty(Container(601).ListItem.Property(widget_id))`">SetProperty(LRS.Active.ContainerID,`$INFO[Container(601).ListItem.Property(widget_id)])</onfocus>") 1
         }
     }
     Write-Text $path $new
@@ -416,7 +416,7 @@ function Check-Status {
     if (Test-Path $infoPath) {
         $t = Read-Text $infoPath
         $slots = ($t -match 'RatingSlot6_IconFile') -and ($t -match 'RatingSlot6_Label')
-        $imdb52 = ([regex]::Matches($t, '(?s)RatingSlot[0-9]_Source\),imdb\).*?<param name="icon_w">52</param>').Count -ge 6
+        $imdb52 = (([regex]::Matches($t, '(?s)RatingSlot[0-9]_Source\),imdb\).*?<param name="icon_w">52</param>')).Count -ge 6)
         $wrong52 = ($t -match 'oscars\.png[\s\S]*?<param name="icon_w">52</param>') -or ($t -match 'emmys\.png[\s\S]*?<param name="icon_w">52</param>')
         $nativeRatings = [regex]::Matches($t, '<include content="Info_Meta_Ratings" condition="\$EXP\[Exp_TMDbHelper_IsData\]"').Count
         $nativeStatus = ($t -match 'TMDbHelper\.\$PARAM\[service\]\.Status')
@@ -452,9 +452,500 @@ function Check-Status {
 }
 function Patch-All { Patch-IncludesInfo; Patch-IncludesHubs; Patch-Screensaver; Check-Status }
 function Remove-All { Remove-IncludesInfoPatch; Remove-IncludesHubsPatch; Remove-ScreensaverPatch; Check-Status }
+
+# -----------------------------------------------------------------------------
+# LRS 1.3.87-r4 merged screensaver fix
+# - merged into full PATCH-AF3-LRS-1.3.87-FIX patcher
+# - preserves AF3 native vignette / fanart zoom / slide / odd-even layout
+# - replaces native Info_StarRating on both sides with LRS row
+# - keeps CropV2 fallback on both sides
+# - lowers rating row to centertop 332
+# - disables plot textbox autoscroll only; does NOT disable list item cycling
+# -----------------------------------------------------------------------------
+$R4_OldClear = @'
+                    <control type="image">
+                        <texture background="true">$INFO[Container(1297).ListItem.Art(clearlogo)]</texture>
+                        <aspectratio aligny="bottom">keep</aspectratio>
+                        <visible>!String.IsEmpty(Container(1297).ListItem.Art(clearlogo))</visible>
+                    </control>
+'@
+$R4_NewCrop = @'
+                    <!-- AFM-CROPV2-CLEARLOGO-LRS-START-1.3.87-r4-MERGED -->
+                    <control type="image">
+                        <texture background="true">$INFO[Window(Home).Property(LibraryRatings.Screensaver.CropV2Image)]</texture>
+                        <aspectratio aligny="bottom">keep</aspectratio>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.CropV2Image))</visible>
+                    </control>
+                    <control type="image">
+                        <texture background="true">$INFO[Container(1297).ListItem.Art(clearlogo)]</texture>
+                        <aspectratio aligny="bottom">keep</aspectratio>
+                        <visible>String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.CropV2Image)) + !String.IsEmpty(Container(1297).ListItem.Art(clearlogo))</visible>
+                    </control>
+                    <!-- AFM-CROPV2-CLEARLOGO-LRS-END-1.3.87-r4-MERGED -->
+'@
+$R4_OldStar = @'
+                <include content="Info_StarRating">
+                    <param name="textcolor">yellow_star</param>
+                    <param name="rating">Container(1297).ListItem.Rating</param>
+                    <param name="size">64</param>
+                    <height>80</height>
+                    <align>center</align>
+                    <centertop>320</centertop>
+                    <itemgap>-16</itemgap>
+                    <visible>!String.IsEmpty(Container(1297).ListItem.Plot)</visible>
+                </include>
+'@
+$R4_NewRow = @'
+                <!-- LRS-AF3-SCREENSAVER-AF3-ROW-START-1.3.87-r4-MERGED -->
+                <control type="grouplist">
+                    <orientation>horizontal</orientation>
+                    <align>center</align>
+                    <height>54</height>
+                    <centertop>332</centertop>
+                    <itemgap>12</itemgap>
+                    <visible>String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.HasData),true)</visible>
+                    <!-- LRS RatingSlot1 -->
+                    <control type="image">
+                        <width>52</width>
+                        <height>32</height>
+                        <aspectratio>keep</aspectratio>
+                        <centertop>50%</centertop>
+                        <texture colordiffuse="main_fg_90">flags/$VAR[Color_Directory]/ratings/$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot1_IconFile)]</texture>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot1_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot1_IconFile)) + String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot1_Source),imdb)</visible>
+                    </control>
+                    <control type="image">
+                        <width>32</width>
+                        <height>32</height>
+                        <aspectratio>keep</aspectratio>
+                        <centertop>50%</centertop>
+                        <texture colordiffuse="main_fg_90">flags/$VAR[Color_Directory]/ratings/$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot1_IconFile)]</texture>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot1_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot1_IconFile)) + !String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot1_Source),imdb)</visible>
+                    </control>
+                    <control type="label">
+                        <aligny>center</aligny>
+                        <label>$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot1_Label)]</label>
+                        <textcolor>main_fg_70</textcolor>
+                        <font>font_main</font>
+                        <width max="680">auto</width>
+                        <textoffsetx>0</textoffsetx>
+                        <texturefocus />
+                        <texturenofocus />
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot1_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot1_IconFile))</visible>
+                    </control>
+                    <control type="group">
+                        <width>-4</width>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot1_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot1_IconFile))</visible>
+                    </control>
+                    <!-- LRS RatingSlot2 -->
+                    <control type="image">
+                        <width>52</width>
+                        <height>32</height>
+                        <aspectratio>keep</aspectratio>
+                        <centertop>50%</centertop>
+                        <texture colordiffuse="main_fg_90">flags/$VAR[Color_Directory]/ratings/$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot2_IconFile)]</texture>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot2_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot2_IconFile)) + String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot2_Source),imdb)</visible>
+                    </control>
+                    <control type="image">
+                        <width>32</width>
+                        <height>32</height>
+                        <aspectratio>keep</aspectratio>
+                        <centertop>50%</centertop>
+                        <texture colordiffuse="main_fg_90">flags/$VAR[Color_Directory]/ratings/$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot2_IconFile)]</texture>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot2_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot2_IconFile)) + !String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot2_Source),imdb)</visible>
+                    </control>
+                    <control type="label">
+                        <aligny>center</aligny>
+                        <label>$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot2_Label)]</label>
+                        <textcolor>main_fg_70</textcolor>
+                        <font>font_main</font>
+                        <width max="680">auto</width>
+                        <textoffsetx>0</textoffsetx>
+                        <texturefocus />
+                        <texturenofocus />
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot2_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot2_IconFile))</visible>
+                    </control>
+                    <control type="group">
+                        <width>-4</width>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot2_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot2_IconFile))</visible>
+                    </control>
+                    <!-- LRS RatingSlot3 -->
+                    <control type="image">
+                        <width>52</width>
+                        <height>32</height>
+                        <aspectratio>keep</aspectratio>
+                        <centertop>50%</centertop>
+                        <texture colordiffuse="main_fg_90">flags/$VAR[Color_Directory]/ratings/$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot3_IconFile)]</texture>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot3_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot3_IconFile)) + String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot3_Source),imdb)</visible>
+                    </control>
+                    <control type="image">
+                        <width>32</width>
+                        <height>32</height>
+                        <aspectratio>keep</aspectratio>
+                        <centertop>50%</centertop>
+                        <texture colordiffuse="main_fg_90">flags/$VAR[Color_Directory]/ratings/$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot3_IconFile)]</texture>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot3_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot3_IconFile)) + !String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot3_Source),imdb)</visible>
+                    </control>
+                    <control type="label">
+                        <aligny>center</aligny>
+                        <label>$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot3_Label)]</label>
+                        <textcolor>main_fg_70</textcolor>
+                        <font>font_main</font>
+                        <width max="680">auto</width>
+                        <textoffsetx>0</textoffsetx>
+                        <texturefocus />
+                        <texturenofocus />
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot3_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot3_IconFile))</visible>
+                    </control>
+                    <control type="group">
+                        <width>-4</width>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot3_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot3_IconFile))</visible>
+                    </control>
+                    <!-- LRS RatingSlot4 -->
+                    <control type="image">
+                        <width>52</width>
+                        <height>32</height>
+                        <aspectratio>keep</aspectratio>
+                        <centertop>50%</centertop>
+                        <texture colordiffuse="main_fg_90">flags/$VAR[Color_Directory]/ratings/$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot4_IconFile)]</texture>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot4_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot4_IconFile)) + String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot4_Source),imdb)</visible>
+                    </control>
+                    <control type="image">
+                        <width>32</width>
+                        <height>32</height>
+                        <aspectratio>keep</aspectratio>
+                        <centertop>50%</centertop>
+                        <texture colordiffuse="main_fg_90">flags/$VAR[Color_Directory]/ratings/$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot4_IconFile)]</texture>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot4_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot4_IconFile)) + !String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot4_Source),imdb)</visible>
+                    </control>
+                    <control type="label">
+                        <aligny>center</aligny>
+                        <label>$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot4_Label)]</label>
+                        <textcolor>main_fg_70</textcolor>
+                        <font>font_main</font>
+                        <width max="680">auto</width>
+                        <textoffsetx>0</textoffsetx>
+                        <texturefocus />
+                        <texturenofocus />
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot4_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot4_IconFile))</visible>
+                    </control>
+                    <control type="group">
+                        <width>-4</width>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot4_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot4_IconFile))</visible>
+                    </control>
+                    <!-- LRS RatingSlot5 -->
+                    <control type="image">
+                        <width>52</width>
+                        <height>32</height>
+                        <aspectratio>keep</aspectratio>
+                        <centertop>50%</centertop>
+                        <texture colordiffuse="main_fg_90">flags/$VAR[Color_Directory]/ratings/$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot5_IconFile)]</texture>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot5_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot5_IconFile)) + String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot5_Source),imdb)</visible>
+                    </control>
+                    <control type="image">
+                        <width>32</width>
+                        <height>32</height>
+                        <aspectratio>keep</aspectratio>
+                        <centertop>50%</centertop>
+                        <texture colordiffuse="main_fg_90">flags/$VAR[Color_Directory]/ratings/$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot5_IconFile)]</texture>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot5_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot5_IconFile)) + !String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot5_Source),imdb)</visible>
+                    </control>
+                    <control type="label">
+                        <aligny>center</aligny>
+                        <label>$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot5_Label)]</label>
+                        <textcolor>main_fg_70</textcolor>
+                        <font>font_main</font>
+                        <width max="680">auto</width>
+                        <textoffsetx>0</textoffsetx>
+                        <texturefocus />
+                        <texturenofocus />
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot5_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot5_IconFile))</visible>
+                    </control>
+                    <control type="group">
+                        <width>-4</width>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot5_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot5_IconFile))</visible>
+                    </control>
+                    <!-- LRS RatingSlot6 -->
+                    <control type="image">
+                        <width>52</width>
+                        <height>32</height>
+                        <aspectratio>keep</aspectratio>
+                        <centertop>50%</centertop>
+                        <texture colordiffuse="main_fg_90">flags/$VAR[Color_Directory]/ratings/$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot6_IconFile)]</texture>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot6_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot6_IconFile)) + String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot6_Source),imdb)</visible>
+                    </control>
+                    <control type="image">
+                        <width>32</width>
+                        <height>32</height>
+                        <aspectratio>keep</aspectratio>
+                        <centertop>50%</centertop>
+                        <texture colordiffuse="main_fg_90">flags/$VAR[Color_Directory]/ratings/$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot6_IconFile)]</texture>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot6_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot6_IconFile)) + !String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot6_Source),imdb)</visible>
+                    </control>
+                    <control type="label">
+                        <aligny>center</aligny>
+                        <label>$INFO[Window(Home).Property(LibraryRatings.Screensaver.RatingSlot6_Label)]</label>
+                        <textcolor>main_fg_70</textcolor>
+                        <font>font_main</font>
+                        <width max="680">auto</width>
+                        <textoffsetx>0</textoffsetx>
+                        <texturefocus />
+                        <texturenofocus />
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot6_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot6_IconFile))</visible>
+                    </control>
+                    <control type="group">
+                        <width>-4</width>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot6_Label)) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.RatingSlot6_IconFile))</visible>
+                    </control>
+                    <!-- LRS Oscar -->
+                    <control type="image">
+                        <width>32</width>
+                        <height>32</height>
+                        <aspectratio>keep</aspectratio>
+                        <centertop>50%</centertop>
+                        <texture colordiffuse="main_fg_90">flags/$VAR[Color_Directory]/ratings/oscars.png</texture>
+                        <visible>String.IsEqual(Window(Home).Property(LibraryRatings.Display.Awards),true) + String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.DBType),movie) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.Oscar_Wins))</visible>
+                    </control>
+                    <control type="label">
+                        <aligny>center</aligny>
+                        <label>$INFO[Window(Home).Property(LibraryRatings.Screensaver.Oscar_Wins),x,]</label>
+                        <textcolor>main_fg_70</textcolor>
+                        <font>font_main</font>
+                        <width max="680">auto</width>
+                        <textoffsetx>0</textoffsetx>
+                        <texturefocus />
+                        <texturenofocus />
+                        <visible>String.IsEqual(Window(Home).Property(LibraryRatings.Display.Awards),true) + String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.DBType),movie) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.Oscar_Wins))</visible>
+                    </control>
+                    <control type="group">
+                        <width>-4</width>
+                        <visible>String.IsEqual(Window(Home).Property(LibraryRatings.Display.Awards),true) + String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.DBType),movie) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.Oscar_Wins))</visible>
+                    </control>
+                    <!-- LRS Emmy -->
+                    <control type="image">
+                        <width>32</width>
+                        <height>32</height>
+                        <aspectratio>keep</aspectratio>
+                        <centertop>50%</centertop>
+                        <texture colordiffuse="main_fg_90">flags/$VAR[Color_Directory]/ratings/emmys.png</texture>
+                        <visible>String.IsEqual(Window(Home).Property(LibraryRatings.Display.Awards),true) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.Emmy_Wins))</visible>
+                    </control>
+                    <control type="label">
+                        <aligny>center</aligny>
+                        <label>$INFO[Window(Home).Property(LibraryRatings.Screensaver.Emmy_Wins),x,]</label>
+                        <textcolor>main_fg_70</textcolor>
+                        <font>font_main</font>
+                        <width max="680">auto</width>
+                        <textoffsetx>0</textoffsetx>
+                        <texturefocus />
+                        <texturenofocus />
+                        <visible>String.IsEqual(Window(Home).Property(LibraryRatings.Display.Awards),true) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.Emmy_Wins))</visible>
+                    </control>
+                    <control type="group">
+                        <width>-4</width>
+                        <visible>String.IsEqual(Window(Home).Property(LibraryRatings.Display.Awards),true) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.Emmy_Wins))</visible>
+                    </control>
+                    <!-- LRS TV status -->
+                    <control type="image">
+                        <width>32</width>
+                        <height>32</height>
+                        <aspectratio>keep</aspectratio>
+                        <centertop>50%</centertop>
+                        <texture colordiffuse="main_fg_90">flags/$VAR[Color_Directory]/ratings/ends.png</texture>
+                        <visible>String.IsEqual(Window(Home).Property(LibraryRatings.Display.TVStatus),true) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.Series_StatusLabel))</visible>
+                    </control>
+                    <control type="label">
+                        <aligny>center</aligny>
+                        <label>$INFO[Window(Home).Property(LibraryRatings.Screensaver.Series_StatusLabel)]</label>
+                        <textcolor>main_fg_70</textcolor>
+                        <font>font_main</font>
+                        <width max="680">auto</width>
+                        <textoffsetx>0</textoffsetx>
+                        <texturefocus />
+                        <texturenofocus />
+                        <visible>String.IsEqual(Window(Home).Property(LibraryRatings.Display.TVStatus),true) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.Series_StatusLabel))</visible>
+                    </control>
+                    <control type="group">
+                        <width>-4</width>
+                        <visible>String.IsEqual(Window(Home).Property(LibraryRatings.Display.TVStatus),true) + !String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.Series_StatusLabel))</visible>
+                    </control>
+                </control>
+                <!-- LRS-AF3-SCREENSAVER-AF3-ROW-END-1.3.87-r4-MERGED -->
+'@
+$R4_OldTitleVisible = @'
+<visible>String.IsEmpty(Container(1297).ListItem.Art(clearlogo))</visible>
+'@
+$R4_NewTitleVisible = @'
+<visible>String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.CropV2Image)) + String.IsEmpty(Container(1297).ListItem.Art(clearlogo))</visible>
+'@
+$R4_OldPlotBox = @'
+            <control type="textbox">
+                <font>font_main_plot</font>
+                <textcolor>main_fg_70</textcolor>
+                <label>$INFO[Container(1297).ListItem.Plot]</label>
+                <bottom>view_pad</bottom>
+                <height>120</height>
+                <align>center</align>
+            </control>
+'@
+$R4_NewPlotBox = @'
+            <control type="textbox">
+                <font>font_main_plot</font>
+                <textcolor>main_fg_70</textcolor>
+                <label>$INFO[Container(1297).ListItem.Plot]</label>
+                <bottom>view_pad</bottom>
+                <height>120</height>
+                <align>center</align>
+                <autoscroll>false</autoscroll>
+            </control>
+'@
+
+function R4-ToLF([string]$Text) {
+    return $Text.Replace("`r`n", "`n").Replace("`r", "`n")
+}
+function R4-CountLiteral([string]$Text, [string]$Needle) {
+    return ([regex]::Matches($Text, [regex]::Escape($Needle))).Count
+}
+function R4-NormalizeTemplate([string]$Text) {
+    return (R4-ToLF $Text).Trim("`n")
+}
+function R4-NormalizeScreensaver([string]$Text) {
+    $t = R4-ToLF $Text
+    $oldClear = R4-NormalizeTemplate $R4_OldClear
+    $oldTitle = (R4-NormalizeTemplate $R4_OldTitleVisible)
+    $newTitle = (R4-NormalizeTemplate $R4_NewTitleVisible)
+    # Revert any previous LRS/CropV2 clearlogo block back to the native clearlogo block first.
+    $t = [regex]::Replace($t, '(?s)\s*<!-- AFM-CROPV2-CLEARLOGO-LRS-START.*?<!-- AFM-CROPV2-CLEARLOGO-LRS-END.*?-->\s*', "`n" + $oldClear + "`n")
+    # Convert any previous LRS screensaver rating rows back to the native star placeholder.
+    # This makes r4 safe on original AF3, r3 patched files, and already-r4 patched files.
+    $oldStar = R4-NormalizeTemplate $R4_OldStar
+    $t = [regex]::Replace($t, '(?s)\s*<!-- LRS-AF3-SCREENSAVER-(?:INLINE|AF3-ROW)-START.*?<!-- LRS-AF3-SCREENSAVER-(?:INLINE|AF3-ROW)-END.*?-->\s*', "`n" + $oldStar + "`n")
+    # Convert old accidental include row variants back to the same placeholder.
+    $t = [regex]::Replace($t, '(?s)\s*<control type="grouplist"[^>]*>\s*<orientation>horizontal</orientation>.*?<include content="LRS_Info_Meta_Ratings">.*?</include>\s*</control>\s*', "`n" + $oldStar + "`n")
+    # Reset title fallback and plot autoscroll changes before applying r4 again.
+    $oldPlot = R4-NormalizeTemplate $R4_OldPlotBox
+    $newPlot = R4-NormalizeTemplate $R4_NewPlotBox
+    $t = $t.Replace($newTitle, $oldTitle)
+    $t = $t.Replace($newPlot, $oldPlot)
+    return $t
+}
+function Patch-Screensaver {
+    $path = Join-Path $Skin1080i "screensaver-arctic-mirage.xml"
+    if (!(Test-Path $path)) { Write-Host "[ERROR] Not found: $path"; return }
+    $backup = "$path.lrs-1.3.87-r4-merged-backup"
+    if (!(Test-Path $backup)) {
+        Copy-Item -LiteralPath $path -Destination $backup -Force
+        Write-Host "[OK] Backup dibuat: $backup"
+    } else {
+        Write-Host "[INFO] Backup sudah ada: $backup"
+    }
+
+    $oldClear = R4-NormalizeTemplate $R4_OldClear
+    $newCrop = R4-NormalizeTemplate $R4_NewCrop
+    $oldStar  = R4-NormalizeTemplate $R4_OldStar
+    $newRow   = R4-NormalizeTemplate $R4_NewRow
+    $oldTitle = R4-NormalizeTemplate $R4_OldTitleVisible
+    $newTitle = R4-NormalizeTemplate $R4_NewTitleVisible
+    $oldPlot  = R4-NormalizeTemplate $R4_OldPlotBox
+    $newPlot  = R4-NormalizeTemplate $R4_NewPlotBox
+
+    $t = Read-Text $path
+    $t = R4-NormalizeScreensaver $t
+
+    $clearCount = R4-CountLiteral $t $oldClear
+    if ($clearCount -ne 2) { throw "Clearlogo native block harus 2 untuk layout kanan/kiri, ketemu $clearCount. Tidak menulis file." }
+    $starCount = R4-CountLiteral $t $oldStar
+    if ($starCount -ne 2) { throw "Info_StarRating asli harus 2 untuk layout kanan/kiri, ketemu $starCount. Tidak menulis file." }
+
+    $t = $t.Replace($oldClear, $newCrop)
+    $t = $t.Replace($oldStar, $newRow)
+    $t = $t.Replace($oldTitle, $newTitle)
+    $plotBefore = R4-CountLiteral $t $oldPlot
+    if ($plotBefore -gt 0) { $t = $t.Replace($oldPlot, $newPlot) }
+
+    # Strict validation before writing.
+    $cropCount = ([regex]::Matches($t, 'AFM-CROPV2-CLEARLOGO-LRS-START')).Count
+    $rowCount = ([regex]::Matches($t, 'LRS-AF3-SCREENSAVER-AF3-ROW-START-1\.3\.87-r4-MERGED')).Count
+    $starLeft = ([regex]::Matches($t, 'Info_StarRating')).Count
+    $vignette = ([regex]::Matches($t, 'vignette\.png')).Count
+    $odd = ([regex]::Matches($t, 'Integer\.IsOdd\(ListItem\.CurrentItem\)')).Count
+    $noScroll = ([regex]::Matches($t, '<autoscroll>false</autoscroll>')).Count
+    if ($cropCount -ne 2 -or $rowCount -ne 2 -or $starLeft -ne 0 -or $vignette -lt 2 -or $odd -lt 4 -or $noScroll -lt 2) {
+        throw "Validasi gagal. crop=$cropCount row=$rowCount starLeft=$starLeft vignette=$vignette odd=$odd plotNoScroll=$noScroll. Tidak menulis file."
+    }
+    [xml]$null = $t
+    Write-Text $path ($t.Replace("`n", "`r`n"))
+    Write-Host "[OK] screensaver-arctic-mirage.xml patched r4: AF3 asli tetap, CropV2+LRS kiri/kanan, rating centertop 332, plot autoscroll false"
+}
+function Remove-ScreensaverPatch {
+    $path = Join-Path $Skin1080i "screensaver-arctic-mirage.xml"
+    if (!(Test-Path $path)) { Write-Host "[ERROR] Not found: $path"; return }
+    $backup = "$path.lrs-1.3.87-r4-merged-backup"
+    if (Test-Path $backup) {
+        Copy-Item -LiteralPath $backup -Destination $path -Force
+        Write-Host "[OK] screensaver restored from r4 backup: $backup"
+        return
+    }
+    Write-Host "[WARN] Backup r4 tidak ada. Restore manual dari backup AF3 asli kalau ingin menghapus patch screensaver."
+}
+function Check-Status {
+    $infoPath = Join-Path $Skin1080i "Includes_Info.xml"
+    $hubPath = Join-Path $Skin1080i "Includes_Hubs.xml"
+    $ssPath = Join-Path $Skin1080i "screensaver-arctic-mirage.xml"
+    Write-Host "`nSTATUS"
+    Write-Host "  Skin path                  : $Skin1080i"
+    if (Test-Path $infoPath) {
+        $t = Read-Text $infoPath
+        $slots = ($t -match 'RatingSlot6_IconFile') -and ($t -match 'RatingSlot6_Label')
+        $imdb52 = (([regex]::Matches($t, '(?s)RatingSlot[0-9]_Source\),imdb\).*?<param name="icon_w">52</param>')).Count -ge 6)
+        $wrong52 = ($t -match 'oscars\.png[\s\S]*?<param name="icon_w">52</param>') -or ($t -match 'emmys\.png[\s\S]*?<param name="icon_w">52</param>')
+        $nativeRatings = [regex]::Matches($t, '<include content="Info_Meta_Ratings" condition="\$EXP\[Exp_TMDbHelper_IsData\]"').Count
+        $nativeStatus = ($t -match 'TMDbHelper\.\$PARAM\[service\]\.Status')
+        $nativeAwards = ($t -match 'TMDbHelper\.\$PARAM\[service\]\.Oscar_Wins')
+        $icons = ($t -match 'oscars\.png') -and ($t -match 'emmys\.png') -and ($t -notmatch 'goldenglobe\.png')
+        Write-Host "  Includes LRS slot 1-6      : $(if($slots){'YES'}else{'NO'})"
+        Write-Host "  IMDb-only icon_w 52        : $(if($imdb52 -and -not $wrong52){'YES'}else{'NO'})"
+        Write-Host "  Native rating calls left   : $nativeRatings"
+        Write-Host "  Native status left         : $(if($nativeStatus){'YES'}else{'NO'})"
+        Write-Host "  Native awards left         : $(if($nativeAwards){'YES'}else{'NO'})"
+        Write-Host "  Awards icons oscars/emmys  : $(if($icons){'YES'}else{'NO'})"
+    }
+    if (Test-Path $hubPath) {
+        $h = Read-Text $hubPath
+        $tmdbAnchors = ([regex]::Matches($h, 'SetProperty\(TMDbHelper\.WidgetContainer')).Count
+        $lrsLines = ([regex]::Matches($h, 'SetProperty\(LRS\.Active\.ContainerID')).Count
+        $selector = ($h -match 'SetProperty\(LRS\.Active\.ContainerID,\$INFO\[Container\(601\)\.ListItem\.Property\(widget_id\)\]')
+        $spotlightButton = ($h -match 'SetProperty\(LRS\.Active\.ContainerID,301,\$PARAM\[window\]\)')
+        Write-Host "  Hub TMDb anchors           : $tmdbAnchors"
+        Write-Host "  Hub LRS bridge lines       : $lrsLines"
+        Write-Host "  Hub selector 601 bridge    : $(if($selector){'YES'}else{'NO'})"
+        Write-Host "  Hub spotlight 301 bridge   : $(if($spotlightButton){'YES'}else{'NO'})"
+        Write-Host "  Includes_Hubs active bridge: $(if(($lrsLines -ge $tmdbAnchors) -and $selector -and $spotlightButton){'YES'}else{'NO'})"
+    }
+    if (Test-Path $ssPath) {
+        $s = Read-Text $ssPath
+        $vignette = ([regex]::Matches($s, 'vignette\.png')).Count
+        $odd = ([regex]::Matches($s, 'Integer\.IsOdd\(ListItem\.CurrentItem\)')).Count
+        $crop = ([regex]::Matches($s, 'AFM-CROPV2-CLEARLOGO-LRS-START')).Count
+        $rows = ([regex]::Matches($s, 'LRS-AF3-SCREENSAVER-AF3-ROW-START-1\.3\.87-r4-MERGED')).Count
+        $star = ([regex]::Matches($s, 'Info_StarRating')).Count
+        $centertop332 = ([regex]::Matches($s, '<centertop>332</centertop>')).Count
+        $noScroll = ([regex]::Matches($s, '<autoscroll>false</autoscroll>')).Count
+        $usesSS = ($s -match 'LibraryRatings\.Screensaver\.RatingSlot1_Label') -and ($s -notmatch 'LRS_Info_Meta_Ratings')
+        Write-Host "  Screensaver AF3 vignette   : $(if($vignette -ge 2){'YES'}else{'NO'}) ($vignette)"
+        Write-Host "  Screensaver odd/even kept  : $(if($odd -ge 4){'YES'}else{'NO'}) ($odd)"
+        Write-Host "  Screensaver CropV2 blocks  : $crop"
+        Write-Host "  Screensaver LRS rows       : $rows"
+        Write-Host "  Native Info_StarRating left: $star"
+        Write-Host "  Screensaver rating y=332   : $(if($centertop332 -ge 2){'YES'}else{'NO'}) ($centertop332)"
+        Write-Host "  Plot autoscroll false      : $(if($noScroll -ge 2){'YES'}else{'NO'}) ($noScroll)"
+        Write-Host "  Screensaver uses SS props  : $(if($usesSS){'YES'}else{'NO'})"
+        Write-Host "  RESULT screensaver         : $(if($vignette -ge 2 -and $odd -ge 4 -and $crop -eq 2 -and $rows -eq 2 -and $star -eq 0 -and $centertop332 -ge 2 -and $noScroll -ge 2 -and $usesSS){'OK'}else{'CHECK'})"
+    }
+}
+
 while ($true) {
     Clear-Host
-    Write-Host "AF3 + LRS 1.3.86 patcher"
+    Write-Host "AF3 + LRS 1.3.87 patcher"
     Write-Host "Skin 1080i: $Skin1080i"
     Write-Host "============================================================"
     Write-Host "1. Patch Includes_Info LRS rating slots + AF3 native spacing"
