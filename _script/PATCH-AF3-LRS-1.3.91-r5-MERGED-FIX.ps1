@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 $DefaultSkin1080i = "E:\Kodi\portable_data\addons\skin.arctic.fuse.3\1080i"
 $Skin1080i = $DefaultSkin1080i
-$PatchVersion = "1.3.87-r4"
+$PatchVersion = "1.3.91-r5"
 function Read-Text($Path) { return [System.IO.File]::ReadAllText($Path, [System.Text.Encoding]::UTF8) }
 function Write-Text($Path, $Text) { [System.IO.File]::WriteAllText($Path, $Text, [System.Text.UTF8Encoding]::new($false)) }
 function Backup-Once($Path) { $b = "$Path.lrs-1386-before"; if ((Test-Path $Path) -and !(Test-Path $b)) { Copy-Item -LiteralPath $Path -Destination $b -Force } }
@@ -444,21 +444,22 @@ function Check-Status {
     if (Test-Path $ssPath) {
         $s = Read-Text $ssPath
         Write-Host "  Screensaver plot preserved : $(if($s -match 'Container\(1297\)\.ListItem\.Plot'){'YES'}else{'NO'})"
-        Write-Host "  Screensaver CropV2 prop    : $(if($s -match 'LibraryRatings\.Screensaver\.CropV2Image'){'YES'}else{'NO'})"
+        Write-Host "  Screensaver final logo prop: $(if($s -match 'LibraryRatings\.Screensaver\.ClearLogoFinal'){'YES'}else{'NO'})"
         Write-Host "  Screensaver uses SS props  : $(if($s -match 'LibraryRatings\.Screensaver\.RatingSlot1_Label' -and $s -notmatch 'LibraryRatings\.ListItem\.HasData'){'YES'}else{'NO'})"
         Write-Host "  Screensaver itemgap 12     : $(if($s -match '<itemgap>12</itemgap>'){'YES'}else{'NO'})"
         Write-Host "  Screensaver fixed 150 left : $(if($s -match '<width>150</width>' -or $s -match 'LRS_Info_Meta_Ratings'){'YES'}else{'NO'})"
+        Write-Host "  Direct default fallback left: $(if($s -match 'String.IsEmpty\(Window\(Home\)\.Property\(LibraryRatings\.Screensaver\.CropV2Image\)\) \+ !String.IsEmpty\(Container\(1297\)\.ListItem\.Art\(clearlogo\)\)'){'YES'}else{'NO'})"
     }
 }
 function Patch-All { Patch-IncludesInfo; Patch-IncludesHubs; Patch-Screensaver; Check-Status }
 function Remove-All { Remove-IncludesInfoPatch; Remove-IncludesHubsPatch; Remove-ScreensaverPatch; Check-Status }
 
 # -----------------------------------------------------------------------------
-# LRS 1.3.87-r4 merged screensaver fix
+# LRS 1.3.91-r5 merged screensaver final clearlogo fix
 # - merged into full PATCH-AF3-LRS-1.3.87-FIX patcher
 # - preserves AF3 native vignette / fanart zoom / slide / odd-even layout
 # - replaces native Info_StarRating on both sides with LRS row
-# - keeps CropV2 fallback on both sides
+# - uses one final clearlogo property on both sides; no direct default fallback in XML
 # - lowers rating row to centertop 332
 # - disables plot textbox autoscroll only; does NOT disable list item cycling
 # -----------------------------------------------------------------------------
@@ -470,18 +471,13 @@ $R4_OldClear = @'
                     </control>
 '@
 $R4_NewCrop = @'
-                    <!-- AFM-CROPV2-CLEARLOGO-LRS-START-1.3.87-r4-MERGED -->
+                    <!-- AFM-CLEARLOGO-FINAL-LRS-START-1.3.91-r5 -->
                     <control type="image">
-                        <texture background="true">$INFO[Window(Home).Property(LibraryRatings.Screensaver.CropV2Image)]</texture>
+                        <texture background="true">$INFO[Window(Home).Property(LibraryRatings.Screensaver.ClearLogoFinal)]</texture>
                         <aspectratio aligny="bottom">keep</aspectratio>
-                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.CropV2Image))</visible>
+                        <visible>!String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.ClearLogoFinal)) + String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.ClearLogoFinalTitle),Container(1297).ListItem.Title)</visible>
                     </control>
-                    <control type="image">
-                        <texture background="true">$INFO[Container(1297).ListItem.Art(clearlogo)]</texture>
-                        <aspectratio aligny="bottom">keep</aspectratio>
-                        <visible>String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.CropV2Image)) + !String.IsEmpty(Container(1297).ListItem.Art(clearlogo))</visible>
-                    </control>
-                    <!-- AFM-CROPV2-CLEARLOGO-LRS-END-1.3.87-r4-MERGED -->
+                    <!-- AFM-CLEARLOGO-FINAL-LRS-END-1.3.91-r5 -->
 '@
 $R4_OldStar = @'
                 <include content="Info_StarRating">
@@ -775,7 +771,7 @@ $R4_OldTitleVisible = @'
 <visible>String.IsEmpty(Container(1297).ListItem.Art(clearlogo))</visible>
 '@
 $R4_NewTitleVisible = @'
-<visible>String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.CropV2Image)) + String.IsEmpty(Container(1297).ListItem.Art(clearlogo))</visible>
+<visible>String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.ClearLogoFinal)) | !String.IsEqual(Window(Home).Property(LibraryRatings.Screensaver.ClearLogoFinalTitle),Container(1297).ListItem.Title)</visible>
 '@
 $R4_OldPlotBox = @'
             <control type="textbox">
@@ -814,18 +810,13 @@ function R4-NormalizeScreensaver([string]$Text) {
     $oldTitle = (R4-NormalizeTemplate $R4_OldTitleVisible)
     $newTitle = (R4-NormalizeTemplate $R4_NewTitleVisible)
     # Revert any previous LRS/CropV2 clearlogo block back to the native clearlogo block first.
-    $t = [regex]::Replace($t, '(?s)\s*<!-- AFM-CROPV2-CLEARLOGO-LRS-START.*?<!-- AFM-CROPV2-CLEARLOGO-LRS-END.*?-->\s*', "`n" + $oldClear + "`n")
-    # Convert any previous LRS screensaver rating rows back to the native star placeholder.
-    # This makes r4 safe on original AF3, r3 patched files, and already-r4 patched files.
-    $oldStar = R4-NormalizeTemplate $R4_OldStar
-    $t = [regex]::Replace($t, '(?s)\s*<!-- LRS-AF3-SCREENSAVER-(?:INLINE|AF3-ROW)-START.*?<!-- LRS-AF3-SCREENSAVER-(?:INLINE|AF3-ROW)-END.*?-->\s*', "`n" + $oldStar + "`n")
-    # Convert old accidental include row variants back to the same placeholder.
-    $t = [regex]::Replace($t, '(?s)\s*<control type="grouplist"[^>]*>\s*<orientation>horizontal</orientation>.*?<include content="LRS_Info_Meta_Ratings">.*?</include>\s*</control>\s*', "`n" + $oldStar + "`n")
-    # Reset title fallback and plot autoscroll changes before applying r4 again.
-    $oldPlot = R4-NormalizeTemplate $R4_OldPlotBox
-    $newPlot = R4-NormalizeTemplate $R4_NewPlotBox
+    $t = [regex]::Replace($t, '(?s)\s*<!-- AFM-(?:CROPV2-CLEARLOGO|CLEARLOGO-FINAL)-LRS-START.*?<!-- AFM-(?:CROPV2-CLEARLOGO|CLEARLOGO-FINAL)-LRS-END.*?-->\s*', "`n" + $oldClear + "`n")
+    # Remove any previous LRS screensaver rating rows.
+    $t = [regex]::Replace($t, '(?s)\s*<!-- LRS-AF3-SCREENSAVER-INLINE-START.*?<!-- LRS-AF3-SCREENSAVER-INLINE-END.*?-->\s*', "`n")
+    # Keep old accidental include row variants for Patch-Screensaver; they can be replaced with the new row there.
+    # Reset title fallback visible condition before applying CropV2 condition again.
     $t = $t.Replace($newTitle, $oldTitle)
-    $t = $t.Replace($newPlot, $oldPlot)
+    $t = $t.Replace('<visible>String.IsEmpty(Window(Home).Property(LibraryRatings.Screensaver.CropV2Image)) + String.IsEmpty(Container(1297).ListItem.Art(clearlogo))</visible>', $oldTitle)
     return $t
 }
 function Patch-Screensaver {
@@ -852,29 +843,37 @@ function Patch-Screensaver {
     $t = R4-NormalizeScreensaver $t
 
     $clearCount = R4-CountLiteral $t $oldClear
-    if ($clearCount -ne 2) { throw "Clearlogo native block harus 2 untuk layout kanan/kiri, ketemu $clearCount. Tidak menulis file." }
+    $oddBefore = ([regex]::Matches($t, 'Integer\.IsOdd\(ListItem\.CurrentItem\)')).Count
+    $expectedSides = $(if ($oddBefore -ge 4) { 2 } else { 1 })
+    if ($clearCount -ne $expectedSides) { throw "Clearlogo native block harus $expectedSides sesuai layout aktif, ketemu $clearCount. Tidak menulis file." }
     $starCount = R4-CountLiteral $t $oldStar
-    if ($starCount -ne 2) { throw "Info_StarRating asli harus 2 untuk layout kanan/kiri, ketemu $starCount. Tidak menulis file." }
+    $existingRows = ([regex]::Matches($t, 'LRS-AF3-SCREENSAVER-AF3-ROW-START')).Count
+    $includeRows = ([regex]::Matches($t, '(?s)<control type="grouplist"[^>]*>\s*<orientation>horizontal</orientation>.*?<include content="LRS_Info_Meta_Ratings">.*?</include>\s*</control>')).Count
+    if ($starCount -gt 0 -and $starCount -ne $expectedSides) { throw "Info_StarRating asli harus $expectedSides atau 0, ketemu $starCount. Tidak menulis file." }
+    if ($starCount -eq 0 -and $existingRows -lt $expectedSides -and $includeRows -lt $expectedSides) { throw "Info_StarRating sudah tidak ada tapi LRS row belum lengkap ($existingRows/$expectedSides), includeRows=$includeRows. Restore screensaver asli/r4 atau kirim XML. Tidak menulis file." }
 
     $t = $t.Replace($oldClear, $newCrop)
-    $t = $t.Replace($oldStar, $newRow)
+    if ($starCount -gt 0) { $t = $t.Replace($oldStar, $newRow) }
+    if ($includeRows -gt 0) { $t = [regex]::Replace($t, '(?s)\s*<control type="grouplist"[^>]*>\s*<orientation>horizontal</orientation>.*?<include content="LRS_Info_Meta_Ratings">.*?</include>\s*</control>\s*', "`n" + $newRow + "`n") }
     $t = $t.Replace($oldTitle, $newTitle)
     $plotBefore = R4-CountLiteral $t $oldPlot
     if ($plotBefore -gt 0) { $t = $t.Replace($oldPlot, $newPlot) }
 
     # Strict validation before writing.
-    $cropCount = ([regex]::Matches($t, 'AFM-CROPV2-CLEARLOGO-LRS-START')).Count
-    $rowCount = ([regex]::Matches($t, 'LRS-AF3-SCREENSAVER-AF3-ROW-START-1\.3\.87-r4-MERGED')).Count
+    $finalCount = ([regex]::Matches($t, 'AFM-CLEARLOGO-FINAL-LRS-START-1\.3\.91-r5')).Count
+    $rowCount = ([regex]::Matches($t, 'LRS-AF3-SCREENSAVER-AF3-ROW-START')).Count
     $starLeft = ([regex]::Matches($t, 'Info_StarRating')).Count
     $vignette = ([regex]::Matches($t, 'vignette\.png')).Count
     $odd = ([regex]::Matches($t, 'Integer\.IsOdd\(ListItem\.CurrentItem\)')).Count
+    $expectedRows = $(if ($odd -ge 4) { 2 } else { 1 })
     $noScroll = ([regex]::Matches($t, '<autoscroll>false</autoscroll>')).Count
-    if ($cropCount -ne 2 -or $rowCount -ne 2 -or $starLeft -ne 0 -or $vignette -lt 2 -or $odd -lt 4 -or $noScroll -lt 2) {
-        throw "Validasi gagal. crop=$cropCount row=$rowCount starLeft=$starLeft vignette=$vignette odd=$odd plotNoScroll=$noScroll. Tidak menulis file."
+    $directFallback = ($t -match 'Container\(1297\)\.ListItem\.Art\(clearlogo\).*LibraryRatings\.Screensaver\.CropV2Image') -or ($t -match 'String\.IsEmpty\(Window\(Home\)\.Property\(LibraryRatings\.Screensaver\.CropV2Image\)\) \+ !String\.IsEmpty\(Container\(1297\)\.ListItem\.Art\(clearlogo\)\)')
+    if ($finalCount -ne $expectedRows -or $rowCount -lt $expectedRows -or $starLeft -ne 0 -or ($expectedRows -eq 2 -and ($vignette -lt 2 -or $odd -lt 4 -or $noScroll -lt 2)) -or $directFallback) {
+        throw "Validasi gagal. final=$finalCount row=$rowCount expected=$expectedRows starLeft=$starLeft vignette=$vignette odd=$odd plotNoScroll=$noScroll directFallback=$directFallback. Tidak menulis file."
     }
     [xml]$null = $t
     Write-Text $path ($t.Replace("`n", "`r`n"))
-    Write-Host "[OK] screensaver-arctic-mirage.xml patched r4: AF3 asli tetap, CropV2+LRS kiri/kanan, rating centertop 332, plot autoscroll false"
+    Write-Host "[OK] screensaver-arctic-mirage.xml patched r5: AF3 asli tetap, final single clearlogo + LRS kiri/kanan, rating centertop 332, plot autoscroll false"
 }
 function Remove-ScreensaverPatch {
     $path = Join-Path $Skin1080i "screensaver-arctic-mirage.xml"
@@ -925,7 +924,7 @@ function Check-Status {
         $s = Read-Text $ssPath
         $vignette = ([regex]::Matches($s, 'vignette\.png')).Count
         $odd = ([regex]::Matches($s, 'Integer\.IsOdd\(ListItem\.CurrentItem\)')).Count
-        $crop = ([regex]::Matches($s, 'AFM-CROPV2-CLEARLOGO-LRS-START')).Count
+        $crop = ([regex]::Matches($s, 'AFM-CLEARLOGO-FINAL-LRS-START-1\.3\.91-r5')).Count
         $rows = ([regex]::Matches($s, 'LRS-AF3-SCREENSAVER-AF3-ROW-START-1\.3\.87-r4-MERGED')).Count
         $star = ([regex]::Matches($s, 'Info_StarRating')).Count
         $centertop332 = ([regex]::Matches($s, '<centertop>332</centertop>')).Count
@@ -933,7 +932,7 @@ function Check-Status {
         $usesSS = ($s -match 'LibraryRatings\.Screensaver\.RatingSlot1_Label') -and ($s -notmatch 'LRS_Info_Meta_Ratings')
         Write-Host "  Screensaver AF3 vignette   : $(if($vignette -ge 2){'YES'}else{'NO'}) ($vignette)"
         Write-Host "  Screensaver odd/even kept  : $(if($odd -ge 4){'YES'}else{'NO'}) ($odd)"
-        Write-Host "  Screensaver CropV2 blocks  : $crop"
+        Write-Host "  Screensaver final logo blocks: $crop"
         Write-Host "  Screensaver LRS rows       : $rows"
         Write-Host "  Native Info_StarRating left: $star"
         Write-Host "  Screensaver rating y=332   : $(if($centertop332 -ge 2){'YES'}else{'NO'}) ($centertop332)"
@@ -952,7 +951,7 @@ while ($true) {
     Write-Host "2. Remove Includes_Info LRS patch"
     Write-Host "3. Patch Includes_Hubs active bridge robust"
     Write-Host "4. Remove Includes_Hubs active bridge"
-    Write-Host "5. Patch Arctic Mirage CropV2 + true AF3-spaced screensaver ratings"
+    Write-Host "5. Patch Arctic Mirage final clearlogo + true AF3-spaced screensaver ratings"
     Write-Host "6. Remove Arctic Mirage CropV2/LRS screensaver block"
     Write-Host "7. Patch all"
     Write-Host "8. Remove all"
