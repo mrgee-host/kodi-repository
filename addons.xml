@@ -21,7 +21,7 @@
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.4.6"
+       version="1.4.7"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -41,8 +41,8 @@
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.4.6 adds safe cleanup after Kodi Clean Library, removes the Oscar BP status table, keeps Oscar BP N/A in sync with Oscar wins N/A, shortens progress notifications, and includes the complete AF3 Oscar BP patch workflow.</description>
-        <description lang="id_ID">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.4.6 adds safe cleanup after Kodi Clean Library, removes the Oscar BP status table, keeps Oscar BP N/A in sync with Oscar wins N/A, shortens progress notifications, and includes the complete AF3 Oscar BP patch workflow.</description>
+        <description lang="en_GB">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.4.7 is the pre-1.5 stabilization build with Maintenance tools, provider health check, clearer status, external cache cleanup/seed behavior, AF3 integration actions, schema metadata, and polish for awards/Top250/RT badge repair.</description>
+        <description lang="id_ID">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.4.7 is the pre-1.5 stabilization build with Maintenance tools, provider health check, clearer status, external cache cleanup/seed behavior, AF3 integration actions, schema metadata, and polish for awards/Top250/RT badge repair.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
