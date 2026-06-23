@@ -21,7 +21,7 @@
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.4.7"
+       version="1.4.8"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
