@@ -19,7 +19,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Artwork Curator" version="0.32.0" provider-name="rmrector + Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Artwork Curator" version="0.32.1" provider-name="rmrector + Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -57,7 +57,16 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.0 Artwork Curator LRS-style menu/db beta
+        <news>v0.32.1 Artwork Curator LRS-style hotfix
+- Fix artwork-cache.db schema creation for artwork_status and queued_items.
+- Add DB self-repair for missing tables and non-fatal DB wrappers.
+- Make diagnostics export fail-safe even when the internal DB is broken.
+- Fix Export diagnostics ZIP menu handling so it is not wrapped as a processing run.
+- Keep queued item DB entries until processing succeeds.
+- Clean legacy icon artwork no longer respects media scope; it intentionally scans all video icon slots.
+- DB failures no longer stop scrape, clean icon, or diagnostics workflows.
+
+v0.32.0 Artwork Curator LRS-style menu/db beta
 - Simplify the main menu to LRS-style actions.
 - Remove Identify unmatched movie sets from the menu.
 - Process queued new items now refreshes enabled artwork for queued DBIDs instead of missing-only.
