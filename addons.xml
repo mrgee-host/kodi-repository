@@ -19,7 +19,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Artwork Curator" version="0.30.18" provider-name="rmrector + Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Artwork Curator" version="0.31.0" provider-name="rmrector + Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -57,7 +57,16 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.30.18 Artwork Curator runtime-debug beta
+        <news>v0.31.0 Artwork Curator LRS-style core beta
+- Add library scope settings: Include movies, movie sets, TV shows, seasons, and episodes.
+- Fix automatic new-library processing to use Kodi OnUpdate DBID queue instead of scanning the full library after every scan.
+- Normal scans now ignore the legacy Kodi icon art slot completely.
+- Add Clean legacy icon artwork maintenance menu for intentional one-time icon cleanup.
+- Add artwork-cache.db with run, item, artwork-slot, and maintenance history for easier diagnostics.
+- Move Indonesian movie detection to settings with editable folder markers.
+- Add actor thumbnail cache setting, default off; actor thumbnails are not mixed into normal artwork scans.
+
+v0.30.18 Artwork Curator runtime-debug beta
 - Add continuous runtime debug logs for every menu command, service signal, provider request, cache operation, item phase, selection decision, and performance timing.
 - Export diagnostics now includes runtime-debug.log, runtime-performance.csv, runtime-items.log, runtime-selection.log, runtime-provider.log, runtime-cache.log, runtime-errors.log, runtime-menu.log, and runtime-service.log.
 - Provider request logs redact API keys and sensitive parameters.
