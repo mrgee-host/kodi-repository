@@ -19,7 +19,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Artwork Curator" version="0.31.0" provider-name="rmrector + Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Artwork Curator" version="0.32.0" provider-name="rmrector + Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -57,7 +57,16 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.31.0 Artwork Curator LRS-style core beta
+        <news>v0.32.0 Artwork Curator LRS-style menu/db beta
+- Simplify the main menu to LRS-style actions.
+- Remove Identify unmatched movie sets from the menu.
+- Process queued new items now refreshes enabled artwork for queued DBIDs instead of missing-only.
+- Add global artwork-type ON/OFF settings for poster, fanart, keyart, banner, clearlogo, logo, landscape, thumb, clearart, discart, and characterart.
+- Scrape missing artwork records N/A status in artwork-cache.db so unavailable slots are skipped next time until Refresh all artwork.
+- Move cache operations into Texture cache tools and restrict obsolete prune to known movie/TV/season/episode artwork.
+- Clean legacy icon artwork uses a cancellable foreground dialog and ignores library scope, so it can clean all video icon slots intentionally.
+
+v0.31.0 Artwork Curator LRS-style core beta
 - Add library scope settings: Include movies, movie sets, TV shows, seasons, and episodes.
 - Fix automatic new-library processing to use Kodi OnUpdate DBID queue instead of scanning the full library after every scan.
 - Normal scans now ignore the legacy Kodi icon art slot completely.
