@@ -19,7 +19,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.11" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.12" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -57,7 +57,16 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.8 Library Artwork Curator import hotfix
+        <news>v0.32.12 Library Artwork Curator quiet auto/cache polish
+- Auto Fill waits for a quiet window after Kodi scan/LRS activity before starting, without queued toast spam.
+- Auto Fill progress is forced visible for new items and begins after a short cooldown.
+- Cache missing artwork now uses stage-only progress: CHECKING TEXTURE CACHE / CACHING ARTWORK / finished toast.
+- Removed visible Back items from submenus; keyboard Back/Esc returns to the parent menu.
+- Item progress lines no longer include the run phase/action, keeping notifications shorter.
+- Diagnostics export checkpoints artwork-cache.db before copying it and closes the menu after notification.
+- Updated icon.
+
+v0.32.8 Library Artwork Curator import hotfix
 - Fixed malformed XML declaration in addon.xml that made repository import reject the ZIP.
 - Keeps addon ID script.artwork.curator to preserve existing userdata and DB path.
 - ZIP filename uses the Library Artwork Curator label.
