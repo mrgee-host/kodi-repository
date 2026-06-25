@@ -247,14 +247,14 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.5" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.6" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
     <extension point="xbmc.python.script" library="default.py"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Applies and removes selected AF3, TMDbHelper, and Skin Helper Widgets patches using anchor-based injection with block-level restore. Main menu shows patch titles only. Opening a patch shows details, installed status, and Patch / Remove / Cancel actions. Patch Status shows compact status only.</description>
+        <description lang="en_GB">Applies and removes selected AF3, TMDbHelper, and Skin Helper Widgets patches using anchor-based injection with block-level restore. Main menu shows patch titles only. Opening a patch shows details, installed status, and Patch / Remove / Cancel actions. Patch Status shows compact status only. Includes a tool to clear cached add-on icons from Kodi Textures DB.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
