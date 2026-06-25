@@ -19,7 +19,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Artwork Curator" version="0.32.2" provider-name="rmrector + Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Artwork Curator" version="0.32.5" provider-name="rmrector + Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -57,7 +57,24 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.2 Artwork Curator LRS-style polish hotfix
+        <news>v0.32.4 LRS-style final DB schema
+- Uses the new human-readable artwork-cache.db schema.
+- No DB fixing/migration/cleanup logic is bundled; install the provided final DB separately.
+- Artwork source is now written for new rows: TMDb, fanart.tv, TheTVDB, TPDb, Remote, Existing.
+- Episode titles in DB use Series Title - SxxExx.
+
+v0.32.3 LRS-style cleanup hotfix
+- Keeps the fixed DB as a separate user-installed file; this add-on update does not bundle a final artwork-cache.db.
+- Moves diagnostics/report/runtime files under the diagnostics folder and merges runtime logs.
+- Removes Process queued new items from the visible menu; queue remains internal for automatic new-library processing.
+- Stops creating processeditems.db for the main LRS-style flow by using artwork-cache.db for legacy processed/set cache.
+- Adds Fill missing confirmation dialog.
+- Notification format: n/total - TITLE - PHASE ARTWORK - percent.
+- Hides dynamic art-type lists from progress notifications.
+- Fixes Default (Kodi) language selection so Auto is never sent to TMDb.
+- Stops recording art.icon/default Kodi fallback into artwork-cache.db.
+
+v0.32.2 Artwork Curator LRS-style polish hotfix
 - New add-on icon.
 - Notification format now follows the LRS pattern: {processed}/{total} TITLE - PHASE.
 - Cache/prune/clean icon progress notifications include item titles when available.
