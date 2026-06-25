@@ -295,7 +295,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.2"
+       version="1.5.3"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
