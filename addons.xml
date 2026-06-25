@@ -287,7 +287,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.15" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.16" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
