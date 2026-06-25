@@ -19,7 +19,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Artwork Curator" version="0.32.5" provider-name="rmrector + Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.8" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -55,9 +55,14 @@
     <extension point="xbmc.service" start="login" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
-        <description lang="en">Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
+        <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.4 LRS-style final DB schema
+        <news>v0.32.8 Library Artwork Curator import hotfix
+- Fixed malformed XML declaration in addon.xml that made repository import reject the ZIP.
+- Keeps addon ID script.artwork.curator to preserve existing userdata and DB path.
+- ZIP filename uses the Library Artwork Curator label.
+
+v0.32.4 LRS-style final DB schema
 - Uses the new human-readable artwork-cache.db schema.
 - No DB fixing/migration/cleanup logic is bundled; install the provided final DB separately.
 - Artwork source is now written for new rows: TMDb, fanart.tv, TheTVDB, TPDb, Remote, Existing.
@@ -74,7 +79,16 @@ v0.32.3 LRS-style cleanup hotfix
 - Fixes Default (Kodi) language selection so Auto is never sent to TMDb.
 - Stops recording art.icon/default Kodi fallback into artwork-cache.db.
 
-v0.32.2 Artwork Curator LRS-style polish hotfix
+v0.32.7 Library Artwork Curator DB-first UI fix
+- Renamed visible add-on to Library Artwork Curator.
+- Fixed add-on version bump so Kodi reads 0.32.7 correctly.
+- Removed duplicate percent text from progress messages. Kodi's progress UI supplies percent separately.
+- Hid internal SKIP phase from progress notification; Fill Missing keeps the same clean phase label.
+- Moved DB-first skip/apply before expensive provider-ID lookup, preventing TMDb collection search when DB rows are already final.
+- Run cancellation now records aborted instead of finished.
+- run_items schema no longer uses redundant phase column for fresh DBs; existing DBs remain compatible.
+
+v0.32.2 Library Artwork Curator LRS-style polish hotfix
 - New add-on icon.
 - Notification format now follows the LRS pattern: {processed}/{total} TITLE - PHASE.
 - Cache/prune/clean icon progress notifications include item titles when available.
@@ -86,7 +100,7 @@ v0.32.2 Artwork Curator LRS-style polish hotfix
 - Texture cache collection deduplicates URLs and prune includes movie sets while protecting skin/addon/resource URLs.
 - Runs now store elapsed_text in addition to elapsed_ms.
 
-v0.32.1 Artwork Curator LRS-style hotfix
+v0.32.1 Library Artwork Curator LRS-style hotfix
 - Fix artwork-cache.db schema creation for artwork_status and queued_items.
 - Add DB self-repair for missing tables and non-fatal DB wrappers.
 - Make diagnostics export fail-safe even when the internal DB is broken.
@@ -95,7 +109,7 @@ v0.32.1 Artwork Curator LRS-style hotfix
 - Clean legacy icon artwork no longer respects media scope; it intentionally scans all video icon slots.
 - DB failures no longer stop scrape, clean icon, or diagnostics workflows.
 
-v0.32.0 Artwork Curator LRS-style menu/db beta
+v0.32.0 Library Artwork Curator LRS-style menu/db beta
 - Simplify the main menu to LRS-style actions.
 - Remove Identify unmatched movie sets from the menu.
 - Process queued new items now refreshes enabled artwork for queued DBIDs instead of missing-only.
@@ -104,7 +118,7 @@ v0.32.0 Artwork Curator LRS-style menu/db beta
 - Move cache operations into Texture cache tools and restrict obsolete prune to known movie/TV/season/episode artwork.
 - Clean legacy icon artwork uses a cancellable foreground dialog and ignores library scope, so it can clean all video icon slots intentionally.
 
-v0.31.0 Artwork Curator LRS-style core beta
+v0.31.0 Library Artwork Curator LRS-style core beta
 - Add library scope settings: Include movies, movie sets, TV shows, seasons, and episodes.
 - Fix automatic new-library processing to use Kodi OnUpdate DBID queue instead of scanning the full library after every scan.
 - Normal scans now ignore the legacy Kodi icon art slot completely.
@@ -113,113 +127,113 @@ v0.31.0 Artwork Curator LRS-style core beta
 - Move Indonesian movie detection to settings with editable folder markers.
 - Add actor thumbnail cache setting, default off; actor thumbnails are not mixed into normal artwork scans.
 
-v0.30.18 Artwork Curator runtime-debug beta
+v0.30.18 Library Artwork Curator runtime-debug beta
 - Add continuous runtime debug logs for every menu command, service signal, provider request, cache operation, item phase, selection decision, and performance timing.
 - Export diagnostics now includes runtime-debug.log, runtime-performance.csv, runtime-items.log, runtime-selection.log, runtime-provider.log, runtime-cache.log, runtime-errors.log, runtime-menu.log, and runtime-service.log.
 - Provider request logs redact API keys and sensitive parameters.
 - Logs rotate automatically when they grow too large.
 
-v0.30.17 Artwork Curator diagnostics beta
+v0.30.17 Library Artwork Curator diagnostics beta
 - Add Export diagnostics to the main menu.
-- Export Kodi logs, filtered Artwork Curator log lines, redacted settings, latest reports, Indonesian refresh log, processed-items state, and Indonesian movie artwork snapshot.
+- Export Kodi logs, filtered Library Artwork Curator log lines, redacted settings, latest reports, Indonesian refresh log, processed-items state, and Indonesian movie artwork snapshot.
 - Create a ZIP under userdata/addon_data/script.artwork.curator/ for easy upload and analysis.
 - Keep API keys redacted in the settings snapshot.
 
-v0.30.16 Artwork Curator movie-only-Indonesian beta
+v0.30.16 Library Artwork Curator movie-only-Indonesian beta
 - Limit Indonesian-language specialization to movies inside Indonesian Movies collection folders.
 - Remove Indonesian-specific handling for movie sets, TV shows, seasons, and episodes.
 - Add explicit details fallback chain: configured/Kodi language, then en-US, then raw details.
 - Keep provider/API index order for /images extras and fallback artwork.
 - Rename the manual command to Refresh Indonesian movie artwork.
 
-v0.30.15 Artwork Curator provider-index-order beta
+v0.30.15 Library Artwork Curator provider-index-order beta
 - Remove rating-based filtering and sorting from automatic artwork selection.
 - Keep ratings and likes only as diagnostic information in logs.
 - Select artwork deterministically by language priority, provider priority, provider/API index order, and minimum resolution.
 - Remove the visible minimum-rating slider because it no longer affects selection.
 - Keep localized Indonesian primary-poster handling and TPDb preservation.
 
-v0.30.14 Artwork Curator rating-tier-fix beta
+v0.30.14 Library Artwork Curator rating-tier-fix beta
 - Make all explicitly rated non-poster artwork rank above Not rated artwork.
 - Treat the minimum-rating setting as a preferred tier instead of a hard rejection threshold.
 - Sort non-poster artwork as: high-rated, low-rated, then unrated fallback.
 - Keep poster selection independent from vote ratings.
 
-v0.30.13 Artwork Curator unrated-fallback beta
+v0.30.13 Library Artwork Curator unrated-fallback beta
 - Treat unrated TMDb, fanart.tv, and TheTVDB artwork as fallback-only candidates instead of assigning a neutral rating of 5.
 - Prefer rated non-poster artwork that meets the configured threshold.
 - Allow unrated candidates only when no viable rated candidate remains.
 - For multi-fanart slots, fill rated candidates first and use unrated rows only for remaining gaps.
 - Keep poster selection independent from vote ratings.
 
-v0.30.12 Artwork Curator poster-selection-fix beta
+v0.30.12 Library Artwork Curator poster-selection-fix beta
 - Stop applying minimum vote-rating filtering to posters.
 - Select posters by localized language priority, localized-primary promotion, TMDb gallery order, and minimum height.
 - Keep minimum rating filtering for non-poster artwork.
 - Fix cases where an unrated lower-priority poster incorrectly beat the localized TMDb primary poster.
 
-v0.30.11 Artwork Curator dialog-fix beta
+v0.30.11 Library Artwork Curator dialog-fix beta
 - Fix Refresh Indonesian artwork confirmation dialog labels.
 - Move the TPDb preservation note into the message body.
 - Use short Refresh and Cancel button labels.
 
-v0.30.10 Artwork Curator debug-log-fix beta
+v0.30.10 Library Artwork Curator debug-log-fix beta
 - Fix Indonesian refresh debug logging on Kodi portable profiles.
 - Replace unsupported xbmcvfs append mode with translated local-path append writes.
 - Keep the full Indonesian poster diagnostic output unchanged.
 
-v0.30.9 Artwork Curator Indonesian-debug beta
+v0.30.9 Library Artwork Curator Indonesian-debug beta
 - Add a dedicated Indonesian refresh debug log viewer.
 - Log scan inclusion, TMDb IDs, current poster URLs, candidate posters, sizes, ratings, localized-primary flags, selected URL, update URL, and JSON-RPC verification.
 - Recognize Indonesian Movies (Collection) folder names in addition to [Collection] and plain variants.
 - Keep the localized-poster flow unchanged while gathering actionable diagnostics.
 
-v0.30.8 Artwork Curator beta
+v0.30.8 Library Artwork Curator beta
 - For Indonesian media, promote localized TMDb details.poster_path from language=id-ID as the main poster.
 - Reuse /images metadata for the promoted poster so minimum-height filtering still applies.
 - Keep /images gallery order for fallbacks and retain extra-artwork provider logic.
 - Preserve TPDb and other manual non-curator URLs during Indonesian refresh.
 
-v0.30.7 Artwork Curator beta
+v0.30.7 Library Artwork Curator beta
 - Follow TMDb poster-gallery order within the selected language and provider.
 - Stop forcing details-endpoint poster_path ahead of TMDb gallery candidates.
 - Use poster_path only as a fallback when TMDb /images has no poster rows.
 - Retain minimum poster-height filtering and Indonesian language priority.
 
-v0.30.6 Artwork Curator beta
+v0.30.6 Library Artwork Curator beta
 - Enable automatic processing for new library items once after upgrade.
 - Add clear log messages when automatic processing is queued.
 - Write and read the latest-run report through xbmcvfs for better Kodi profile compatibility.
 - Add a configurable minimum poster height and default it to 1000px.
 - Prevent TMDb details-endpoint primary posters from bypassing poster quality filtering.
 
-v0.30.5 Artwork Curator report-fix beta
+v0.30.5 Library Artwork Curator report-fix beta
 - Always write a dedicated latest-run summary when processing finishes.
 - Make final notification totals and visible report totals use the same completed-run data.
 - Show artwork counts grouped by type and scanned items grouped by media type.
 - Keep the rolling history report below the latest summary.
 
-v0.30.4 Artwork Curator beta
+v0.30.4 Library Artwork Curator beta
 - Add a new manual menu action: Refresh Indonesian artwork.
 - Re-check Indonesian movies, TV shows, episodes, and the Indonesian Movies Collection using language priority id -> en -> no language.
 - Preserve existing TPDb and other manually chosen non-curator remote URLs while refreshing curator-managed artwork.
 - Keep TV-show season artwork in sync during Indonesian refresh.
 
-v0.30.3 Artwork Curator stability beta
+v0.30.3 Library Artwork Curator stability beta
 - Prevent screensaver and idle shutdown while artwork scans, cache warming, and pruning are running.
 - Recover from malformed individual library items and provider-response errors without stopping the full scan.
 - Write recovered Python tracebacks clearly to kodi.log.
 - Add top-level service exception recovery.
 
-v0.30.2 Artwork Curator beta
+v0.30.2 Library Artwork Curator beta
 - Automatically migrate legacy profile data after the add-on ID rename.
 - Import old artwork reports, processed-item state, and missing settings such as API keys.
 - Rename the internal Home-window busy property to ArtworkCurator.Status.
 - Show a clear message when no report exists yet.
 
-v0.30.0 Artwork Curator beta
-- Renamed the visible add-on from Artwork Beef Video Remote to Artwork Curator.
-- Added a new Artwork Curator icon.
+v0.30.0 Library Artwork Curator beta
+- Renamed the visible add-on from Artwork Beef Video Remote to Library Artwork Curator.
+- Added a new Library Artwork Curator icon.
 - Simplified settings into General, Artwork, Providers, and Advanced.
 - Standard movie, set, TV-show, season, and episode artwork remains enabled automatically.
 - Internal add-on ID changed to script.artwork.curator. Uninstall the older custom build with the old ID to avoid duplicate services.
@@ -237,7 +251,7 @@ v0.29.7 custom fast beta
 
 v0.29.6 custom beta
 - Compact progress actions are now English, title case, and exactly one word: Checking, Reading, Searching, Selecting, Adding, Downloading, Removing, Cleaning, Skipping, Missing, and Done.
-- Artwork type remains visible when relevant, for example: Artwork Curator: Downloading Â· fanart3.
+- Artwork type remains visible when relevant, for example: Library Artwork Curator: Downloading Â· fanart3.
 
 v0.29.4 custom beta
 - Detailed compact progress stages: checking slots, remote search, library updates, and texture-cache downloads.
