@@ -264,7 +264,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.0"
+       version="1.5.1"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -284,8 +284,8 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.5.0 is the stable cleanup release: diagnostics redact API keys, reports are clearer, RT badge diagnostics are safer, bundled IMDb Top 250 remains the source, and default debug/auto-scrape settings stay off.</description>
-        <description lang="id_ID">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.5.0 is the stable cleanup release: diagnostics redact API keys, reports are clearer, RT badge diagnostics are safer, bundled IMDb Top 250 remains the source, and default debug/auto-scrape settings stay off.</description>
+        <description lang="en_GB">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.5.1 is the no-back-menu cleanup release: diagnostics redact API keys, reports are clearer, RT badge diagnostics are safer, bundled IMDb Top 250 remains the source, and default debug/auto-scrape settings stay off, and run submenus no longer include separate Back items.</description>
+        <description lang="id_ID">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.5.1 is the no-back-menu cleanup release: diagnostics redact API keys, reports are clearer, RT badge diagnostics are safer, bundled IMDb Top 250 remains the source, and default debug/auto-scrape settings stay off, and run submenus no longer include separate Back items.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
