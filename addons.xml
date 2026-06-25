@@ -19,7 +19,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Artwork Curator" version="0.32.1" provider-name="rmrector + Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Artwork Curator" version="0.32.2" provider-name="rmrector + Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -57,7 +57,19 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.1 Artwork Curator LRS-style hotfix
+        <news>v0.32.2 Artwork Curator LRS-style polish hotfix
+- New add-on icon.
+- Notification format now follows the LRS pattern: {processed}/{total} TITLE - PHASE.
+- Cache/prune/clean icon progress notifications include item titles when available.
+- Added confirmation before heavy Refresh all artwork.
+- Main menu label changed from Scrape missing artwork to Fill missing artwork.
+- Settings simplified and artwork type order changed: Poster, Fanart, Extrafanart, Landscape, Banner, Thumb, Clearlogo, Logo, Clearart, Keyart, Discart, Character art.
+- Fanart and Extrafanart are now separate global toggles.
+- Clean legacy icon skips Kodi default fallback icons.
+- Texture cache collection deduplicates URLs and prune includes movie sets while protecting skin/addon/resource URLs.
+- Runs now store elapsed_text in addition to elapsed_ms.
+
+v0.32.1 Artwork Curator LRS-style hotfix
 - Fix artwork-cache.db schema creation for artwork_status and queued_items.
 - Add DB self-repair for missing tables and non-fatal DB wrappers.
 - Make diagnostics export fail-safe even when the internal DB is broken.
