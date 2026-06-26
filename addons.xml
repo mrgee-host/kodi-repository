@@ -19,7 +19,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.15" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.17" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -51,7 +51,13 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.15 Library Artwork Curator OnUpdate/busy hotfix
+        <news>v0.32.17 Library Artwork Curator Select artwork order fix
+- Select artwork no longer pins current/selected fanart entries to the top of the candidate dialog.
+- Current artwork URLs are now merged into the provider candidate list at their natural provider-sorted position and checked there.
+- Current-only URLs that no longer exist in provider candidates are kept at the bottom as fallback/current-only entries.
+- Removed the old title-based selected-state guard so provider candidates that match current fanart remain checked correctly.
+
+v0.32.15 Library Artwork Curator OnUpdate/busy hotfix
 - VideoLibrary.OnUpdate is no longer used as an auto-fill trigger because Kodi also emits it after playback/resume/watched/bookmark updates for existing items. Auto-fill now relies on ScanStarted/ScanFinished snapshot diff only.
 - The Home busy property only counts real processing as busy. A stale/signalled queue no longer shows Stop current process or blocks manual context actions.
 - Manual context actions clear a signalled-but-not-processing auto queue before opening Select artwork or Dry run. Real active processing shows a clear warning instead of silently returning.
