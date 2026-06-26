@@ -19,7 +19,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.13" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.14" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -31,17 +31,9 @@
         <provides>executable</provides>
     </extension>
     <extension point="kodi.context.item">
-        <menu id="kodi.core.main">
-            <item library="context.py">
-                <label>Library Artwork Curator: Add missing artwork</label>
-                <visible>!Skin.HasSetting(disablecontext:script.artwork.curator)</visible>
-            </item>
-            <item library="context_gui.py">
-                <label>Library Artwork Curator: Select artwork</label>
-                <visible>!Skin.HasSetting(disablecontext:script.artwork.curator)</visible>
-            </item>
-            <item library="context_dryrun.py">
-                <label>Library Artwork Curator: Dry run artwork selection</label>
+        <menu id="kodi.core.manage">
+            <item library="context_menu.py">
+                <label>Library Artwork Curator</label>
                 <visible>!Skin.HasSetting(disablecontext:script.artwork.curator)</visible>
             </item>
             <item library="context_debug_remove.py">
@@ -59,7 +51,14 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.13 Library Artwork Curator context dry-run
+        <news>v0.32.14 Library Artwork Curator context menu/select fix
+- Context menu is back under Manage as one entry: Library Artwork Curator. Selecting it opens Add missing artwork, Select artwork, and Dry run artwork selection.
+- Select artwork now fetches full provider candidates using the same provider path as dry-run/Refresh all artwork instead of showing only current Kodi art.
+- Current art is still shown at the top of each art type and selected by default for multi-art, but provider candidates are also listed.
+- Hidden icon/default-video artwork is removed from the Select artwork type list.
+- Manual selections are written to artwork-cache.db with MANUAL status so Fill Missing will not replace them.
+
+v0.32.13 Library Artwork Curator context dry-run
 - Context menu actions moved to the root context menu and use looser visibility so they appear from library views, widgets, and hub items.
 - Context actions now try to resolve a missing DBID from the focused item using DBID first, then uniqueid/title/path fallbacks.
 - Added full dry-run artwork selection from the context menu. It fetches providers, selects exactly as Refresh all artwork would, but does not write Kodi art, DB rows, or texture cache.
