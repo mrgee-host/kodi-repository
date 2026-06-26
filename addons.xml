@@ -19,7 +19,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.12" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.13" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -32,24 +32,26 @@
     </extension>
     <extension point="kodi.context.item">
         <menu id="kodi.core.main">
-            <menu id="kodi.core.manage">
-                <item library="context.py">
-                    <label>AC: add missing artwork</label>
-                    <visible>!Skin.HasSetting(disablecontext:script.artwork.curator) + [String.IsEqual(ListItem.DBTYPE, movie) | String.IsEqual(ListItem.DBTYPE, set) | String.IsEqual(ListItem.DBTYPE, tvshow) | String.IsEqual(ListItem.DBTYPE, season) | String.IsEqual(ListItem.DBTYPE, episode)]</visible>
-                </item>
-                <item library="context_gui.py">
-                    <label>AC: select artwork</label>
-                    <visible>!Skin.HasSetting(disablecontext:script.artwork.curator) + [String.IsEqual(ListItem.DBTYPE, movie) | String.IsEqual(ListItem.DBTYPE, set) | String.IsEqual(ListItem.DBTYPE, tvshow) | String.IsEqual(ListItem.DBTYPE, season) | String.IsEqual(ListItem.DBTYPE, episode)]</visible>
-                </item>
-                <item library="context_debug_remove.py">
-                    <label>AC: remove artwork references</label>
-                    <visible>Skin.HasSetting(enablecontext:script.artwork.curator.debug) + [String.IsEqual(ListItem.DBTYPE, movie) | String.IsEqual(ListItem.DBTYPE, set) | String.IsEqual(ListItem.DBTYPE, tvshow) | String.IsEqual(ListItem.DBTYPE, season) | String.IsEqual(ListItem.DBTYPE, episode)]</visible>
-                </item>
-                <item library="context_debug_logitem.py">
-                    <label>AC: log item debug info</label>
-                    <visible>Skin.HasSetting(enablecontext:script.artwork.curator.debug) + [String.IsEqual(ListItem.DBTYPE, movie) | String.IsEqual(ListItem.DBTYPE, set) | String.IsEqual(ListItem.DBTYPE, tvshow) | String.IsEqual(ListItem.DBTYPE, season) | String.IsEqual(ListItem.DBTYPE, episode)]</visible>
-                </item>
-            </menu>
+            <item library="context.py">
+                <label>Library Artwork Curator: Add missing artwork</label>
+                <visible>!Skin.HasSetting(disablecontext:script.artwork.curator)</visible>
+            </item>
+            <item library="context_gui.py">
+                <label>Library Artwork Curator: Select artwork</label>
+                <visible>!Skin.HasSetting(disablecontext:script.artwork.curator)</visible>
+            </item>
+            <item library="context_dryrun.py">
+                <label>Library Artwork Curator: Dry run artwork selection</label>
+                <visible>!Skin.HasSetting(disablecontext:script.artwork.curator)</visible>
+            </item>
+            <item library="context_debug_remove.py">
+                <label>AC: remove artwork references</label>
+                <visible>Skin.HasSetting(enablecontext:script.artwork.curator.debug)</visible>
+            </item>
+            <item library="context_debug_logitem.py">
+                <label>AC: log item debug info</label>
+                <visible>Skin.HasSetting(enablecontext:script.artwork.curator.debug)</visible>
+            </item>
         </menu>
     </extension>
     <extension point="xbmc.service" start="login" library="service.py" />
@@ -57,7 +59,13 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.12 Library Artwork Curator quiet auto/cache polish
+        <news>v0.32.13 Library Artwork Curator context dry-run
+- Context menu actions moved to the root context menu and use looser visibility so they appear from library views, widgets, and hub items.
+- Context actions now try to resolve a missing DBID from the focused item using DBID first, then uniqueid/title/path fallbacks.
+- Added full dry-run artwork selection from the context menu. It fetches providers, selects exactly as Refresh all artwork would, but does not write Kodi art, DB rows, or texture cache.
+- Dry-run writes diagnostics/dry-run-artwork-selection.txt and diagnostics/dry-run-artwork-selection-last.txt with full candidate order, usable order, selected URLs, update plan, current artwork, languages, and provider counts.
+
+v0.32.12 Library Artwork Curator quiet auto/cache polish
 - Auto Fill waits for a quiet window after Kodi scan/LRS activity before starting, without queued toast spam.
 - Auto Fill progress is forced visible for new items and begins after a short cooldown.
 - Cache missing artwork now uses stage-only progress: CHECKING TEXTURE CACHE / CACHING ARTWORK / finished toast.
