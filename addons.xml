@@ -19,7 +19,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.14" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.15" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -51,7 +51,13 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.14 Library Artwork Curator context menu/select fix
+        <news>v0.32.15 Library Artwork Curator OnUpdate/busy hotfix
+- VideoLibrary.OnUpdate is no longer used as an auto-fill trigger because Kodi also emits it after playback/resume/watched/bookmark updates for existing items. Auto-fill now relies on ScanStarted/ScanFinished snapshot diff only.
+- The Home busy property only counts real processing as busy. A stale/signalled queue no longer shows Stop current process or blocks manual context actions.
+- Manual context actions clear a signalled-but-not-processing auto queue before opening Select artwork or Dry run. Real active processing shows a clear warning instead of silently returning.
+- Diagnostics export writes to a temporary ZIP, validates it, removes older diagnostics ZIPs, then renames the new ZIP so only the latest export remains in the profile. Profile file lists also hide diagnostics ZIPs.
+
+v0.32.14 Library Artwork Curator context menu/select fix
 - Context menu is back under Manage as one entry: Library Artwork Curator. Selecting it opens Add missing artwork, Select artwork, and Dry run artwork selection.
 - Select artwork now fetches full provider candidates using the same provider path as dry-run/Refresh all artwork instead of showing only current Kodi art.
 - Current art is still shown at the top of each art type and selected by default for multi-art, but provider candidates are also listed.
