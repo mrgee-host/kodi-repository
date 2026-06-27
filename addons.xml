@@ -20,7 +20,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.22" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.23" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -32,11 +32,13 @@
         <provides>executable</provides>
     </extension>
     <extension point="kodi.context.item">
-        <menu id="kodi.core.manage">
+        <menu id="kodi.core.main">
             <item library="context_menu.py">
                 <label>Library Artwork Curator</label>
                 <visible>!Skin.HasSetting(disablecontext:script.artwork.curator)</visible>
             </item>
+        </menu>
+        <menu id="kodi.core.manage">
             <item library="context_debug_remove.py">
                 <label>AC: remove artwork references</label>
                 <visible>Skin.HasSetting(enablecontext:script.artwork.curator.debug)</visible>
@@ -52,7 +54,15 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.21 Library Artwork Curator season fanart cleanup
+        <news>v0.32.23 Library Artwork Curator lazy provider and season cache fix
+- Auto Fill Missing / Refresh All now uses lazy provider fallback: TMDb first, fanart.tv only for targets still missing strong candidates, and TheTVDB only as final TV fallback.
+- Select artwork still fetches provider candidates freely so manual selection is not limited by lazy auto-stop rules.
+- Dry run is now hidden behind Advanced > Show expert context diagnostics and caps candidate logging to keep diagnostics usable.
+- Context menu entry moved to the root context menu so it can appear on episodes even when Kodi/skin does not expose Manage.
+- Season artwork cache now mirrors tvshow season.N rows to direct season rows, keeping direct season as canonical and season.N as compatibility mirror.
+- Provider requests now fail faster to avoid long Kodi UI freezes when a fallback provider is slow.
+
+v0.32.21 Library Artwork Curator season fanart cleanup
 - Season fanart is intentionally ignored. Seasons now manage poster, banner, landscape, thumb, and keyart only.
 - Removed season fanart from direct season targets, dry-run target lists, Select artwork, and fanart.tv seasonal showbackground mapping.
 - Keeps 0.32.20 behavior for completeness: one low-resolution fallback for fanart/landscape/thumb when no preferred-resolution candidate exists, and direct season keyart support.
