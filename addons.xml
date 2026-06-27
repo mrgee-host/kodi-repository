@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="repository.mrgee.kodi" name="MrGee Kodi Repository" version="1.0.1" provider-name="Miftahul Ginda / MrGee">
+<addon id="repository.mrgee.kodi" name="MrGee Kodi Repository" version="1.0.2" provider-name="Miftahul Ginda / MrGee">
     <extension point="xbmc.addon.repository" name="MrGee Kodi Repository">
         <dir minversion="20.0.0">
             <info compressed="false">https://mrgee-host.github.io/kodi-repository/addons.xml</info>
