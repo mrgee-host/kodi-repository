@@ -334,7 +334,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.27" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.28" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -342,7 +342,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Applies and removes selected AF3, TMDbHelper, and Skin Helper Widgets patches using anchor-based injection with block-level restore. Main menu shows patch titles only. Opening a patch shows details, installed status, and Patch / Remove / Cancel actions. Patch Status shows compact status only. Includes LRS-only pause/full OSD patch with clearart behind the progress line, hidden chapter ticks, shortened OSD plot, pause-stays-open behavior, dialog-safe service-managed OSD open/close without Action(Back), simplified main menu; v0.1.24 adds Reliable Studio Logos with 1/2/3 auto-matched studio logos from the installed studio resource pack, while keeping v0.1.23 pause/full OSD behavior, live fullscreen ratings diagnostics, diagnostics ZIP export, and a tool to clear cached add-on icons from Kodi Textures DB.</description>
+        <description lang="en_GB">Applies and removes selected AF3, TMDbHelper, and Skin Helper Widgets patches using anchor-based injection with block-level restore. Main menu shows patch titles only. Opening a patch shows details, installed status, and Patch / Remove / Cancel actions. Patch Status shows compact status only. Includes LRS-only pause/full OSD patch with clearart behind the progress line, hidden chapter ticks, shortened OSD plot, pause-stays-open behavior, dialog-safe service-managed OSD open/close without Action(Back), simplified main menu; v0.1.28 uses Reliable Studio Logos single-logo mode through KPM.StudioLogo.1 only, with no raw multi-studio fallback, while keeping v0.1.23 pause/full OSD behavior, live fullscreen ratings diagnostics, diagnostics ZIP export, and a tool to clear cached add-on icons from Kodi Textures DB.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
