@@ -20,7 +20,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.24" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.25" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -54,7 +54,12 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.24 Library Artwork Curator context refresh and Select artwork cleanup
+        <news>v0.32.25 Library Artwork Curator Select artwork provider visibility hotfix
+- Select artwork compact filtering now keeps provider visibility: if a provider had candidates before filtering, the top candidates from that provider are kept so TMDb/fanart.tv/TheTVDB do not disappear from the manual picker just because HD or preferred-language filters are active.
+- Current-only artwork labels now include the inferred source when possible, for example Current art (TMDb), so existing Kodi artwork is not confused with a fresh provider candidate.
+- Select artwork still preserves current/manual artwork and still hides excess low-resolution/other-language candidates when enough better candidates exist.
+
+v0.32.24 Library Artwork Curator context refresh and Select artwork cleanup
 - Added context menu action: Refresh all artwork for this item. It refreshes only the focused library item using Refresh All rules while preserving manual/protected artwork.
 - Select artwork now uses a compact high-quality candidate list by default: when enough HD/preferred-language candidates exist, low-resolution and other-language candidates are hidden. Current artwork is always kept visible.
 - Added Select artwork settings to enable/disable compact filtering, low-resolution hiding, and other-language hiding.
