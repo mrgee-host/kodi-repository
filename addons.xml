@@ -20,7 +20,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.26" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.27" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -54,7 +54,12 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.25 Library Artwork Curator Select artwork provider visibility hotfix
+        <news>v0.32.27 Library Artwork Curator poster fallback and status cleanup
+- Auto selection now allows one global poster fallback when no poster meets the configured minimum poster height. Good posters still win first; fallback only prevents sparse/older items from ending with no poster.
+- Status/cache summaries now hide internal tvshow season.N.* mirror rows. Direct season artwork remains canonical; mirror rows are compatibility-only.
+- Generated video thumb behavior remains one global setting.
+
+v0.32.25 Library Artwork Curator Select artwork provider visibility hotfix
 - Select artwork compact filtering now keeps provider visibility: if a provider had candidates before filtering, the top candidates from that provider are kept so TMDb/fanart.tv/TheTVDB do not disappear from the manual picker just because HD or preferred-language filters are active.
 - Current-only artwork labels now include the inferred source when possible, for example Current art (TMDb), so existing Kodi artwork is not confused with a fresh provider candidate.
 - Select artwork still preserves current/manual artwork and still hides excess low-resolution/other-language candidates when enough better candidates exist.
