@@ -20,7 +20,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.23" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.24" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -54,7 +54,13 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.23 Library Artwork Curator lazy provider and season cache fix
+        <news>v0.32.24 Library Artwork Curator context refresh and Select artwork cleanup
+- Added context menu action: Refresh all artwork for this item. It refreshes only the focused library item using Refresh All rules while preserving manual/protected artwork.
+- Select artwork now uses a compact high-quality candidate list by default: when enough HD/preferred-language candidates exist, low-resolution and other-language candidates are hidden. Current artwork is always kept visible.
+- Added Select artwork settings to enable/disable compact filtering, low-resolution hiding, and other-language hiding.
+- Reordered Artwork type ON/OFF settings and Select artwork type order to: poster, fanart, clearlogo, clearart, discart, then the remaining types.
+
+v0.32.23 Library Artwork Curator lazy provider and season cache fix
 - Auto Fill Missing / Refresh All now uses lazy provider fallback: TMDb first, fanart.tv only for targets still missing strong candidates, and TheTVDB only as final TV fallback.
 - Select artwork still fetches provider candidates freely so manual selection is not limited by lazy auto-stop rules.
 - Dry run is now hidden behind Advanced > Show expert context diagnostics and caps candidate logging to keep diagnostics usable.
