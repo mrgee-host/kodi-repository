@@ -20,7 +20,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.20" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.21" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -52,8 +52,13 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.19 Library Artwork Curator season provider rebuild fix
-- Direct season items now fetch season artwork through the TV-show provider path and map season.N.* candidates back to direct season poster/fanart/banner/landscape/thumb.
+        <news>v0.32.21 Library Artwork Curator season fanart cleanup
+- Season fanart is intentionally ignored. Seasons now manage poster, banner, landscape, thumb, and keyart only.
+- Removed season fanart from direct season targets, dry-run target lists, Select artwork, and fanart.tv seasonal showbackground mapping.
+- Keeps 0.32.20 behavior for completeness: one low-resolution fallback for fanart/landscape/thumb when no preferred-resolution candidate exists, and direct season keyart support.
+
+v0.32.20 Library Artwork Curator season provider rebuild fix
+- Direct season items now fetch season artwork through the TV-show provider path and map season.N.* candidates back to direct season poster/banner/landscape/thumb/keyart.
 - Season dry-run should no longer show provider candidate counts {} only because the mediatype is season.
 - Direct season MediaItem now carries its season map so season.N.* provider results can be accepted and applied to the correct season DBID.
 - Dry-run logs now include current artwork positions: usable #N, provider #N but not usable, or not in provider candidates. This makes current DB/Kodi art order auditable against Refresh All selection order.
