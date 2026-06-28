@@ -20,7 +20,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.28" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.29" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -54,7 +54,11 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.27 Library Artwork Curator poster fallback and status cleanup
+        <news>v0.32.29 Library Artwork Curator cache skip cleanup
+- Cache missing artwork skips non-cacheable Kodi generated video thumbs from .strm and folder paths so they do not keep reappearing as missing.
+- Cache progress remains based on actual cacheable artwork work.
+
+v0.32.27 Library Artwork Curator poster fallback and status cleanup
 - Auto selection now allows one global poster fallback when no poster meets the configured minimum poster height. Good posters still win first; fallback only prevents sparse/older items from ending with no poster.
 - Status/cache summaries now hide internal tvshow season.N.* mirror rows. Direct season artwork remains canonical; mirror rows are compatibility-only.
 - Generated video thumb behavior remains one global setting.
