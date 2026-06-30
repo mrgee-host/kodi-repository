@@ -374,7 +374,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.44" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.45" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -382,7 +382,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager applies selected AF3/Kodi patches with status-first, marker-based insert/update/remove. v0.1.44 removes the Independent Fanart Engine and AF3 x LRS patch entries from KPM. Fanart live diagnostics remain available and now observe default AF3/TMDbHelper/Kodi fanart and blur state without changing fanart.</description>
+        <description lang="en_GB">Kodi Patch Manager applies selected AF3/Kodi patches with status-first, marker-based insert/update/remove. v0.1.45 keeps KPM fanart engine and AF3 x LRS patch entries removed, keeps fanart live diagnostics, and adds an Advanced Patch for TMDbHelper Visit Random Fanart: random once per valid media visit, sticky while the same item remains focused.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
