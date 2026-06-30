@@ -374,7 +374,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.51" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.52" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -382,7 +382,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager applies selected AF3/Kodi patches with status-first, marker-based insert/update/remove. v0.1.51 updates TMDbHelper Visit Random Fanart to V17: Home/Hub uses the container-resolved fanart pool and one cached choice per media visit, preventing double-random from tvshow.fanart{x}/fanart{x} while keeping sticky idle behavior.</description>
+        <description lang="en_GB">Kodi Patch Manager applies selected AF3/Kodi patches with status-first, marker-based insert/update/remove. v0.1.52 fixes TMDbHelper Visit Random Fanart to V17: Home/Hub uses the container-resolved fanart pool and one cached choice per media visit, preventing double-random from tvshow.fanart{x}/fanart{x}; also fixes the KPM patcher template error that showed only â€œxâ€ while keeping sticky idle behavior.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
