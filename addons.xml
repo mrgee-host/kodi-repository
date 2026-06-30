@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.14" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.17" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -16,7 +16,6 @@
         <license>MIT</license>
         <assets>
             <icon>resources/media/icon.png</icon>
-            <fanart>resources/media/fanart.png</fanart>
         </assets>
     </extension>
 </addon>
