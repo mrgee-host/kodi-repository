@@ -374,7 +374,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.49" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.50" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -382,7 +382,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager applies selected AF3/Kodi patches with status-first, marker-based insert/update/remove. v0.1.49 fixes Home/Hub fanart visit-random priority: current-window TMDbHelper/LRS visual containers now beat stale KPM Home containers, and diagnostics stop probing invalid window ids.</description>
+        <description lang="en_GB">Kodi Patch Manager applies selected AF3/Kodi patches with status-first, marker-based insert/update/remove. v0.1.50 updates TMDbHelper Visit Random Fanart to V16: Home/Hub media-key polling runs every monitor pass, with short art-signature correction to avoid stale widget artwork during fast focus changes.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
