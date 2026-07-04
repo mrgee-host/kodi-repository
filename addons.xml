@@ -39,7 +39,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.31" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.32" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -73,7 +73,7 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.31 Library Artwork Curator actor cache reporting cleanup
+        <news>v0.32.32 Auto scan processing reliability fix
 - Added a clear actor-cache-last-run-summary.txt report with found, cacheable, already cached, pending, cached, failed, skipped, and elapsed totals.
 - Cache actor thumbnails notifications now use real cache stats instead of always showing 0 errors.
 - Runtime performance CSV writes one header only instead of repeating headers for each run.
