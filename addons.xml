@@ -19,6 +19,26 @@
         </assets>
     </extension>
 </addon>
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.0" provider-name="OpenAI">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+
+    <extension point="xbmc.python.pluginsource" library="addon.py">
+        <provides>video</provides>
+    </extension>
+
+    <extension point="xbmc.addon.metadata">
+        <summary>Unified Movies, Series, and Steam Games widget paths</summary>
+        <description>Creates selectable Kodi plugin paths that combine Movies, TV Shows/Series, and Steam Library games for home widgets and screensavers.</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <assets>
+            <icon>resources/media/icon.png</icon>
+            <fanart>resources/media/fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
 <addon id="repository.mrgee.kodi" name="MrGee Kodi Repository" version="1.0.2" provider-name="Miftahul Ginda / MrGee">
     <extension point="xbmc.addon.repository" name="MrGee Kodi Repository">
         <dir minversion="20.0.0">
