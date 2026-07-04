@@ -373,7 +373,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.58" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.59" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -381,7 +381,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager applies selected AF3/Kodi patches with status-first, marker-based insert/update/remove. v0.1.58 replaces TMDbHelper internal fanart patching with a safer KPM Visit Random Fanart Source bridge. It does not edit TMDbHelper internals; KPM chooses one fanart per media visit and AF3/TMDbHelper blur renders that single source.</description>
+        <description lang="en_GB">Kodi Patch Manager applies selected AF3/Kodi patches with status-first, marker-based insert/update/remove. v0.1.59 fixes AF3 hub window detection for KPM Visit Random Fanart Source after diagnostics showed active media windows 11101/11102 were not included in v0.1.58. It does not edit TMDbHelper internals; KPM chooses one fanart per media visit and AF3/TMDbHelper blur renders that single source.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
