@@ -414,7 +414,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.7"
+       version="1.5.8"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -434,8 +434,8 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.5.5 keeps the v1.5 stable cleanup, no-back menus, title-first progress, updated icon, and fixes auto-scan finishing progress so saving/exporting are shown as AUTO SCAN steps without reusing 3/3 item counters.</description>
-        <description lang="id_ID">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.5.5 keeps the v1.5 stable cleanup, no-back menus, title-first progress, updated icon, and fixes auto-scan finishing progress so saving/exporting are shown as AUTO SCAN steps without reusing 3/3 item counters.</description>
+        <description lang="en_GB">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.5.8 keeps the existing movie/TV/episode cache-scraper flow and adds MediaHub Widget game rating passthrough from RatingSlotN_* ListItem properties for AF3 screensaver/home.</description>
+        <description lang="id_ID">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.5.8 keeps the existing movie/TV/episode cache-scraper flow and adds MediaHub Widget game rating passthrough from RatingSlotN_* ListItem properties for AF3 screensaver/home.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
