@@ -19,7 +19,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.3" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.5" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -29,7 +29,7 @@
     </extension>
 
     <extension point="xbmc.addon.metadata">
-        <summary>Unified Movies, Series, and Steam Games widget paths with AF3/LRS game rating properties</summary>
+        <summary>Unified Movies, Series, and Steam Games widget paths with AF3/LRS game rating properties, Steam250 aliases, normalized age labels, tagline rows, and no duplicate age row</summary>
         <description>Creates selectable Kodi plugin paths that combine Movies, TV Shows/Series, and Steam Library games for home widgets and screensavers.</description>
         <platform>all</platform>
         <license>MIT</license>
