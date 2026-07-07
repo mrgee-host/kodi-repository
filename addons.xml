@@ -59,7 +59,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.36" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.37" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -93,7 +93,12 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.36 LRS-style auto scan missed-start fallback
+        <news>v0.32.37 shared auto-scan lock for LRS/LAC
+- LAC auto-scan now waits briefly for LRS and participates in the same .kodi-auto-scan.lock file.
+- Prevents LRS and LAC progress/final notifications from starting at the same time after Kodi library scan.
+- Releases LAC-owned stale locks on service startup and after auto-scan finish/cancel.
+
+v0.32.36 LRS-style auto scan missed-start fallback
 - Buffers VideoLibrary.OnUpdate added=true events and consumes them after OnScanFinished when OnScanStarted was missed.
 - Keeps snapshot diff when available, and adds a capped cache fallback to avoid false full-library runs.
 
