@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.49" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.50" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -19,7 +19,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.5" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.6" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -59,7 +59,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.37" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.39" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -74,7 +74,7 @@
         <menu id="kodi.core.main">
             <item library="context_menu.py">
                 <label>Library Artwork Curator</label>
-                <visible>!Skin.HasSetting(disablecontext:script.artwork.curator)</visible>
+                <visible>!Skin.HasSetting(disablecontext:script.artwork.curator) + [String.IsEqual(ListItem.DBTYPE,movie) | String.IsEqual(ListItem.DBTYPE,set) | String.IsEqual(ListItem.DBTYPE,movieset) | String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season) | String.IsEqual(ListItem.DBTYPE,episode) | String.IsEmpty(ListItem.DBTYPE)] + !String.IsEqual(ListItem.Property(MediaType),game) + !String.IsEqual(ListItem.Property(DBTYPE),game) + !String.IsEqual(ListItem.Property(lrs_game),true)</visible>
             </item>
         </menu>
         <menu id="kodi.core.manage">
@@ -93,7 +93,14 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.37 shared auto-scan lock for LRS/LAC
+        <news>v0.32.39 no external TPDb add-on / unified LAC context
+- Removed the separate TPDb context add-on from the release package. TPDb is now only an internal Library Artwork Curator feature.
+- TPDb poster selection is exposed only from Library Artwork Curator context menu for movies and movie sets.
+- Main menu moved Indonesian movie refresh into Maintenance tools.
+- Maintenance tools removed TPDb picker/session clear and N/A reset entries.
+- Runtime logs/reports now use runtime/* folders while diagnostics ZIP stays in addon_data root and old ZIPs are removed.
+
+v0.32.37 shared auto-scan lock for LRS/LAC
 - LAC auto-scan now waits briefly for LRS and participates in the same .kodi-auto-scan.lock file.
 - Prevents LRS and LAC progress/final notifications from starting at the same time after Kodi library scan.
 - Releases LAC-owned stale locks on service startup and after auto-scan finish/cancel.
@@ -414,7 +421,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.69" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.70" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -435,7 +442,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.11"
+       version="1.5.12"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -447,8 +454,8 @@ v0.29.1 custom beta
     <extension point="kodi.context.item">
         <menu id="kodi.core.main">
             <item library="context.py">
-                <label>Refresh ratings data for selected item</label>
-                <visible>String.IsEqual(ListItem.DBTYPE,movie) | String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,episode) | !String.IsEmpty(ListItem.DBID)</visible>
+                <label>Refresh ratings for this item</label>
+                <visible>[String.IsEqual(ListItem.DBTYPE,movie) | String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,episode)] + !String.IsEqual(ListItem.Property(lrs_game),true) + !String.IsEqual(ListItem.Property(MediaType),game) + !String.IsEqual(ListItem.Property(DBTYPE),game)</visible>
             </item>
         </menu>
     </extension>
