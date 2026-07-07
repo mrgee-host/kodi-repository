@@ -59,7 +59,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.33" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.35" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -93,7 +93,19 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.32 Auto scan processing reliability fix
+        <news>v0.32.35 LRS-style auto scan pipeline
+- Auto scan now follows Library Ratings Scraper's flow: scan-start snapshot, scan-finish pending job, service-loop consume, retry if Kodi DB is not ready, then direct processing.
+- Removes the auto path dependency on signal/status/quiet-delay before processing; manual context menu actions remain unchanged.
+- Adds duplicate callback guards for Kodi builds that emit both Monitor callbacks and generic notifications.
+
+v0.32.34 Auto scan quiet-delay deadlock fix
+- Fixes auto-fill stuck after quiet delay start by avoiding waitForAbort(0), which can block indefinitely on Kodi.
+
+v0.32.33 Auto scan gate fix
+- Fix auto-scan queue stuck in signalled state when Kodi leaves Library.IsScanningVideo true after OnScanFinished.
+- Skip false full-library auto queue when service receives OnScanFinished without a matching start snapshot.
+
+v0.32.32 Auto scan processing reliability fix
 - Added a clear actor-cache-last-run-summary.txt report with found, cacheable, already cached, pending, cached, failed, skipped, and elapsed totals.
 - Cache actor thumbnails notifications now use real cache stats instead of always showing 0 errors.
 - Runtime performance CSV writes one header only instead of repeating headers for each run.
