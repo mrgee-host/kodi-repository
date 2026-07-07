@@ -59,7 +59,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.35" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.36" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -93,7 +93,11 @@
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
         <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.35 LRS-style auto scan pipeline
+        <news>v0.32.36 LRS-style auto scan missed-start fallback
+- Buffers VideoLibrary.OnUpdate added=true events and consumes them after OnScanFinished when OnScanStarted was missed.
+- Keeps snapshot diff when available, and adds a capped cache fallback to avoid false full-library runs.
+
+v0.32.35 LRS-style auto scan pipeline
 - Auto scan now follows Library Ratings Scraper's flow: scan-start snapshot, scan-finish pending job, service-loop consume, retry if Kodi DB is not ready, then direct processing.
 - Removes the auto path dependency on signal/status/quiet-delay before processing; manual context menu actions remain unchanged.
 - Adds duplicate callback guards for Kodi builds that emit both Monitor callbacks and generic notifications.
