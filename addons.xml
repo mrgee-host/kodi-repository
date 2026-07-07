@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.50" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.52" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -11,7 +11,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Native Steam games library for Kodi</summary>
-        <description>Steam-only game launcher/library with native Kodi ListItems, Steam scraping, collections, artwork URLs, and launch via steam://rungameid.</description>
+        <description>Steam Library. v0.3.52 uses KPM shared icons as the only icon source for AF3 layout patch icons, with no local fallback and no legacy icon aliases.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
@@ -19,7 +19,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.6" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.8" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -30,7 +30,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Unified Movies, Series, and Steam Games widget paths with AF3/LRS game rating properties, Steam250 aliases, normalized age labels, tagline rows, and no duplicate age row</summary>
-        <description>Creates selectable Kodi plugin paths that combine Movies, TV Shows/Series, and Steam Library games for home widgets and screensavers.</description>
+        <description>MediaHub Widget. v0.1.8 points all shared rating/game icon paths directly to KPM shared-icons with no local fallback.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -59,7 +59,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.39" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.41" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -91,7 +91,7 @@
     <extension point="xbmc.service" start="login" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
-        <description lang="en">Library Artwork Curator manages remote artwork for movies, movie sets, TV shows, seasons, and episodes. Artwork stays remote and is cached only in Kodi's internal texture cache. Indonesian content prioritizes Indonesian artwork before English and no-language fallbacks.</description>
+        <description lang="en">Library Artwork Curator. v0.32.41 keeps TPDb internal and has no external context.tpdb.artwork dependency. Companion icon paths are centralized in KPM where applicable.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
         <news>v0.32.39 no external TPDb add-on / unified LAC context
 - Removed the separate TPDb context add-on from the release package. TPDb is now only an internal Library Artwork Curator feature.
@@ -421,18 +421,15 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.70" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.73" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
     <extension point="xbmc.python.script" library="default.py"/>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-    </extension>
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager applies selected AF3/Kodi patches. v0.1.68 is a clean no-fanart build. It adds a KPM screensaver source that can mix Kodi movies, TV shows, and Steam Library games while leaving artwork/background pipelines native.</description>
+        <description lang="en_GB">Kodi Patch Manager applies selected AF3/Kodi patches. v0.1.73 is built from the v0.1.67 clean-no-fanart base and uses the fixed KPM shared icon package as the single canonical icon source. No external TPDb or local icon fallback is bundled.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -442,7 +439,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.12"
+       version="1.5.15"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -462,7 +459,7 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.5.11 is based on the 1.5.9 MediaHub game screensaver-only build, keeps the movie/TV/episode cache-scraper flow unchanged, mirrors game RatingSlotN_* values to AF3 screensaver, clears game ListItem/Player namespaces to avoid duplicate home/hub rows, and adds game CropV2 lookup from TMDbHelper crop_v2 using game clearlogo candidates.</description>
+        <description lang="en_GB">Library Ratings Scraper. v1.5.15 uses KPM shared-icons as the only icon source. The AF3/LRS icon textbox now means a subfolder inside KPM shared-icons; when blank, the default KPM shared-icons root is used.</description>
         <description lang="id_ID">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.5.11 is based on the 1.5.9 MediaHub game screensaver-only build, keeps the movie/TV/episode cache-scraper flow unchanged, mirrors game RatingSlotN_* values to AF3 screensaver, clears game ListItem/Player namespaces to avoid duplicate home/hub rows, and adds game CropV2 lookup from TMDbHelper crop_v2 using game clearlogo candidates.</description>
         <platform>all</platform>
         <license>MIT</license>
