@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.52" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.53" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -11,7 +11,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Native Steam games library for Kodi</summary>
-        <description>Steam Library. v0.3.52 uses KPM shared icons as the only icon source for AF3 layout patch icons, with no local fallback and no legacy icon aliases.</description>
+        <description>Steam Library. v0.3.53 writes every AF3 Steam icon path directly to KPM shared-icons. No skin-local rating icon copy and no local fallback.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
