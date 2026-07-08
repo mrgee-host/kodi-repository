@@ -439,7 +439,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.15"
+       version="1.5.16"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -459,7 +459,7 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper. v1.5.15 uses KPM shared-icons as the only icon source. The AF3/LRS icon textbox now means a subfolder inside KPM shared-icons; when blank, the default KPM shared-icons root is used.</description>
+        <description lang="en_GB">Library Ratings Scraper. v1.5.16 fixes KPM shared-icon filename mapping: Verified Hot uses verified.png, Oscar uses oscars.png, and Best Picture uses oscars_bp.png. KPM shared-icons remains the only icon source.</description>
         <description lang="id_ID">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.5.11 is based on the 1.5.9 MediaHub game screensaver-only build, keeps the movie/TV/episode cache-scraper flow unchanged, mirrors game RatingSlotN_* values to AF3 screensaver, clears game ListItem/Player namespaces to avoid duplicate home/hub rows, and adds game CropV2 lookup from TMDbHelper crop_v2 using game clearlogo candidates.</description>
         <platform>all</platform>
         <license>MIT</license>
