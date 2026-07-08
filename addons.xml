@@ -21,7 +21,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.8" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.9" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -31,8 +31,8 @@
     </extension>
 
     <extension point="xbmc.addon.metadata">
-        <summary>Unified Movies, Series, and Steam Games widget paths with AF3/LRS game rating properties, Steam250 aliases, normalized age labels, tagline rows, and no duplicate age row</summary>
-        <description>MediaHub Widget. v0.1.8 points all shared rating/game icon paths directly to KPM shared-icons with no local fallback.</description>
+        <summary>Unified Movies, Series, and Steam Games widget paths with AF3/LRS game rating properties, Steam250 aliases, normalized age labels, tagline rows, and no duplicate age row, clearlogo filtering, and cached 1080p fanart filtering</summary>
+        <description>MediaHub Widget. v0.1.8 points all shared rating/game icon paths directly to KPM shared-icons with no local fallback. v0.1.9 adds clearlogo and cached 1080p fanart filters using Kodi Textures DB.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
