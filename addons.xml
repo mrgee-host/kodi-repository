@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.56" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.57" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -13,7 +13,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Native Steam games library for Kodi</summary>
-        <description>Steam Library. v0.3.55 adds Steam SortAs/sort_as support for chronological library sorting.</description>
+        <description>Steam Library. v0.3.57 reads Steam SortAs from local appcache/appinfo.vdf with API fallback.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
