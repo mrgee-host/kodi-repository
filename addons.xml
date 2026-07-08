@@ -61,7 +61,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.41" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.42" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -93,7 +93,7 @@
     <extension point="xbmc.service" start="login" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
-        <description lang="en">Library Artwork Curator. v0.32.41 keeps TPDb internal and has no external context.tpdb.artwork dependency. Companion icon paths are centralized in KPM where applicable.</description>
+        <description lang="en">Library Artwork Curator. v0.32.42 adds dynamic service wait policy for lower idle CPU while preserving scan/job responsiveness.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
         <news>v0.32.39 no external TPDb add-on / unified LAC context
 - Removed the separate TPDb context add-on from the release package. TPDb is now only an internal Library Artwork Curator feature.
@@ -423,7 +423,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.73" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.74" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -431,7 +431,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager applies selected AF3/Kodi patches. v0.1.73 is built from the v0.1.67 clean-no-fanart base and uses the fixed KPM shared icon package as the single canonical icon source. No external TPDb or local icon fallback is bundled.</description>
+        <description lang="en_GB">Kodi Patch Manager. v0.1.74 adds dynamic service wait policy while keeping pause/OSD monitoring fast and idle states power-saving.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -441,7 +441,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.19"
+       version="1.5.20"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -461,8 +461,8 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper. v1.5.19 adds a Home/Hub anti-game visible guard so stale movie ratings are hidden instantly when the focused item is a game. It keeps direct KPM Oscar/Verified icon paths.</description>
-        <description lang="id_ID">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.5.11 is based on the 1.5.9 MediaHub game screensaver-only build, keeps the movie/TV/episode cache-scraper flow unchanged, mirrors game RatingSlotN_* values to AF3 screensaver, clears game ListItem/Player namespaces to avoid duplicate home/hub rows, and adds game CropV2 lookup from TMDbHelper crop_v2 using game clearlogo candidates.</description>
+        <description lang="en_GB">Library Ratings Scraper. v1.5.20 adds TMDbHelper-style service pacing, Home/Hub MetaRowReady guard for native Ends-at metadata, and keeps direct KPM shared icons only.</description>
+        <description lang="id_ID">Library Ratings Scraper. v1.5.20 menambahkan service wait policy seperti TMDbHelper, guard MetaRowReady untuk Home/Hub Ends-at, dan tetap memakai ikon langsung dari KPM shared-icons.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
