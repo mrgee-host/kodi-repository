@@ -441,7 +441,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.21"
+       version="1.5.22"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -461,8 +461,8 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper. v1.5.21 moves Home/Hub Ends-at into the LRS metadata row, disables native AF3 Ends-at objects to prevent flicker, restores normal polling to 0.10s, and removes the old ready-flag properties.</description>
-        <description lang="id_ID">Library Ratings Scraper. v1.5.21 memindahkan Ends-at Home/Hub ke row metadata LRS, mematikan native AF3 Ends-at agar tidak flicker, mengembalikan polling normal ke 0.10 detik, dan menghapus property ready-flag lama.</description>
+        <description lang="en_GB">Library Ratings Scraper. v1.5.22 makes Home/Hub Ends-at a fixed LRS extra slot at the end of the row, keeps normal polling at 0.10s, disables native AF3 Ends-at, and removes old ready-flag properties.</description>
+        <description lang="id_ID">Library Ratings Scraper. v1.5.22 menjadikan Ends-at Home/Hub sebagai slot tambahan LRS tetap di akhir row, polling normal tetap 0.10 detik, native AF3 Ends-at dimatikan, dan property ready-flag lama dihapus.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
