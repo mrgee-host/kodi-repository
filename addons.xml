@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.51" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.54" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -13,7 +13,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Native Steam games library for Kodi</summary>
-        <description>Steam-only game launcher/library with native Kodi ListItems, Steam scraping, collections, artwork URLs, and launch via steam://rungameid.</description>
+        <description>Steam Library. v0.3.54 is rebased on v0.3.53 KPM direct-icons and adds Refresh library for new games.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
