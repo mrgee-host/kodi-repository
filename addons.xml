@@ -439,7 +439,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.18"
+       version="1.5.19"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -459,7 +459,7 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper. v1.5.18 keeps the full 1.5.15 base, fixes direct KPM Oscar/Verified icon paths, and removes legacy LRS_AF3/Oscar filename references from emitted paths.</description>
+        <description lang="en_GB">Library Ratings Scraper. v1.5.19 adds a Home/Hub anti-game visible guard so stale movie ratings are hidden instantly when the focused item is a game. It keeps direct KPM Oscar/Verified icon paths.</description>
         <description lang="id_ID">Scans selected Kodi media types, stores ratings/statuses/awards/IMDb Top 250 rank in an independent cache, and publishes TMDbHelper-compatible window properties for Arctic Fuse 3. Version 1.5.11 is based on the 1.5.9 MediaHub game screensaver-only build, keeps the movie/TV/episode cache-scraper flow unchanged, mirrors game RatingSlotN_* values to AF3 screensaver, clears game ListItem/Player namespaces to avoid duplicate home/hub rows, and adds game CropV2 lookup from TMDbHelper crop_v2 using game clearlogo candidates.</description>
         <platform>all</platform>
         <license>MIT</license>
