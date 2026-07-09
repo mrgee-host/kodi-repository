@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.65" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.66" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -13,7 +13,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Native Steam games library for Kodi</summary>
-        <description>Steam Library. v0.3.65 coordinates with LRS 1.5.28 DisplaySlot and removes direct AF3 game meta row injection.</description>
+        <description>Steam Library. v0.3.66 provides RatingSlot bridge properties for LRS 1.5.29; Steam Library no longer owns the lower rating row.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
@@ -423,7 +423,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.76" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.77" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -441,7 +441,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.28"
+       version="1.5.29"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
