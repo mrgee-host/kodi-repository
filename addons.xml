@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.67" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.69" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -12,7 +12,7 @@
     <extension point="xbmc.service" library="service.py" start="startup" />
 
     <extension point="xbmc.addon.metadata">
-        <summary>Native Steam games library for Kodi</summary>
+        <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
         <description>Steam Library. v0.3.67 provides clean RatingSlot bridge properties for LRS 1.5.30; Steam Library does not own the lower rating row.</description>
         <platform>windows</platform>
         <license>MIT</license>
@@ -21,7 +21,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.9" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.11" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -31,7 +31,7 @@
     </extension>
 
     <extension point="xbmc.addon.metadata">
-        <summary>Unified Movies, Series, and Steam Games widget paths with AF3/LRS game rating properties, Steam250 aliases, normalized age labels, tagline rows, and no duplicate age row, clearlogo filtering, and cached 1080p fanart filtering</summary>
+        <summary>MediaHub widget/list data provider. KPM owns visual integration.</summary>
         <description>MediaHub Widget. v0.1.8 points all shared rating/game icon paths directly to KPM shared-icons with no local fallback. v0.1.9 adds clearlogo and cached 1080p fanart filters using Kodi Textures DB.</description>
         <platform>all</platform>
         <license>MIT</license>
@@ -61,7 +61,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.43" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.45" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -423,7 +423,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.79" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.82" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -431,7 +431,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager. v0.1.76 adds optional Steam game studio logo resolving through resource.images.gamestudios.grayscale, while keeping the v0.1.74 service wait policy and clean no-fanart base.</description>
+        <description lang="en_GB">Kodi Patch Manager. v0.1.80 adds one full KPM diagnostics ZIP for KPM/LRS/Steam Library/LAC/MediaHub, AF3 XML, shared icons, visual row state, and cropV2/pathing snapshots. Scraping remains owned by each add-on.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -441,7 +441,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.31"
+       version="1.5.33"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
