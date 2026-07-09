@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.69" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.70" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -13,7 +13,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library. v0.3.67 provides clean RatingSlot bridge properties for LRS 1.5.30; Steam Library does not own the lower rating row.</description>
+        <description>Steam Library. v0.3.70 is game data-owner only, fixes Tools menu runtime syntax, and leaves AF3 visual patching to KPM.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
@@ -21,7 +21,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.12" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.13" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -32,7 +32,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>MediaHub widget/list data provider. KPM owns visual integration.</summary>
-        <description>MediaHub Widget. v0.1.12 fixes KPM game percent formatting and stops sending runtime through deprecated setInfo video keys; KPM owns visual integration.</description>
+        <description>MediaHub Widget. v0.1.13 fixes KPM game percent formatting and stops sending runtime through deprecated setInfo video keys; KPM owns visual integration.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -423,7 +423,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.83" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.84" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -431,7 +431,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager. v0.1.83 adds Apply Full KPM Integration, moves single patches under Advanced Patches, and fixes the KPM studio resolver _safe_int helper. Scraping remains owned by each add-on.</description>
+        <description lang="en_GB">Kodi Patch Manager. v0.1.84 is the migration-parity pass: KPM-owned AF3 row is KPM-only, rating formatting/awards/game row are restored, and provider crash coordination is handled cleanly.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -441,7 +441,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.33"
+       version="1.5.34"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -461,7 +461,7 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper. v1.5.22 makes Home/Hub Ends-at a fixed LRS extra slot at the end of the row, keeps normal polling at 0.10s, disables native AF3 Ends-at, and removes old ready-flag properties.</description>
+        <description lang="en_GB">Library Ratings Scraper. v1.5.34 keeps LRS as the rating data owner and fixes diagnostics export after the runtime-layout cleanup.</description>
         <description lang="id_ID">Library Ratings Scraper. v1.5.22 menjadikan Ends-at Home/Hub sebagai slot tambahan LRS tetap di akhir row, polling normal tetap 0.10 detik, native AF3 Ends-at dimatikan, dan property ready-flag lama dihapus.</description>
         <platform>all</platform>
         <license>MIT</license>
