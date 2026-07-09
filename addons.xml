@@ -21,7 +21,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.11" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.12" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -32,7 +32,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>MediaHub widget/list data provider. KPM owns visual integration.</summary>
-        <description>MediaHub Widget. v0.1.8 points all shared rating/game icon paths directly to KPM shared-icons with no local fallback. v0.1.9 adds clearlogo and cached 1080p fanart filters using Kodi Textures DB.</description>
+        <description>MediaHub Widget. v0.1.12 fixes KPM game percent formatting and stops sending runtime through deprecated setInfo video keys; KPM owns visual integration.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
