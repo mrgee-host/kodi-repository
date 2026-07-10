@@ -423,7 +423,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.84" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.85" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -431,7 +431,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager. v0.1.84 is the migration-parity pass: KPM-owned AF3 row is KPM-only, rating formatting/awards/game row are restored, and provider crash coordination is handled cleanly.</description>
+        <description lang="en_GB">Kodi Patch Manager. v0.1.85 repairs the 0.1.84 AF3 Includes_Info XML breakage and re-applies the KPM-owned row with safer native-row cleanup.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
