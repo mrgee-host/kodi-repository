@@ -423,7 +423,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.86" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.87" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -431,7 +431,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager. v0.1.86 repairs the 0.1.84 AF3 Includes_Info XML breakage and re-applies the KPM-owned row with safer native-row cleanup.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.1.87 restores proven AF3 behavior: exact 192px Steam landscape cards, mature LRS DisplaySlot bridging, atomic lower-row publishing, exact legacy screensaver row placement, default icon assets, and IMDb-only width 52.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
