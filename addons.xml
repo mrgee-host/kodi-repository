@@ -423,7 +423,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.92" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.90" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -431,7 +431,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.1.92 keeps the previously committed AF3 panel visible while the next item is resolved, preloads the inactive bank logo texture before the atomic switch, prevents native and KPM panels from overlapping, and repairs full live diagnostics.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.1.90 replaces the hard blanking transition gate with non-destructive keep-last behavior, keeps the previous KPM row visible until the next canonical item is committed, and repairs live/full diagnostics condition sampling.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
