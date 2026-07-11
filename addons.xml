@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.71" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.72" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -13,7 +13,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library. v0.3.71 adds local-first library membership, startup ownership diff sync, Steam-style playtime, new-game metadata notifications, and Clean Game Library.</description>
+        <description>Steam Library. v0.3.72 fixes settings, mirrors Steam Hidden globally with an optional Hidden Games folder, reconstructs dynamic Software, keeps local-first sync, and uses compact Steam-style playtime.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
@@ -21,7 +21,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.14" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.15" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -32,7 +32,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>MediaHub widget/list data provider. KPM owns visual integration.</summary>
-        <description>MediaHub Widget. v0.1.14 fixes KPM game percent formatting and stops sending runtime through deprecated setInfo video keys; KPM owns visual integration.</description>
+        <description>MediaHub Widget v0.1.15 reads only active non-hidden Steam membership, forwards compact lifetime playtime, and preserves KPM game row properties. KPM owns visual integration.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -423,7 +423,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.93" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.94" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -431,7 +431,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.1.93 is rebased on 0.1.90, keeps native AF3 logo/fanart/plot transitions, repairs 60 ms live diagnostics, adds Steam Play Time as the final game row slot, and compacts series status labels.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.1.94 keeps native AF3 logo/fanart/plot transitions and uses an atomic lower-row snapshot for stable Steam, Metacritic, achievement and compact playtime ordering. Live diagnostics remain enabled.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
