@@ -61,6 +61,21 @@
         </assets>
     </extension>
 </addon>
+<addon id="resource.images.kpm.studiologos" name="KPM Studio &amp; Game Logos" version="1.0.0" provider-name="MrGee">
+    <extension point="kodi.resource.images" compile="false" type="studios" />
+    <requires>
+        <import addon="kodi.resource" version="1.0.0"/>
+    </requires>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">XBT studio, developer and publisher logo pack for Kodi Patch Manager</summary>
+        <description lang="en_GB">Contains 505 deduplicated logos in one XBTF2 texture archive: 374 movie/series studios and 131 game developers/publishers. Kodi Patch Manager supplies provider-aware resolution and aliases.</description>
+        <platform>all</platform>
+        <license>Personal custom resource pack</license>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon>
 <addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.45" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -423,15 +438,16 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.94" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.96" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="resource.images.kpm.studiologos" version="1.0.0"/>
     </requires>
     <extension point="xbmc.python.script" library="default.py"/>
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.1.94 keeps native AF3 logo/fanart/plot transitions and uses an atomic lower-row snapshot for stable Steam, Metacritic, achievement and compact playtime ordering. Live diagnostics remain enabled.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.1.96 moves its 505 deduplicated studio/game logos into a dedicated XBTF2 image resource add-on. Movie/TV resolves coloured resource first then KPM XBT; games resolve KPM XBT first then grayscale. Logo names are indexed once at service startup and focus changes use dictionary lookup only.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
