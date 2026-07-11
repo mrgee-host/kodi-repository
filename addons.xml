@@ -21,7 +21,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.15" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.16" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -32,7 +32,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>MediaHub widget/list data provider. KPM owns visual integration.</summary>
-        <description>MediaHub Widget v0.1.15 reads only active non-hidden Steam membership, forwards compact lifetime playtime, and preserves KPM game row properties. KPM owns visual integration.</description>
+        <description>MediaHub Widget v0.1.16 marks each Steam item as a complete KPM game-row snapshot, keeps active/non-hidden membership filtering, and forwards Steam, Metacritic, achievement and compact lifetime playtime properties together.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -61,14 +61,14 @@
         </assets>
     </extension>
 </addon>
-<addon id="resource.images.kpm.studiologos" name="KPM Studio &amp; Game Logos" version="1.0.0" provider-name="MrGee">
+<addon id="resource.images.kpm.studiologos" name="KPM Studio &amp; Game Logos" version="1.0.1" provider-name="MrGee">
     <extension point="kodi.resource.images" compile="false" type="studios" />
     <requires>
         <import addon="kodi.resource" version="1.0.0"/>
     </requires>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">XBT studio, developer and publisher logo pack for Kodi Patch Manager</summary>
-        <description lang="en_GB">Contains 505 deduplicated logos in one XBTF2 texture archive: 374 movie/series studios and 131 game developers/publishers. Kodi Patch Manager supplies provider-aware resolution and aliases.</description>
+        <description lang="en_GB">Contains 505 deduplicated, AF3-sized 161Ã—109 centered logos in one XBTF2 texture archive: 374 movie/series studios and 131 game developers/publishers. Kodi Patch Manager supplies provider-aware resolution and aliases.</description>
         <platform>all</platform>
         <license>Personal custom resource pack</license>
         <assets>
@@ -438,16 +438,16 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.96" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.97" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
-        <import addon="resource.images.kpm.studiologos" version="1.0.0"/>
+        <import addon="resource.images.kpm.studiologos" version="1.0.1"/>
     </requires>
     <extension point="xbmc.python.script" library="default.py"/>
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.1.96 moves its 505 deduplicated studio/game logos into a dedicated XBTF2 image resource add-on. Movie/TV resolves coloured resource first then KPM XBT; games resolve KPM XBT first then grayscale. Logo names are indexed once at service startup and focus changes use dictionary lookup only.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.1.97 uses AF3-sized 161Ã—109 XBT studio/game logos, removes every legacy direct Steam lower-row renderer, resets stale row state on upgrade, locks game order to Steamâ€“Metacriticâ€“Achievementâ€“playtime, and falls back to the Steam database when widget properties are incomplete.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
