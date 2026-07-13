@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.72" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.73" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -13,7 +13,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library. v0.3.72 fixes settings, mirrors Steam Hidden globally with an optional Hidden Games folder, reconstructs dynamic Software, keeps local-first sync, and uses compact Steam-style playtime.</description>
+        <description>Steam Library. v0.3.73 preserves SteamEdit display names and SortAs, exposes Kodi Sort title correctly, fixes Default sort mapping, adds names to Steam-hidden flags, and stores a complete JSON snapshot for manual Kodi hides.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
@@ -21,7 +21,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.17" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.18" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -32,7 +32,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>MediaHub widget/list data provider. KPM owns visual integration.</summary>
-        <description>MediaHub Widget v0.1.17 exposes an explicit game identity even while using Kodi movie furniture for AF3, forwards Steam250 rank and lifetime playtime, and publishes a canonical Steam, Metacritic, achievement, playtime snapshot for KPM.</description>
+        <description>MediaHub Widget v0.1.18 prefers SteamEdit display_name, keeps steam_name as the original title, and orders games by sortname with display-name fallback while retaining game-row parity for KPM.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -457,7 +457,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.37"
+       version="1.5.38"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -477,7 +477,7 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.5.37 fixes TV-status/Ends-at slot classification and adds an explicit screensaver-only data bridge while KPM remains the visual owner.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.5.38 restores ratings_only forwarding in the final resolver wrapper so Refresh ratings for this item works again, while keeping compact series statuses and KPM visual ownership.</description>
         <description lang="id_ID">Library Ratings Scraper. v1.5.22 menjadikan Ends-at Home/Hub sebagai slot tambahan LRS tetap di akhir row, polling normal tetap 0.10 detik, native AF3 Ends-at dimatikan, dan property ready-flag lama dihapus.</description>
         <platform>all</platform>
         <license>MIT</license>
