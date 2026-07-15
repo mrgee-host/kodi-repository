@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.74" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.76" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -13,7 +13,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library. v0.3.74 makes SteamEdit names durable when Steam resets appinfo, recovers names overwritten by v0.3.73 reports, cleans only duplicated leading A/An/The in SortAs, and makes natural sorting Unicode-safe.</description>
+        <description>Steam Library. v0.3.76 condenses Tools to nine actions, combines Name/Sortname work with metadata refresh, and automatically caches pending artwork after scan or metadata operations.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
