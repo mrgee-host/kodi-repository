@@ -76,7 +76,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.45" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.46" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -108,9 +108,16 @@
     <extension point="xbmc.service" start="login" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
-        <description lang="en">Library Artwork Curator. v0.32.42 adds dynamic service wait policy for lower idle CPU while preserving scan/job responsiveness.</description>
+        <description lang="en">Library Artwork Curator. v0.32.46 automatically forces movies in the configured Indonesian folder into one Indonesian movie collection.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.39 no external TPDb add-on / unified LAC context
+        <news>v0.32.46 Indonesian movie collection sync
+- Automatically assign every movie whose path matches the Indonesian folder markers to Indonesian Movies Collection.
+- Replace any previous movie-set assignment, because Kodi movies have one active movie-set field.
+- Run once after service startup and after every completed Kodi video-library scan.
+- Add Maintenance tools -> Sync Indonesian movie collection.
+- Add human-readable collection state and sync report to diagnostics export.
+
+v0.32.39 no external TPDb add-on / unified LAC context
 - Removed the separate TPDb context add-on from the release package. TPDb is now only an internal Library Artwork Curator feature.
 - TPDb poster selection is exposed only from Library Artwork Curator context menu for movies and movie sets.
 - Main menu moved Indonesian movie refresh into Maintenance tools.
