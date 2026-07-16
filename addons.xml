@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.77" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.78" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -13,7 +13,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library. v0.3.77 stores active game entries only, skips applications/betas/tools, and immediately deletes metadata for games no longer present in the owned library.</description>
+        <description>Steam Library. v0.3.78 keeps active game entries only and makes normal library opens read-only at connection time, with one-time serialized schema migration and SQLite busy-timeout/WAL concurrency protection.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
