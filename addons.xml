@@ -465,7 +465,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.44"
+       version="1.5.45"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -486,7 +486,7 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.5.44 adds a manual one-shot TMDbHelper-compatible CropV2 cache builder for movie, TV-show, and Steam-game clearlogos.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.5.45 fixes CropV2 canonical hashing, repairs missing TMDbHelper filenames, and safely removes byte-identical duplicate aliases created by v1.5.44.</description>
         <description lang="id_ID">Library Ratings Scraper. v1.5.22 menjadikan Ends-at Home/Hub sebagai slot tambahan LRS tetap di akhir row, polling normal tetap 0.10 detik, native AF3 Ends-at dimatikan, dan property ready-flag lama dihapus.</description>
         <platform>all</platform>
         <license>MIT</license>
