@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.79" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.80" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -13,7 +13,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library. v0.3.78 keeps active game entries only and makes normal library opens read-only at connection time, with one-time serialized schema migration and SQLite busy-timeout/WAL concurrency protection.</description>
+        <description>Steam Library v0.3.80 migrates item metadata to InfoTagVideo, creates plugin ListItems offscreen, and releases Addon/Monitor wrappers when plugin and startup-service invocations end.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
@@ -21,7 +21,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.18" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.21" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -32,7 +32,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>MediaHub widget/list data provider. KPM owns visual integration.</summary>
-        <description>MediaHub Widget v0.1.18 prefers SteamEdit display_name, keeps steam_name as the original title, and orders games by sortname with display-name fallback while retaining game-row parity for KPM.</description>
+        <description>MediaHub Widget v0.1.21 migrates video metadata to InfoTagVideo, creates plugin ListItems offscreen, and avoids retaining xbmcaddon.Addon at module scope.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
