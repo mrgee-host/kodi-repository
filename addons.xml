@@ -465,10 +465,11 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.43"
+       version="1.5.44"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.pil" version="1.1.7" />
     </requires>
     <extension point="xbmc.python.script" library="default.py">
         <provides>executable</provides>
@@ -485,7 +486,7 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.5.42 writes the human-readable screensaver clearlogo report into exported diagnostics and fixes screensaver lifetime playtime to use ends.png, matching Library, Home, and Hub.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.5.44 adds a manual one-shot TMDbHelper-compatible CropV2 cache builder for movie, TV-show, and Steam-game clearlogos.</description>
         <description lang="id_ID">Library Ratings Scraper. v1.5.22 menjadikan Ends-at Home/Hub sebagai slot tambahan LRS tetap di akhir row, polling normal tetap 0.10 detik, native AF3 Ends-at dimatikan, dan property ready-flag lama dihapus.</description>
         <platform>all</platform>
         <license>MIT</license>
