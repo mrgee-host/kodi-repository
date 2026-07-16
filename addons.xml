@@ -438,7 +438,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.01" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.04" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.1"/>
@@ -448,7 +448,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.01 fixes the AF3 screensaver widget chooser for Skin Shortcuts v3 by using its supported standalone skinstring picker. The selected content path is written only to Defs_ScreensaverWidget in Includes_Defaults.xml.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.04 adds a reversible AF3 poster-ratio patch. It derives a 2:3 poster width from the active poster height and reduces the layout width by the same amount, preserving the current horizontal gap.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
