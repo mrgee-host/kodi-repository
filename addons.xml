@@ -438,7 +438,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.98" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.99" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.1"/>
@@ -447,7 +447,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.1.98 keeps AF3-sized XBT studio/game logos and fixes MediaHub game identity parity. Explicit MediaHub Steam items override Kodi's movie DBType, legacy direct rows are removed, and the lower row is locked to Steam/Steam250, Metacritic, achievements, then lifetime playtime.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.1.99 adds a manual Kodi screenshot-folder picker and a test screenshot action under KPM Settings, while retaining the AF3 XBT studio/game logo and MediaHub game identity integration from v0.1.98.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
