@@ -438,16 +438,17 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.1.99" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.00" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.1"/>
+        <import addon="script.skinshortcuts" version="2.0.0" optional="true"/>
     </requires>
     <extension point="xbmc.python.script" library="default.py"/>
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.1.99 adds a manual Kodi screenshot-folder picker and a test screenshot action under KPM Settings, while retaining the AF3 XBT studio/game logo and MediaHub game identity integration from v0.1.98.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.00 adds a selectable AF3 screensaver widget path. Choose a library, playlist, source, or add-on folder with the native Skin Shortcuts picker, enter a path manually, or restore the MediaHub mixed default. Only Defs_ScreensaverWidget in Includes_Defaults.xml is updated.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
