@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.78" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.79" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -458,7 +458,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.42"
+       version="1.5.43"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
