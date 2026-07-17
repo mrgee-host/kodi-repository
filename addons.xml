@@ -21,7 +21,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.23" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.24" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -32,7 +32,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>MediaHub widget/list data provider. KPM owns visual integration.</summary>
-        <description>MediaHub Widget v0.1.23 publishes a stable mediahub_item_key for every movie, TV show, and Steam game so LRS and Arctic Mirage can reject stale cross-panel metadata.</description>
+        <description>MediaHub Widget v0.1.24 keeps one screensaver slide per item while randomly choosing one cached main or extra fanart for each launch. Stable mediahub_item_key guards remain unchanged.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -445,7 +445,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.12" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.13" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.1"/>
@@ -455,7 +455,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.12 uses strict mediahub_item_key guards and a resolver-ready gate so Arctic Mirage never reuses the previous slide clearlogo on the opposite panel.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.13 marks the Arctic Mirage widget path as screensaver_mix so MediaHub can select one random cached extra fanart per item while retaining strict clearlogo guards.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
