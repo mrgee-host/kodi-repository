@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.84" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.85" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -13,7 +13,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library v0.3.84 restyles the two-pane artwork picker to match Arctic Fuse 3, adds fixed two-line URLs, and shortens SteamGridDB hero labels.</description>
+        <description>Steam Library v0.3.85 rebuilds the artwork picker from Arctic Fuse 3 native dialog includes, follows active AF3 dialog theme/blur/transparency/highlight settings, removes preview borders, and fixes scrollbar focus navigation.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
