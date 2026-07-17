@@ -537,7 +537,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.49"
+       version="1.5.50"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -558,8 +558,8 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.5.49 simplifies resolver/CropV2 menus, uses scrollable report viewers, restores normal TMDbHelper-compatible bbox cropping, and reads clearlogo bytes strictly from Kodi texture cache while preserving canonical URL hashes.</description>
-        <description lang="id_ID">Library Ratings Scraper v1.5.49 menyederhanakan menu resolver/CropV2, memakai report yang dapat digulir, mengembalikan crop bbox normal kompatibel TMDbHelper, dan membaca clearlogo hanya dari cache tekstur Kodi dengan hash URL kanonik tetap.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.5.50 opens Resolver cache and CropV2 as single three-button confirmation dialogs: Rebuild, Fill missing, and Cancel. Reports remain scrollable and clearlogo input remains Kodi texture-cache-only with canonical URL hashes unchanged.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.5.50 membuka Resolver cache dan CropV2 sebagai satu dialog konfirmasi tiga tombol: Rebuild, Fill missing, dan Cancel. Report tetap dapat digulir dan clearlogo tetap hanya dibaca dari cache tekstur Kodi dengan hash URL kanonik tidak berubah.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
