@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.87" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.88" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -13,7 +13,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library v0.3.87 compacts the thumbnail rail and fits the preview, selected label, and two-line URL entirely inside the AF3 dialog body. The preview is moved left, list rows are smaller, and native AF3 theme and focus navigation are preserved.</description>
+        <description>Steam Library v0.3.88 uses the full AF3 dialog body: the preview is larger and shifted left, while the focus pill is reduced without shrinking artwork thumbnails. The selected label and two-line URL remain inside the dialog and native AF3 theme/navigation are preserved.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
