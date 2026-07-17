@@ -445,45 +445,9 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.cinema.preroll.indonesia"
-       name="Cinema Pre-roll Indonesia 2"
-       version="0.1.4"
-       provider-name="Yu Home Cinema">
-  <requires>
-    <import addon="xbmc.python" version="3.0.0"/>
-  </requires>
-
-  <extension point="xbmc.python.script" library="default.py">
-    <provides>executable</provides>
-  </extension>
-
-  <extension point="xbmc.service" library="service.py" start="login"/>
-
-  <extension point="kodi.context.item">
-    <menu id="kodi.core.main">
-      <item library="context.py">
-        <label>32000</label>
-        <visible>ListItem.IsPlayable | ListItem.DBType(movie) | Container.Content(movies)</visible>
-      </item>
-    </menu>
-  </extension>
-
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en_GB">Play Dolby, an Indonesian age-rating bumper, then the movie.</summary>
-    <summary lang="id_ID">Putar Dolby, telop klasifikasi usia Indonesia, lalu film.</summary>
-    <description lang="en_GB">Creates a cinema sequence using one Dolby bumper and four age-rating videos. The selected movie title is shown as an XML overlay on the certificate frame.</description>
-    <description lang="id_ID">Membuat urutan bioskop: Dolby, telop SU/13+/17+/21+, lalu film. Judul film ditampilkan melalui overlay XML pada frame sertifikat.</description>
-    <platform>all</platform>
-    <license>GPL-3.0-only</license>
-    <assets>
-      <icon>icon.png</icon>
-    </assets>
-    <news>v0.1.4 - New certificate layout: large two-line movie title, random certificate number in LSF-style format, and dynamic age text under the title block; notifications remain hidden and resume still skips pre-roll.</news>
-  </extension>
-</addon>
 <addon id="script.kodi.cinema.preroll"
        name="Cinema Pre-roll Indonesia"
-       version="0.1.4"
+       version="0.1.5"
        provider-name="Yu Home Cinema">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
