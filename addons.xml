@@ -447,7 +447,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.cinema.preroll.indonesia"
        name="Cinema Pre-roll Indonesia 2"
-       version="0.1.3"
+       version="0.1.4"
        provider-name="Yu Home Cinema">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
@@ -478,7 +478,7 @@ v0.29.1 custom beta
     <assets>
       <icon>icon.png</icon>
     </assets>
-    <news>v0.1.3 - Restore normal Kodi controls and OSD; suppress Dolby/rating notifications; skip cinema pre-roll when resuming; make the certificate title visibly larger and thicker without relying on a missing bold font.</news>
+    <news>v0.1.4 - New certificate layout: large two-line movie title, random certificate number in LSF-style format, and dynamic age text under the title block; notifications remain hidden and resume still skips pre-roll.</news>
   </extension>
 </addon>
 <addon id="script.kodi.cinema.preroll"
