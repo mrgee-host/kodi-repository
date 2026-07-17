@@ -21,7 +21,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.22" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.23" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -32,7 +32,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>MediaHub widget/list data provider. KPM owns visual integration.</summary>
-        <description>MediaHub Widget v0.1.22 makes every widget unlimited by default and ignores legacy limit parameters while Force unlimited output is enabled.</description>
+        <description>MediaHub Widget v0.1.23 publishes a stable mediahub_item_key for every movie, TV show, and Steam game so LRS and Arctic Mirage can reject stale cross-panel metadata.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -445,7 +445,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.11" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.12" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.1"/>
@@ -455,7 +455,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.11 prevents the previous Arctic Mirage metadata panel, including clearlogo, ratings, and plot, from reverse-fading over the next slide.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.12 uses strict mediahub_item_key guards and a resolver-ready gate so Arctic Mirage never reuses the previous slide clearlogo on the opposite panel.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -465,7 +465,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.46"
+       version="1.5.47"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -486,8 +486,8 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.5.46 gives Arctic Mirage first context priority so the Home, Hub, Programs, or Video Library window behind it cannot replace the active slide identity.</description>
-        <description lang="id_ID">Library Ratings Scraper. v1.5.22 menjadikan Ends-at Home/Hub sebagai slot tambahan LRS tetap di akhir row, polling normal tetap 0.10 detik, native AF3 Ends-at dimatikan, dan property ready-flag lama dihapus.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.5.47 adds a prebuilt persistent clearlogo resolver database, 0.05 second screensaver polling, cache-only runtime lookup, and fail-closed Arctic Mirage logo transitions.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.5.47 menambahkan database resolver clearlogo permanen yang dibangun sekaligus, polling screensaver 0,05 detik, lookup runtime cache-only, dan transisi logo Arctic Mirage yang gagal-tertutup saat identitas belum cocok.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
