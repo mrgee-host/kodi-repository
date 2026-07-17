@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.80" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.81" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -13,7 +13,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library v0.3.80 migrates item metadata to InfoTagVideo, creates plugin ListItems offscreen, and releases Addon/Monitor wrappers when plugin and startup-service invocations end.</description>
+        <description>Steam Library v0.3.81 keeps game ordering plugin-owned and exposes only Kodi UNSORTED, preventing ViewModes from restoring label sort after restart.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
@@ -501,7 +501,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.47"
+       version="1.5.48"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -522,8 +522,8 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.5.47 adds a prebuilt persistent clearlogo resolver database, 0.05 second screensaver polling, cache-only runtime lookup, and fail-closed Arctic Mirage logo transitions.</description>
-        <description lang="id_ID">Library Ratings Scraper v1.5.47 menambahkan database resolver clearlogo permanen yang dibangun sekaligus, polling screensaver 0,05 detik, lookup runtime cache-only, dan transisi logo Arctic Mirage yang gagal-tertutup saat identitas belum cocok.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.5.48 adds alpha-threshold CropV2 trimming and a local-only repair for existing transparent padding, while retaining the persistent resolver and fail-closed Arctic Mirage transitions.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.5.48 menambahkan pemotongan CropV2 berbasis ambang alpha dan perbaikan lokal untuk padding transparan lama, sambil mempertahankan resolver permanen dan transisi Arctic Mirage yang fail-closed.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
