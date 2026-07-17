@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.90" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.91" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -13,7 +13,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library v0.3.90 fixes the 0.3.89 artwork-picker overlap by giving the thumbnail rail an explicit internal width and constraining the preview to the proven AF3 dialog body edge. URLs remain removed and the single normalized source label is retained.</description>
+        <description>Steam Library v0.3.91 fixes the artwork-picker centering correctly: the right preview control now spans the complete AF3 body area after the thumbnail rail, while the 16:9 image is centered inside that area. Preview height is increased to the maximum safe body height; URLs remain removed and the single normalized source label is retained.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
