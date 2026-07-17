@@ -445,7 +445,7 @@ v0.29.1 custom beta
         <assets><icon>icon.png</icon></assets>
     </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.10" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.11" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.1"/>
@@ -455,7 +455,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.10 fixes the Settings crash caused by the missing urllib.parse import while retaining screensaver path repair, unlimited MediaHub paths, configurable slide duration, and plot autoscroll off.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.11 prevents the previous Arctic Mirage metadata panel, including clearlogo, ratings, and plot, from reverse-fading over the next slide.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
