@@ -447,7 +447,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.kodi.cinema.preroll"
        name="Cinema Pre-roll Indonesia"
-       version="0.1.1"
+       version="0.1.2"
        provider-name="Yu Home Cinema">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
@@ -478,7 +478,7 @@ v0.29.1 custom beta
     <assets>
       <icon>icon.png</icon>
     </assets>
-    <news>v0.1.1 - Fix automatic interception on Kodi 22 by probing delayed Player metadata; add local-file fallback and detailed diagnostics.</news>
+    <news>v0.1.2 - Increase certificate title size and weight; add pre-roll control lock to suppress pause/OSD during Dolby and age-rating bumpers.</news>
   </extension>
 </addon>
 <addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.13" provider-name="MrGee">
