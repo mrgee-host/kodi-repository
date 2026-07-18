@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.92" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.93" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -13,7 +13,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library v0.3.92 widens the compact thumbnail rail so the selected focus pill spans the full list width, lets thumbnail size adapt to that rail, and enlarges the right-side preview safely while keeping the single centered source label and removing URLs.</description>
+        <description>Steam Library v0.3.93 rebuilds the artwork picker rail with a dedicated scrollbar gutter, exact seven-item paging, image-based radio indicators, adaptive thumbnails, and a truly separate centered preview area. The selected pill no longer overlaps the scrollbar; URLs remain removed and the single centered source label is retained.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
