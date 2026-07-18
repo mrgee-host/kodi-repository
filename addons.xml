@@ -447,7 +447,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.kodi.cinema.preroll"
        name="Cinema Pre-roll Indonesia"
-       version="0.1.7"
+       version="0.1.14"
        provider-name="Yu Home Cinema">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
@@ -478,7 +478,7 @@ v0.29.1 custom beta
     <assets>
       <icon>icon.png</icon>
     </assets>
-    <news>v0.1.7 - Add overlay age icons (SU/13+/17+/21+) from user-provided assets while keeping the custom certificate title, number, and age text layout.</news>
+    <news>v0.1.14 - Fine-tune title positioning to match the Photoshop references: move title block 60 px left, shift it downward, tighten multi-line spacing, and keep the age text close to the certificate number.</news>
   </extension>
 </addon>
 <addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.14" provider-name="MrGee">
