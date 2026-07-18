@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.96" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.97" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -13,7 +13,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library v0.3.95 refines the Photoshop layout with measured corrections: the candidate label moves 10 px down, the preview moves 17 px down, the artwork rail returns to native Arctic Fuse 3 List_Dialog styling, and the native scrollbar is placed in a dedicated gutter. Focus navigation is List to Scrollbar to Close and reverses Close to Scrollbar to List.</description>
+        <description>Steam Library v0.3.97 centers the widened artwork candidate rail by moving it 19 pixels right and tightens the vertical row pitch from 97 to 94 pixels so the final item is fully visible. Radio, thumbnail, scrollbar, preview, and header geometry remain unchanged.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
