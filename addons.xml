@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.98" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.99" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.pil" version="1.1.7"/>
@@ -14,7 +14,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library v0.3.98 adds a fanart-only Flip toggle inside the artwork picker. The preview mirrors instantly while browsing; applying a flipped candidate creates a real cached mirror file and stores that file as the selected fanart, while preserving the original source.</description>
+        <description>Steam Library v0.3.99 replaces the fanart Flip ON/OFF text with a compact AF3-style Flipped checkbox pill in the header. The current candidate source now follows the title in parentheses, the pill stays protected before the close button, live preview mirroring remains instant, and applying still stores a real flipped fanart file.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
