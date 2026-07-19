@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.97" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.3.98" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.pil" version="1.1.7"/>
     </requires>
 
     <extension point="xbmc.python.pluginsource" library="addon.py">
@@ -13,7 +14,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library v0.3.97 centers the widened artwork candidate rail by moving it 19 pixels right and tightens the vertical row pitch from 97 to 94 pixels so the final item is fully visible. Radio, thumbnail, scrollbar, preview, and header geometry remain unchanged.</description>
+        <description>Steam Library v0.3.98 adds a fanart-only Flip toggle inside the artwork picker. The preview mirrors instantly while browsing; applying a flipped candidate creates a real cached mirror file and stores that file as the selected fanart, while preserving the original source.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
