@@ -76,7 +76,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.46" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.47" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -108,9 +108,17 @@
     <extension point="xbmc.service" start="login" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
-        <description lang="en">Library Artwork Curator. v0.32.46 automatically forces movies in the configured Indonesian folder into one Indonesian movie collection.</description>
+        <description lang="en">Library Artwork Curator. v0.32.47 automatically forces movies in configured Indonesian and Thailand folders into their dedicated movie collections.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.46 Indonesian movie collection sync
+        <news>v0.32.47 Thailand movie collection sync
+- Automatically assign every movie whose path matches the Thailand folder markers to Thailand Movies Collection.
+- Uses the same one-set replacement rule as the Indonesian collection sync.
+- Runs after service startup, every completed Kodi video-library scan, and settings changes.
+- Adds Maintenance tools -> Sync Thailand movie collection.
+- Adds Thailand collection state and sync report to diagnostics export.
+- Thailand detection affects collection assignment only; artwork language selection remains unchanged.
+
+v0.32.46 Indonesian movie collection sync
 - Automatically assign every movie whose path matches the Indonesian folder markers to Indonesian Movies Collection.
 - Replace any previous movie-set assignment, because Kodi movies have one active movie-set field.
 - Run once after service startup and after every completed Kodi video-library scan.
