@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.00" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.01" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.pil" version="1.1.7"/>
@@ -14,7 +14,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library v0.4.00 replaces the simulated Flipped header button with a real Kodi radiobutton control. It uses AF3 focus and radio-state textures, keeps the compact header placement before the close button, preserves live preview mirroring, and still stores a real flipped fanart file when applied.</description>
+        <description>Steam Library v0.4.01 moves the native Flipped radiobutton out of the cramped header and places it directly above the artwork candidate rail. The full label and native checked/unchecked marker remain readable, seven candidates still fit through a tighter vertical pitch, non-fanart pickers slide the list back to the original top position, and live preview plus physical flipped-file apply behavior are preserved.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
