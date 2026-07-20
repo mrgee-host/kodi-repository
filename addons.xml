@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.02" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.03" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.pil" version="1.1.7"/>
@@ -14,7 +14,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library v0.4.02 fixes the fanart picker startup overlap by giving fanart and non-fanart artwork separate static XML layouts. The heading now uses a 40 px safe inset, Flipped permanently occupies its own row above the fanart list, the candidate list and scrollbar permanently begin at y=64, and no conditional slide remains. Seven fanart candidates still fit, while poster, thumb, and clearlogo retain the full-height rail.</description>
+        <description>Steam Library v0.4.03 adds a clear AF3 focus pill behind the native Flipped radiobutton. The radio icon continues to show checked or unchecked state, while the orange pill appears only when remote focus is on Flipped. The static fanart rail, seven-item layout, live mirror preview, and flipped-file apply behavior are unchanged.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
