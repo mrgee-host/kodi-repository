@@ -490,7 +490,7 @@ v0.29.1 custom beta
     <news>v0.1.14 - Fine-tune title positioning to match the Photoshop references: move title block 60 px left, shift it downward, tighten multi-line spacing, and keep the age text close to the certificate number.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.14" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.17" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.1"/>
@@ -500,7 +500,7 @@ v0.29.1 custom beta
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.14 displays long patch results and AF3 integration status in a scrollable text viewer while retaining strict Arctic Mirage clearlogo guards and random fanart support.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.17 renders Letterboxd only from the strict LRS DisplaySlot bridge as a whole 1-100 number, with no 0-5 conversion or direct database fallback.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -510,7 +510,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.50"
+       version="1.5.54"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -531,8 +531,8 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.5.50 opens Resolver cache and CropV2 as single three-button confirmation dialogs: Rebuild, Fill missing, and Cancel. Reports remain scrollable and clearlogo input remains Kodi texture-cache-only with canonical URL hashes unchanged.</description>
-        <description lang="id_ID">Library Ratings Scraper v1.5.50 membuka Resolver cache dan CropV2 sebagai satu dialog konfirmasi tiga tombol: Rebuild, Fill missing, dan Cancel. Report tetap dapat digulir dan clearlogo tetap hanya dibaca dari cache tekstur Kodi dengan hash URL kanonik tidak berubah.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.5.54 reads MDBList Letterboxd score first; when score is absent, it stores value multiplied by 20 on the same 1-100 scale. Existing database rows are not migrated.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.5.54 membaca score Letterboxd dari MDBList terlebih dahulu; jika score tidak ada, value dikali 20 lalu disimpan pada skala 1-100. Data lama di database tidak dimigrasikan.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
