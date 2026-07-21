@@ -510,7 +510,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.55"
+       version="1.5.57"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -531,8 +531,8 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.5.54 reads MDBList Letterboxd score first; when score is absent, it stores value multiplied by 20 on the same 1-100 scale. Existing database rows are not migrated.</description>
-        <description lang="id_ID">Library Ratings Scraper v1.5.54 membaca score Letterboxd dari MDBList terlebih dahulu; jika score tidak ada, value dikali 20 lalu disimpan pada skala 1-100. Data lama di database tidak dimigrasikan.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.5.57 stores N/A for every rating family after a definitive provider response with no value, while temporary failures remain blank for retry. Letterboxd uses score or value multiplied by 20.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.5.57 menyimpan N/A untuk semua keluarga rating setelah provider memberi hasil definitif tanpa nilai, sedangkan kegagalan sementara tetap kosong agar dapat dicoba lagi. Letterboxd memakai score atau value dikali 20.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
