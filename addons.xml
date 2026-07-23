@@ -540,4 +540,59 @@ v0.29.1 custom beta
         </assets>
     </extension>
 </addon>
+<addon id="service.episode.to.strm" name="Episode to Empty STRM" version="1.0.0" provider-name="Yu custom">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="xbmc.json" version="6.20.0" />
+    </requires>
+    <extension point="xbmc.service" start="login" library="service.py" />
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Replace a completed local episode with an empty STRM placeholder.</summary>
+        <summary lang="id_ID">Ganti episode lokal yang selesai ditonton dengan placeholder STRM kosong.</summary>
+        <description lang="en_GB">After a library episode ends normally, this service removes the source video, creates an empty STRM with the same basename, rebuilds the Kodi episode, restores watched state and artwork, and preserves Library Artwork Curator and Library Ratings Scraper cache identity.</description>
+        <description lang="id_ID">Setelah episode library selesai diputar normal, service menghapus file video, membuat STRM kosong dengan nama dasar yang sama, memasukkan ulang episode ke Kodi, memulihkan status tontonan dan artwork, serta menjaga identitas cache Library Artwork Curator dan Library Ratings Scraper.</description>
+        <disclaimer lang="en_GB">The source video is permanently deleted. Only normal playback completion is processed. Virtual streams and existing STRM files are ignored.</disclaimer>
+        <disclaimer lang="id_ID">File video sumber dihapus permanen. Hanya playback yang selesai normal yang diproses. Stream virtual dan file STRM yang sudah ada akan diabaikan.</disclaimer>
+        <news>v1.0.0
+- Automatic conversion only after onPlayBackEnded.
+- No hardcoded source video extension.
+- No Kodi Clean Library operation.
+- Shared auto-scan lock prevents LAC/LRS racing before cache migration.
+- Preserves watched state, last played, resume, date added, unique IDs, and episode artwork.
+- Migrates LAC episode cache and LRS rating rows when Kodi assigns a different episode DBID.
+- Uses cached data only. It does not start a full LAC or LRS internet scrape.
+- Writes a recoverable pending job before destructive operations.</news>
+        <assets>
+            <icon>resources/media/icon.png</icon>
+        </assets>
+    </extension>
+</addon>
+<addon id="service.subtitles.subsource.autosync"
+       name="SubSource AutoSync"
+       version="0.1.20"
+       provider-name="OpenAI">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+  <extension point="xbmc.subtitle.module" library="main.py"/>
+  <extension point="xbmc.service" library="service.py" start="login"/>
+  <extension point="xbmc.python.script" library="diagnostics.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Fast automatic and manual Indonesian subtitles from SubSource.</summary>
+    <summary lang="id_ID">Subtitle Indonesia otomatis dan manual dari SubSource.</summary>
+    <description lang="en_GB">Uses embedded or matching local Indonesian text directly. Every text subtitle path, including automatic, manual, local, embedded, RAW and synchronized profiles, passes through an always-on ad, watermark and fan-credit cleaner while timing, closed captions and styling tags remain intact. When the MKV or its folder contains a usable matching English text subtitle, Indonesian candidates are synchronized to that exact-video reference. Without embedded text, the add-on downloads top Indonesian subtitles with original timing and F3/R1 cycles them. Online English is never used automatically; it is available only through manual search and can be confirmed with hold R1 before synchronizing Indonesian candidates. Image subtitles such as PGS/SUP, VobSub, and DVB are ignored. A visible Settings button exports a sanitized diagnostic ZIP.</description>
+    <description lang="id_ID">Memakai subtitle Indonesia teks embedded atau lokal yang cocok secara langsung. Semua jalur subtitle teks, termasuk otomatis, manual, lokal, embedded, RAW, dan hasil sinkronisasi, selalu melewati pembersih iklan, watermark, dan kredit fan-sub tanpa mengubah timing, closed caption, maupun tag tampilan. Jika MKV atau foldernya memiliki subtitle Inggris teks yang cocok, kandidat Indonesia disinkronkan ke referensi dari video tersebut. Tanpa referensi teks terpercaya, addon mengunduh kandidat Indonesia teratas dengan timing asli dan F3/R1 mengganti hasil RAW. Subtitle Inggris online tidak pernah dipakai otomatis; hanya tersedia melalui pencarian manual. PGS/SUP, VobSub, dan DVB diabaikan. Tombol di Settings mengekspor ZIP diagnosis yang sudah disanitasi.</description>
+    <platform>all</platform>
+    <reuselanguageinvoker>true</reuselanguageinvoker>
+    <license>GPL-3.0-only</license>
+    <assets>
+      <icon>resources/icon.png</icon>
+    </assets>
+  </extension>
+</addon>
 </addons>
