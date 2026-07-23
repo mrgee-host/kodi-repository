@@ -522,7 +522,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.63"
+       version="1.5.64"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -543,8 +543,8 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.5.62 uses IMDb's official title.ratings dataset for IMDb ratings, performs one batch lookup before online providers, keeps movie/show MDBList with OMDb/TMDb item-not-found fallbacks, and never stores vote counts.</description>
-        <description lang="id_ID">Library Ratings Scraper v1.5.62 memakai dataset resmi title.ratings IMDb untuk rating IMDb, melakukan pencocokan batch sebelum provider online, mempertahankan MDBList movie/series beserta fallback OMDb/TMDb saat item tidak ditemukan, dan tidak menyimpan jumlah vote.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.5.64 uses IMDb's official title.ratings dataset for IMDb ratings, performs one batch lookup before online providers, keeps movie/show MDBList with OMDb/TMDb item-not-found fallbacks, and never stores vote counts.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.5.64 memakai dataset resmi title.ratings IMDb untuk rating IMDb, melakukan pencocokan batch sebelum provider online, mempertahankan MDBList movie/series beserta fallback OMDb/TMDb saat item tidak ditemukan, dan tidak menyimpan jumlah vote.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
