@@ -77,7 +77,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.47" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.48" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -109,9 +109,16 @@
     <extension point="xbmc.service" start="login" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
-        <description lang="en">Library Artwork Curator. v0.32.47 automatically forces movies in configured Indonesian and Thailand folders into their dedicated movie collections.</description>
+        <description lang="en">Library Artwork Curator. v0.32.48 adds a DBID identity guard and repairs cross-series episode thumbnails copied from stale cache rows, while retaining Indonesian and Thailand collection sync.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.47 Thailand movie collection sync
+        <news>v0.32.48 DBID identity guard and episode thumbnail repair
+- Validate cached unique IDs, series identity, season/episode coordinates, file path, and title before any DB-first artwork apply.
+- Delete stale cache rows when Kodi reuses a numeric DBID for a different library item.
+- Detect newer cross-series TMDb/TheTVDB/fanart.tv thumb/landscape collisions and reopen those artwork types for provider scraping.
+- Queue DBID-reused items after library scan even when their numeric IDs did not change.
+- Existing corrupted episode rows are repaired by running Scrape missing artwork once after installation.
+
+v0.32.47 Thailand movie collection sync
 - Automatically assign every movie whose path matches the Thailand folder markers to Thailand Movies Collection.
 - Uses the same one-set replacement rule as the Indonesian collection sync.
 - Runs after service startup, every completed Kodi video-library scan, and settings changes.
