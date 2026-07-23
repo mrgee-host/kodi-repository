@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.04" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.05" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.pil" version="1.1.7"/>
@@ -14,7 +14,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library v0.4.03 adds a clear AF3 focus pill behind the native Flipped radiobutton. The radio icon continues to show checked or unchecked state, while the orange pill appears only when remote focus is on Flipped. The static fanart rail, seven-item layout, live mirror preview, and flipped-file apply behavior are unchanged.</description>
+        <description>Steam Library v0.4.05 rebuilds the Flipped selector from Arctic Fuse 3 v3.2.14 native settings components. It uses the same Settings_Button radiobutton include, common/menu focus pill, ColorHighlight/ColorSelected variables, and check-on/check-off textures as AF3 addon settings. Up on the first candidate is also intercepted in Python so focus always reaches the selector. The fanart flip preview and applied mirrored file behavior are unchanged.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
