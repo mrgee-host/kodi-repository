@@ -77,7 +77,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.48" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.49" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -109,9 +109,14 @@
     <extension point="xbmc.service" start="login" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
-        <description lang="en">Library Artwork Curator. v0.32.48 adds a DBID identity guard and repairs cross-series episode thumbnails copied from stale cache rows, while retaining Indonesian and Thailand collection sync.</description>
+        <description lang="en">Library Artwork Curator. v0.32.49 also repairs repeated same-series cross-season episode artwork collisions, while retaining the DBID identity guard and collection sync.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.48 DBID identity guard and episode thumbnail repair
+        <news>v0.32.49 same-series cross-season episode artwork repair
+- Scrape missing artwork now detects repeated newer-season episode URLs copied from an older season of the same show.
+- The same-show detector requires at least two distinct episode-pair collisions across seasons to avoid deleting a single legitimately reused still.
+- TWD S07 rows copied from TWD S01 are reopened for provider scraping, in addition to the existing Korra/TWD cross-series repair.
+
+v0.32.48 DBID identity guard and episode thumbnail repair
 - Validate cached unique IDs, series identity, season/episode coordinates, file path, and title before any DB-first artwork apply.
 - Delete stale cache rows when Kodi reuses a numeric DBID for a different library item.
 - Detect newer cross-series TMDb/TheTVDB/fanart.tv thumb/landscape collisions and reopen those artwork types for provider scraping.
@@ -517,7 +522,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.62"
+       version="1.5.63"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
