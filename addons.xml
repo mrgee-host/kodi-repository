@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.06" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.07" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.pil" version="1.1.7"/>
@@ -22,7 +22,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.25" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.26" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -30,10 +30,11 @@
     <extension point="xbmc.python.pluginsource" library="addon.py">
         <provides>video</provides>
     </extension>
+    <extension point="xbmc.service" library="service.py" start="login"/>
 
     <extension point="xbmc.addon.metadata">
         <summary>MediaHub widget/list data provider. KPM owns visual integration.</summary>
-        <description>MediaHub Widget v0.1.24 keeps one screensaver slide per item while randomly choosing one cached main or extra fanart for each launch. Stable mediahub_item_key guards remain unchanged.</description>
+        <description>MediaHub Widget v0.1.26 keeps one screensaver slide per item while randomly choosing one cached main or extra fanart for each launch. Stable mediahub_item_key guards remain unchanged.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -77,7 +78,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.53" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.54" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -480,7 +481,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.kodi.cinema.preroll"
        name="Cinema Pre-roll Indonesia"
-       version="0.1.15"
+       version="0.1.16"
        provider-name="Yu Home Cinema">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
@@ -514,7 +515,7 @@ v0.29.1 custom beta
     <news>v0.1.14 - Fine-tune title positioning to match the Photoshop references: move title block 60 px left, shift it downward, tighten multi-line spacing, and keep the age text close to the certificate number.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.20" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.21" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.1"/>
@@ -534,7 +535,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.67"
+       version="1.5.68"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -596,7 +597,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="service.subtitles.subsource.autosync"
        name="SubSource AutoSync"
-       version="0.1.23"
+       version="0.1.24"
        provider-name="OpenAI">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
