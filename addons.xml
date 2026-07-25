@@ -77,7 +77,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.52" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.53" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -109,9 +109,16 @@
     <extension point="xbmc.service" start="login" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
-        <description lang="en">Library Artwork Curator. v0.32.51 also repairs repeated same-series cross-season episode artwork collisions, while retaining the DBID identity guard and collection sync.</description>
+        <description lang="en">Library Artwork Curator. v0.32.53 hardens diagnostics privacy and unifies runtime folders while retaining DBID identity protection, episode artwork repair, and collection sync.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.51 preflight progress and season identity safety
+        <news>v0.32.53 diagnostics privacy and runtime-family cleanup
+- Redact Kodi webserver basic-auth credentials, API secrets, authorization headers, and TPDb email from text diagnostics.
+- Store runtime traces in runtime/logs and human reports in runtime/reports; migrate and compact legacy mixed files automatically.
+- Prevent duplicate ZIP entries and duplicate menu/service runtime log rows.
+- Publish and validate the new ZIP before deleting older exports; fix legacy ZIP cleanup counting.
+- Add addon_version to the diagnostics manifest and export redacted settings as summary/settings.xml.
+
+v0.32.51 preflight progress and season identity safety
 - Fill Missing shows progress immediately while reading Kodi and checking the artwork DB.
 - Stop current process now cancels the preflight stage.
 - Seasons without Kodi unique IDs no longer lose valid cached artwork on every run.
