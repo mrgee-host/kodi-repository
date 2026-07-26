@@ -78,7 +78,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.33.3" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.33.4" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -110,9 +110,16 @@
     <extension point="xbmc.service" start="login" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
-        <description lang="en">Library Artwork Curator v0.33.3 creates the current artwork schema directly, rejects unsupported schemas, and contains no title-specific repair or historical collision migration. Generic identity validation, active DBID handoff, current provider fallback, local-video thumbnail generation, diagnostics, and atomic writes remain active.</description>
+        <description lang="en">Library Artwork Curator v0.33.4 creates the current artwork schema directly, rejects unsupported schemas, and contains no title-specific repair or historical collision migration. Generic identity validation, active DBID handoff, current provider fallback, local-video thumbnail generation, diagnostics, and atomic writes remain active.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.33.3 - Kodi 22 settings-label hotfix
+        <news>v0.33.4 - Active DBID handoff recovery
+- Captures a late snapshot when Kodi starts its video scan before the LAC service.
+- Uses only Kodi OnUpdate added=true DBIDs when ScanStarted was missed; generic cache misses remain ignored.
+- Defers OnRemove cache deletion during scan/clean handoff windows.
+- Performs one-to-one Clean Library handoff salvage before deleting stale artwork rows.
+- Keeps fresh-schema-only policy, provider behavior, generated thumbnails, and atomic writes unchanged.
+
+v0.33.3 - Kodi 22 settings-label hotfix
 - Replaces unsupported literal category and setting labels with localized numeric string IDs.
 - Adds current resource.language.en_gb and resource.language.id_id catalogs.
 - Restores all category and setting names in Kodi 22 / Arctic Fuse 3.
@@ -195,7 +202,7 @@ v0.33.1 - Clean fresh-install baseline
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.6.1"
+       version="1.6.2"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -216,8 +223,8 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.6.1 uses IMDb's official title.ratings dataset for IMDb ratings, performs one batch lookup before online providers, keeps movie/show MDBList with OMDb/TMDb item-not-found fallbacks, and never stores vote counts.</description>
-        <description lang="id_ID">Library Ratings Scraper v1.6.1 memakai dataset resmi title.ratings IMDb untuk rating IMDb, melakukan pencocokan batch sebelum provider online, mempertahankan MDBList movie/series beserta fallback OMDb/TMDb saat item tidak ditemukan, dan tidak menyimpan jumlah vote.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.6.2 uses IMDb's official title.ratings dataset for IMDb ratings, performs one batch lookup before online providers, keeps movie/show MDBList with OMDb/TMDb item-not-found fallbacks, and never stores vote counts.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.6.2 memakai dataset resmi title.ratings IMDb untuk rating IMDb, melakukan pencocokan batch sebelum provider online, mempertahankan MDBList movie/series beserta fallback OMDb/TMDb saat item tidak ditemukan, dan tidak menyimpan jumlah vote.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
