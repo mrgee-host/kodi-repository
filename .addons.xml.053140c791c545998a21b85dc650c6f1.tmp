@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addons>
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.11" provider-name="OpenAI">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.pil" version="1.1.7"/>
+    </requires>
+
+    <extension point="xbmc.python.pluginsource" library="addon.py">
+        <provides>executable</provides>
+    </extension>
+
+    <extension point="xbmc.service" library="service.py" start="startup" />
+
+    <extension point="xbmc.addon.metadata">
+        <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
+        <description>Steam Library v0.4.10 creates only the current game-library schema on an empty database and rejects unsupported schemas instead of rewriting them. Steam provider fallbacks, artwork selection, collection syncing, diagnostics, and KPM-owned AF3 integration remain active.</description>
+        <platform>windows</platform>
+        <license>MIT</license>
+        <assets>
+            <icon>resources/media/icon.png</icon>
+        </assets>
+    </extension>
+</addon>
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.29" provider-name="OpenAI">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+
+    <extension point="xbmc.python.pluginsource" library="addon.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.service" library="service.py" start="login"/>
+
+    <extension point="xbmc.addon.metadata">
+        <summary>MediaHub widget/list data provider. KPM owns visual integration.</summary>
+        <description>MediaHub Widget v0.1.29 keeps one screensaver slide per item while randomly choosing one cached main or extra fanart for each launch. Stable mediahub_item_key guards remain unchanged.</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <assets>
+            <icon>resources/media/icon.png</icon>
+            <fanart>resources/media/fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="repository.mrgee.kodi" name="MrGee Kodi Repository" version="1.0.3" provider-name="Miftahul Ginda / MrGee">
+    <extension point="xbmc.addon.repository" name="MrGee Kodi Repository">
+        <dir minversion="20.0.0">
+            <info compressed="false">https://mrgee-host.github.io/kodi-repository/addons.xml</info>
+            <checksum>https://mrgee-host.github.io/kodi-repository/addons.xml.md5</checksum>
+            <datadir zip="true">https://mrgee-host.github.io/kodi-repository/</datadir>
+            <hashes>false</hashes>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">MrGee Kodi Repository</summary>
+        <description lang="en_GB">Private Kodi repository for MrGee custom addons.</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="resource.images.kpm.studiologos" name="KPM Studio &amp; Game Logos" version="1.0.2" provider-name="MrGee">
+    <extension point="kodi.resource.images" compile="false" type="studios" />
+    <requires>
+        <import addon="kodi.resource" version="1.0.0"/>
+    </requires>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">XBT studio, developer and publisher logo pack for Kodi Patch Manager</summary>
+        <description lang="en_GB">Contains 505 deduplicated, AF3-sized 161Ã—109 centered logos in one XBTF2 texture archive: 374 movie/series studios and 131 game developers/publishers. Kodi Patch Manager supplies provider-aware resolution and aliases.</description>
+        <platform>all</platform>
+        <license>Personal custom resource pack</license>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon>
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.33.4" provider-name="rmrector + Library Artwork Curator custom fork">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="xbmc.json" version="6.20.0" />
+        <import addon="script.module.simplejson" version="3.3.0" />
+        <import addon="script.module.requests" version="2.9.1" />
+        <import addon="script.common.plugin.cache" version="2.5.8" />
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="context_menu.py">
+                <label>Library Artwork Curator</label>
+                <visible>!Skin.HasSetting(disablecontext:script.artwork.curator) + [String.IsEqual(ListItem.DBTYPE,movie) | String.IsEqual(ListItem.DBTYPE,set) | String.IsEqual(ListItem.DBTYPE,movieset) | String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season) | String.IsEqual(ListItem.DBTYPE,episode) | String.IsEmpty(ListItem.DBTYPE)] + !String.IsEqual(ListItem.Property(MediaType),game) + !String.IsEqual(ListItem.Property(DBTYPE),game) + !String.IsEqual(ListItem.Property(lrs_game),true)</visible>
+            </item>
+        </menu>
+        <menu id="kodi.core.manage">
+            <item library="context_debug_remove.py">
+                <label>AC: remove artwork references</label>
+                <visible>Skin.HasSetting(enablecontext:script.artwork.curator.debug)</visible>
+            </item>
+            <item library="context_debug_logitem.py">
+                <label>AC: log item debug info</label>
+                <visible>Skin.HasSetting(enablecontext:script.artwork.curator.debug)</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.service" start="login" library="service.py" />
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
+        <description lang="en">Library Artwork Curator v0.33.4 creates the current artwork schema directly, rejects unsupported schemas, and contains no title-specific repair or historical collision migration. Generic identity validation, active DBID handoff, current provider fallback, local-video thumbnail generation, diagnostics, and atomic writes remain active.</description>
+        <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
+        <news>v0.33.4 - Active DBID handoff recovery
+- Captures a late snapshot when Kodi starts its video scan before the LAC service.
+- Uses only Kodi OnUpdate added=true DBIDs when ScanStarted was missed; generic cache misses remain ignored.
+- Defers OnRemove cache deletion during scan/clean handoff windows.
+- Performs one-to-one Clean Library handoff salvage before deleting stale artwork rows.
+- Keeps fresh-schema-only policy, provider behavior, generated thumbnails, and atomic writes unchanged.
+
+v0.33.3 - Kodi 22 settings-label hotfix
+- Replaces unsupported literal category and setting labels with localized numeric string IDs.
+- Adds current resource.language.en_gb and resource.language.id_id catalogs.
+- Restores all category and setting names in Kodi 22 / Arctic Fuse 3.
+- Keeps database, DBID handoff, DBID reuse validation, providers, and artwork behavior unchanged.
+
+v0.33.2 - Kodi 22 launch and settings hotfix
+- Removes a stale import of the deleted legacy maintenance module.
+- Declares empty string settings as allow-empty for Kodi 22.
+- Keeps the R7 fresh-schema baseline, active DBID handoff, DBID reuse validation, provider fallback, and atomic writes unchanged.
+
+v0.33.1 - Clean fresh-install baseline
+- Creates the final artwork database schema directly.
+- Removes historical schema migration, title-specific repair, collision-repair, and added-event fallback paths.
+- Startup auto-fill uses exact scan DBID delta only.
+- Keeps active DBID handoff so the same movie or episode can move from MKV to STRM without artwork scraping.
+- Keeps normal provider fallback, identity validation, generated local thumbnails, atomic writes, diagnostics, and 58-character family notifications.</news>
+        <source>https://github.com/rmrector/script.artwork.curator</source>
+        <website>https://rmrector.github.io/script.artwork.curator/</website>
+        <license>The MIT License</license>
+        <platform>all</platform>
+        <assets><icon>icon.png</icon></assets>
+    </extension>
+</addon>
+<addon id="script.kodi.cinema.preroll"
+       name="Cinema Pre-roll Indonesia"
+       version="0.1.19"
+       provider-name="Yu Home Cinema">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+
+  <extension point="xbmc.python.script" library="default.py">
+    <provides>executable</provides>
+  </extension>
+
+  <extension point="xbmc.service" library="service.py" start="login"/>
+
+  <extension point="kodi.context.item">
+    <menu id="kodi.core.main">
+      <item library="context.py">
+        <label>32000</label>
+        <visible>ListItem.IsPlayable | ListItem.DBType(movie) | Container.Content(movies)</visible>
+      </item>
+    </menu>
+  </extension>
+
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Play Dolby, an Indonesian age-rating bumper, then the movie.</summary>
+    <summary lang="id_ID">Putar Dolby, telop klasifikasi usia Indonesia, lalu film.</summary>
+    <description lang="en_GB">Creates a cinema sequence using one Dolby bumper and four age-rating videos. The selected movie title is shown as an XML overlay on the certificate frame.</description>
+    <description lang="id_ID">Membuat urutan bioskop: Dolby, telop SU/13+/17+/21+, lalu film. Judul film ditampilkan melalui overlay XML pada frame sertifikat.</description>
+    <platform>all</platform>
+    <license>GPL-3.0-only</license>
+    <assets>
+      <icon>icon.png</icon>
+    </assets>
+    <news>v0.1.19 - MrGee Kodi Family R7
+- Fresh-install runtime layout with no historical folder or keymap cleanup.
+- Cinema font definitions are installed into Arctic Fuse 3 by Kodi Patch Manager.
+- Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
+  </extension>
+</addon>
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.24" provider-name="MrGee">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="resource.images.kpm.studiologos" version="1.0.2"/>
+        <import addon="script.skinshortcuts" version="3.0.0" optional="true"/>
+    </requires>
+    <extension point="xbmc.python.script" library="default.py"/>
+    <extension point="xbmc.service" library="service.py" start="login"/>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
+        <description lang="en_GB">Kodi Patch Manager v0.2.24 applies only the current Arctic Fuse 3 patch definitions. It keeps idempotent status/apply/remove behavior, validates XML, writes atomically, installs Cinema Pre-roll fonts, and does not run historical patch repair paths.</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon>
+<addon id="script.library.ratings.scraper"
+       name="Library Ratings Scraper"
+       version="1.6.2"
+       provider-name="OpenAI">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.pil" version="1.1.7" />
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.service" library="service.py" />
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="context.py">
+                <label>Refresh ratings for this item</label>
+                <visible>[String.IsEqual(ListItem.DBTYPE,movie) | String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,episode)] + !String.IsEqual(ListItem.Property(lrs_game),true) + !String.IsEqual(ListItem.Property(MediaType),game) + !String.IsEqual(ListItem.Property(DBTYPE),game)</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
+        <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
+        <description lang="en_GB">Library Ratings Scraper v1.6.2 uses IMDb's official title.ratings dataset for IMDb ratings, performs one batch lookup before online providers, keeps movie/show MDBList with OMDb/TMDb item-not-found fallbacks, and never stores vote counts.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.6.2 memakai dataset resmi title.ratings IMDb untuk rating IMDb, melakukan pencocokan batch sebelum provider online, mempertahankan MDBList movie/series beserta fallback OMDb/TMDb saat item tidak ditemukan, dan tidak menyimpan jumlah vote.</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon>
+<addon id="service.episode.to.strm" name="Episode to Empty STRM" version="1.0.0" provider-name="Yu custom">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="xbmc.json" version="6.20.0" />
+    </requires>
+    <extension point="xbmc.service" start="login" library="service.py" />
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Replace a completed local episode with an empty STRM placeholder.</summary>
+        <summary lang="id_ID">Ganti episode lokal yang selesai ditonton dengan placeholder STRM kosong.</summary>
+        <description lang="en_GB">After a library episode ends normally, this service removes the source video, creates an empty STRM with the same basename, rebuilds the Kodi episode, restores watched state and artwork, and preserves Library Artwork Curator and Library Ratings Scraper cache identity.</description>
+        <description lang="id_ID">Setelah episode library selesai diputar normal, service menghapus file video, membuat STRM kosong dengan nama dasar yang sama, memasukkan ulang episode ke Kodi, memulihkan status tontonan dan artwork, serta menjaga identitas cache Library Artwork Curator dan Library Ratings Scraper.</description>
+        <disclaimer lang="en_GB">The source video is permanently deleted. Only normal playback completion is processed. Virtual streams and existing STRM files are ignored.</disclaimer>
+        <disclaimer lang="id_ID">File video sumber dihapus permanen. Hanya playback yang selesai normal yang diproses. Stream virtual dan file STRM yang sudah ada akan diabaikan.</disclaimer>
+        <news>v1.0.0
+- Automatic conversion only after onPlayBackEnded.
+- No hardcoded source video extension.
+- No Kodi Clean Library operation.
+- Shared auto-scan lock prevents LAC/LRS racing before cache migration.
+- Preserves watched state, last played, resume, date added, unique IDs, and episode artwork.
+- Migrates LAC episode cache and LRS rating rows when Kodi assigns a different episode DBID.
+- Uses cached data only. It does not start a full LAC or LRS internet scrape.
+- Writes a recoverable pending job before destructive operations.</news>
+        <assets>
+            <icon>resources/media/icon.png</icon>
+        </assets>
+    </extension>
+</addon>
+<addon id="service.subtitles.subsource.autosync"
+       name="SubSource AutoSync"
+       version="0.1.28"
+       provider-name="OpenAI">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+  <extension point="xbmc.subtitle.module" library="main.py"/>
+  <extension point="xbmc.service" library="service.py" start="login"/>
+  <extension point="xbmc.python.script" library="diagnostics.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Fast automatic and manual Indonesian subtitles from SubSource.</summary>
+    <summary lang="id_ID">Subtitle Indonesia otomatis dan manual dari SubSource.</summary>
+    <description lang="en_GB">Uses embedded or matching local Indonesian text directly. Every text subtitle path, including automatic, manual, local, embedded, RAW and synchronized profiles, passes through an always-on ad, watermark and fan-credit cleaner while timing, closed captions and styling tags remain intact. When the MKV or its folder contains a usable matching English text subtitle, Indonesian candidates are synchronized to that exact-video reference. Without embedded text, the add-on downloads top Indonesian subtitles with original timing and F3 cycles them. Online English is never used automatically; it is available only through manual search and can be confirmed with Shift+F3 before synchronizing Indonesian candidates. Image subtitles such as PGS/SUP, VobSub, and DVB are ignored. A visible Settings button exports a sanitized diagnostic ZIP.</description>
+    <description lang="id_ID">Memakai subtitle Indonesia teks embedded atau lokal yang cocok secara langsung. Semua jalur subtitle teks, termasuk otomatis, manual, lokal, embedded, RAW, dan hasil sinkronisasi, selalu melewati pembersih iklan, watermark, dan kredit fan-sub tanpa mengubah timing, closed caption, maupun tag tampilan. Jika MKV atau foldernya memiliki subtitle Inggris teks yang cocok, kandidat Indonesia disinkronkan ke referensi dari video tersebut. Tanpa referensi teks terpercaya, addon mengunduh kandidat Indonesia teratas dengan timing asli dan F3 mengganti hasil RAW. Subtitle Inggris online tidak pernah dipakai otomatis; hanya tersedia melalui pencarian manual. PGS/SUP, VobSub, dan DVB diabaikan. Tombol di Settings mengekspor ZIP diagnostics yang sudah disanitasi.</description>
+    <platform>all</platform>
+    <reuselanguageinvoker>true</reuselanguageinvoker>
+    <license>GPL-3.0-only</license>
+    <assets>
+      <icon>resources/icon.png</icon>
+    </assets>
+  </extension>
+</addon>
+</addons>

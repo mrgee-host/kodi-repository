@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.10" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.11" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.pil" version="1.1.7"/>
@@ -182,7 +182,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.24" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.25" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.2"/>
@@ -202,7 +202,7 @@ v0.33.1 - Clean fresh-install baseline
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.6.2"
+       version="1.6.3"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -264,7 +264,7 @@ v0.33.1 - Clean fresh-install baseline
 </addon>
 <addon id="service.subtitles.subsource.autosync"
        name="SubSource AutoSync"
-       version="0.1.28"
+       version="0.1.29"
        provider-name="OpenAI">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
