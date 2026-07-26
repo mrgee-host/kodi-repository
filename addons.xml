@@ -78,7 +78,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.33.2" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.33.3" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -110,9 +110,15 @@
     <extension point="xbmc.service" start="login" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
-        <description lang="en">Library Artwork Curator v0.33.2 creates the current artwork schema directly, rejects unsupported schemas, and contains no title-specific repair or historical collision migration. Generic identity validation, active DBID handoff, current provider fallback, local-video thumbnail generation, diagnostics, and atomic writes remain active.</description>
+        <description lang="en">Library Artwork Curator v0.33.3 creates the current artwork schema directly, rejects unsupported schemas, and contains no title-specific repair or historical collision migration. Generic identity validation, active DBID handoff, current provider fallback, local-video thumbnail generation, diagnostics, and atomic writes remain active.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.33.2 - Kodi 22 launch and settings hotfix
+        <news>v0.33.3 - Kodi 22 settings-label hotfix
+- Replaces unsupported literal category and setting labels with localized numeric string IDs.
+- Adds current resource.language.en_gb and resource.language.id_id catalogs.
+- Restores all category and setting names in Kodi 22 / Arctic Fuse 3.
+- Keeps database, DBID handoff, DBID reuse validation, providers, and artwork behavior unchanged.
+
+v0.33.2 - Kodi 22 launch and settings hotfix
 - Removes a stale import of the deleted legacy maintenance module.
 - Declares empty string settings as allow-empty for Kodi 22.
 - Keeps the R7 fresh-schema baseline, active DBID handoff, DBID reuse validation, provider fallback, and atomic writes unchanged.
