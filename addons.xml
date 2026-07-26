@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.08" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.10" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.pil" version="1.1.7"/>
@@ -14,7 +14,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library v0.4.05 rebuilds the Flipped selector from Arctic Fuse 3 v3.2.14 native settings components. It uses the same Settings_Button radiobutton include, common/menu focus pill, ColorHighlight/ColorSelected variables, and check-on/check-off textures as AF3 addon settings. Up on the first candidate is also intercepted in Python so focus always reaches the selector. The fanart flip preview and applied mirrored file behavior are unchanged.</description>
+        <description>Steam Library v0.4.10 creates only the current game-library schema on an empty database and rejects unsupported schemas instead of rewriting them. Steam provider fallbacks, artwork selection, collection syncing, diagnostics, and KPM-owned AF3 integration remain active.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
@@ -22,7 +22,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.27" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.29" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -34,7 +34,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>MediaHub widget/list data provider. KPM owns visual integration.</summary>
-        <description>MediaHub Widget v0.1.27 keeps one screensaver slide per item while randomly choosing one cached main or extra fanart for each launch. Stable mediahub_item_key guards remain unchanged.</description>
+        <description>MediaHub Widget v0.1.29 keeps one screensaver slide per item while randomly choosing one cached main or extra fanart for each launch. Stable mediahub_item_key guards remain unchanged.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -43,7 +43,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="repository.mrgee.kodi" name="MrGee Kodi Repository" version="1.0.2" provider-name="Miftahul Ginda / MrGee">
+<addon id="repository.mrgee.kodi" name="MrGee Kodi Repository" version="1.0.3" provider-name="Miftahul Ginda / MrGee">
     <extension point="xbmc.addon.repository" name="MrGee Kodi Repository">
         <dir minversion="20.0.0">
             <info compressed="false">https://mrgee-host.github.io/kodi-repository/addons.xml</info>
@@ -63,7 +63,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="resource.images.kpm.studiologos" name="KPM Studio &amp; Game Logos" version="1.0.1" provider-name="MrGee">
+<addon id="resource.images.kpm.studiologos" name="KPM Studio &amp; Game Logos" version="1.0.2" provider-name="MrGee">
     <extension point="kodi.resource.images" compile="false" type="studios" />
     <requires>
         <import addon="kodi.resource" version="1.0.0"/>
@@ -78,7 +78,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.32.55" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.33.1" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -110,368 +110,14 @@
     <extension point="xbmc.service" start="login" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
-        <description lang="en">Library Artwork Curator. v0.32.53 hardens diagnostics privacy and unifies runtime folders while retaining DBID identity protection, episode artwork repair, and collection sync.</description>
+        <description lang="en">Library Artwork Curator v0.33.1 creates the current artwork schema directly, rejects unsupported schemas, and contains no title-specific repair or historical collision migration. Generic identity validation, active DBID handoff, current provider fallback, local-video thumbnail generation, diagnostics, and atomic writes remain active.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.32.53 diagnostics privacy and runtime-family cleanup
-- Redact Kodi webserver basic-auth credentials, API secrets, authorization headers, and TPDb email from text diagnostics.
-- Store runtime traces in runtime/logs and human reports in runtime/reports; migrate and compact legacy mixed files automatically.
-- Prevent duplicate ZIP entries and duplicate menu/service runtime log rows.
-- Publish and validate the new ZIP before deleting older exports; fix legacy ZIP cleanup counting.
-- Add addon_version to the diagnostics manifest and export redacted settings as summary/settings.xml.
-
-v0.32.51 preflight progress and season identity safety
-- Fill Missing shows progress immediately while reading Kodi and checking the artwork DB.
-- Stop current process now cancels the preflight stage.
-- Seasons without Kodi unique IDs no longer lose valid cached artwork on every run.
-
-v0.32.49 same-series cross-season episode artwork repair
-- Scrape missing artwork now detects repeated newer-season episode URLs copied from an older season of the same show.
-- The same-show detector requires at least two distinct episode-pair collisions across seasons to avoid deleting a single legitimately reused still.
-- TWD S07 rows copied from TWD S01 are reopened for provider scraping, in addition to the existing Korra/TWD cross-series repair.
-
-v0.32.48 DBID identity guard and episode thumbnail repair
-- Validate cached unique IDs, series identity, season/episode coordinates, file path, and title before any DB-first artwork apply.
-- Delete stale cache rows when Kodi reuses a numeric DBID for a different library item.
-- Detect newer cross-series TMDb/TheTVDB/fanart.tv thumb/landscape collisions and reopen those artwork types for provider scraping.
-- Queue DBID-reused items after library scan even when their numeric IDs did not change.
-- Existing corrupted episode rows are repaired by running Scrape missing artwork once after installation.
-
-v0.32.47 Thailand movie collection sync
-- Automatically assign every movie whose path matches the Thailand folder markers to Thailand Movies Collection.
-- Uses the same one-set replacement rule as the Indonesian collection sync.
-- Runs after service startup, every completed Kodi video-library scan, and settings changes.
-- Adds Maintenance tools -> Sync Thailand movie collection.
-- Adds Thailand collection state and sync report to diagnostics export.
-- Thailand detection affects collection assignment only; artwork language selection remains unchanged.
-
-v0.32.46 Indonesian movie collection sync
-- Automatically assign every movie whose path matches the Indonesian folder markers to Indonesian Movies Collection.
-- Replace any previous movie-set assignment, because Kodi movies have one active movie-set field.
-- Run once after service startup and after every completed Kodi video-library scan.
-- Add Maintenance tools -> Sync Indonesian movie collection.
-- Add human-readable collection state and sync report to diagnostics export.
-
-v0.32.39 no external TPDb add-on / unified LAC context
-- Removed the separate TPDb context add-on from the release package. TPDb is now only an internal Library Artwork Curator feature.
-- TPDb poster selection is exposed only from Library Artwork Curator context menu for movies and movie sets.
-- Main menu moved Indonesian movie refresh into Maintenance tools.
-- Maintenance tools removed TPDb picker/session clear and N/A reset entries.
-- Runtime logs/reports now use runtime/* folders while diagnostics ZIP stays in addon_data root and old ZIPs are removed.
-
-v0.32.37 shared auto-scan lock for LRS/LAC
-- LAC auto-scan now waits briefly for LRS and participates in the same .kodi-auto-scan.lock file.
-- Prevents LRS and LAC progress/final notifications from starting at the same time after Kodi library scan.
-- Releases LAC-owned stale locks on service startup and after auto-scan finish/cancel.
-
-v0.32.36 LRS-style auto scan missed-start fallback
-- Buffers VideoLibrary.OnUpdate added=true events and consumes them after OnScanFinished when OnScanStarted was missed.
-- Keeps snapshot diff when available, and adds a capped cache fallback to avoid false full-library runs.
-
-v0.32.35 LRS-style auto scan pipeline
-- Auto scan now follows Library Ratings Scraper's flow: scan-start snapshot, scan-finish pending job, service-loop consume, retry if Kodi DB is not ready, then direct processing.
-- Removes the auto path dependency on signal/status/quiet-delay before processing; manual context menu actions remain unchanged.
-- Adds duplicate callback guards for Kodi builds that emit both Monitor callbacks and generic notifications.
-
-v0.32.34 Auto scan quiet-delay deadlock fix
-- Fixes auto-fill stuck after quiet delay start by avoiding waitForAbort(0), which can block indefinitely on Kodi.
-
-v0.32.33 Auto scan gate fix
-- Fix auto-scan queue stuck in signalled state when Kodi leaves Library.IsScanningVideo true after OnScanFinished.
-- Skip false full-library auto queue when service receives OnScanFinished without a matching start snapshot.
-
-v0.32.32 Auto scan processing reliability fix
-- Added a clear actor-cache-last-run-summary.txt report with found, cacheable, already cached, pending, cached, failed, skipped, and elapsed totals.
-- Cache actor thumbnails notifications now use real cache stats instead of always showing 0 errors.
-- Runtime performance CSV writes one header only instead of repeating headers for each run.
-- artwork-report.txt is now a latest-session report and no longer accumulates repeated version blocks across add-on updates.
-
-v0.32.29 Library Artwork Curator cache skip cleanup
-- Cache missing artwork skips non-cacheable Kodi generated video thumbs from .strm and folder paths so they do not keep reappearing as missing.
-- Cache progress remains based on actual cacheable artwork work.
-
-v0.32.27 Library Artwork Curator poster fallback and status cleanup
-- Auto selection now allows one global poster fallback when no poster meets the configured minimum poster height. Good posters still win first; fallback only prevents sparse/older items from ending with no poster.
-- Status/cache summaries now hide internal tvshow season.N.* mirror rows. Direct season artwork remains canonical; mirror rows are compatibility-only.
-- Generated video thumb behavior remains one global setting.
-
-v0.32.25 Library Artwork Curator Select artwork provider visibility hotfix
-- Select artwork compact filtering now keeps provider visibility: if a provider had candidates before filtering, the top candidates from that provider are kept so TMDb/fanart.tv/TheTVDB do not disappear from the manual picker just because HD or preferred-language filters are active.
-- Current-only artwork labels now include the inferred source when possible, for example Current art (TMDb), so existing Kodi artwork is not confused with a fresh provider candidate.
-- Select artwork still preserves current/manual artwork and still hides excess low-resolution/other-language candidates when enough better candidates exist.
-
-v0.32.24 Library Artwork Curator context refresh and Select artwork cleanup
-- Added context menu action: Refresh all artwork for this item. It refreshes only the focused library item using Refresh All rules while preserving manual/protected artwork.
-- Select artwork now uses a compact high-quality candidate list by default: when enough HD/preferred-language candidates exist, low-resolution and other-language candidates are hidden. Current artwork is always kept visible.
-- Added Select artwork settings to enable/disable compact filtering, low-resolution hiding, and other-language hiding.
-- Reordered Artwork type ON/OFF settings and Select artwork type order to: poster, fanart, clearlogo, clearart, discart, then the remaining types.
-
-v0.32.23 Library Artwork Curator lazy provider and season cache fix
-- Auto Fill Missing / Refresh All now uses lazy provider fallback: TMDb first, fanart.tv only for targets still missing strong candidates, and TheTVDB only as final TV fallback.
-- Select artwork still fetches provider candidates freely so manual selection is not limited by lazy auto-stop rules.
-- Dry run is now hidden behind Advanced > Show expert context diagnostics and caps candidate logging to keep diagnostics usable.
-- Context menu entry moved to the root context menu so it can appear on episodes even when Kodi/skin does not expose Manage.
-- Season artwork cache now mirrors tvshow season.N rows to direct season rows, keeping direct season as canonical and season.N as compatibility mirror.
-- Provider requests now fail faster to avoid long Kodi UI freezes when a fallback provider is slow.
-
-v0.32.21 Library Artwork Curator season fanart cleanup
-- Season fanart is intentionally ignored. Seasons now manage poster, banner, landscape, thumb, and keyart only.
-- Removed season fanart from direct season targets, dry-run target lists, Select artwork, and fanart.tv seasonal showbackground mapping.
-- Keeps 0.32.20 behavior for completeness: one low-resolution fallback for fanart/landscape/thumb when no preferred-resolution candidate exists, and direct season keyart support.
-
-v0.32.20 Library Artwork Curator season provider rebuild fix
-- Direct season items now fetch season artwork through the TV-show provider path and map season.N.* candidates back to direct season poster/banner/landscape/thumb/keyart.
-- Season dry-run should no longer show provider candidate counts {} only because the mediatype is season.
-- Direct season MediaItem now carries its season map so season.N.* provider results can be accepted and applied to the correct season DBID.
-- Dry-run logs now include current artwork positions: usable #N, provider #N but not usable, or not in provider candidates. This makes current DB/Kodi art order auditable against Refresh All selection order.
-
-v0.32.17 Library Artwork Curator Select artwork order fix
-- Select artwork no longer pins current/selected fanart entries to the top of the candidate dialog.
-- Current artwork URLs are now merged into the provider candidate list at their natural provider-sorted position and checked there.
-- Current-only URLs that no longer exist in provider candidates are kept at the bottom as fallback/current-only entries.
-- Removed the old title-based selected-state guard so provider candidates that match current fanart remain checked correctly.
-
-v0.32.15 Library Artwork Curator OnUpdate/busy hotfix
-- VideoLibrary.OnUpdate is no longer used as an auto-fill trigger because Kodi also emits it after playback/resume/watched/bookmark updates for existing items. Auto-fill now relies on ScanStarted/ScanFinished snapshot diff only.
-- The Home busy property only counts real processing as busy. A stale/signalled queue no longer shows Stop current process or blocks manual context actions.
-- Manual context actions clear a signalled-but-not-processing auto queue before opening Select artwork or Dry run. Real active processing shows a clear warning instead of silently returning.
-- Diagnostics export writes to a temporary ZIP, validates it, removes older diagnostics ZIPs, then renames the new ZIP so only the latest export remains in the profile. Profile file lists also hide diagnostics ZIPs.
-
-v0.32.14 Library Artwork Curator context menu/select fix
-- Context menu is back under Manage as one entry: Library Artwork Curator. Selecting it opens Add missing artwork, Select artwork, and Dry run artwork selection.
-- Select artwork now fetches full provider candidates using the same provider path as dry-run/Refresh all artwork instead of showing only current Kodi art.
-- Current art is still shown at the top of each art type and selected by default for multi-art, but provider candidates are also listed.
-- Hidden icon/default-video artwork is removed from the Select artwork type list.
-- Manual selections are written to artwork-cache.db with MANUAL status so Fill Missing will not replace them.
-
-v0.32.13 Library Artwork Curator context dry-run
-- Context menu actions moved to the root context menu and use looser visibility so they appear from library views, widgets, and hub items.
-- Context actions now try to resolve a missing DBID from the focused item using DBID first, then uniqueid/title/path fallbacks.
-- Added full dry-run artwork selection from the context menu. It fetches providers, selects exactly as Refresh all artwork would, but does not write Kodi art, DB rows, or texture cache.
-- Dry-run writes diagnostics/dry-run-artwork-selection.txt and diagnostics/dry-run-artwork-selection-last.txt with full candidate order, usable order, selected URLs, update plan, current artwork, languages, and provider counts.
-
-v0.32.12 Library Artwork Curator quiet auto/cache polish
-- Auto Fill waits for a quiet window after Kodi scan/LRS activity before starting, without queued toast spam.
-- Auto Fill progress is forced visible for new items and begins after a short cooldown.
-- Cache missing artwork now uses stage-only progress: CHECKING TEXTURE CACHE / CACHING ARTWORK / finished toast.
-- Removed visible Back items from submenus; keyboard Back/Esc returns to the parent menu.
-- Item progress lines no longer include the run phase/action, keeping notifications shorter.
-- Diagnostics export checkpoints artwork-cache.db before copying it and closes the menu after notification.
-- Updated icon.
-
-v0.32.8 Library Artwork Curator import hotfix
-- Fixed malformed XML declaration in addon.xml that made repository import reject the ZIP.
-- Keeps addon ID script.artwork.curator to preserve existing userdata and DB path.
-- ZIP filename uses the Library Artwork Curator label.
-
-v0.32.4 LRS-style final DB schema
-- Uses the new human-readable artwork-cache.db schema.
-- No DB fixing/migration/cleanup logic is bundled; install the provided final DB separately.
-- Artwork source is now written for new rows: TMDb, fanart.tv, TheTVDB, TPDb, Remote, Existing.
-- Episode titles in DB use Series Title - SxxExx.
-
-v0.32.3 LRS-style cleanup hotfix
-- Keeps the fixed DB as a separate user-installed file; this add-on update does not bundle a final artwork-cache.db.
-- Moves diagnostics/report/runtime files under the diagnostics folder and merges runtime logs.
-- Removes Process queued new items from the visible menu; queue remains internal for automatic new-library processing.
-- Stops creating processeditems.db for the main LRS-style flow by using artwork-cache.db for legacy processed/set cache.
-- Adds Fill missing confirmation dialog.
-- Notification format: n/total - TITLE - PHASE ARTWORK - percent.
-- Hides dynamic art-type lists from progress notifications.
-- Fixes Default (Kodi) language selection so Auto is never sent to TMDb.
-- Stops recording art.icon/default Kodi fallback into artwork-cache.db.
-
-v0.32.7 Library Artwork Curator DB-first UI fix
-- Renamed visible add-on to Library Artwork Curator.
-- Fixed add-on version bump so Kodi reads 0.32.7 correctly.
-- Removed duplicate percent text from progress messages. Kodi's progress UI supplies percent separately.
-- Hid internal SKIP phase from progress notification; Fill Missing keeps the same clean phase label.
-- Moved DB-first skip/apply before expensive provider-ID lookup, preventing TMDb collection search when DB rows are already final.
-- Run cancellation now records aborted instead of finished.
-- run_items schema no longer uses redundant phase column for fresh DBs; existing DBs remain compatible.
-
-v0.32.2 Library Artwork Curator LRS-style polish hotfix
-- New add-on icon.
-- Notification format now follows the LRS pattern: {processed}/{total} TITLE - PHASE.
-- Cache/prune/clean icon progress notifications include item titles when available.
-- Added confirmation before heavy Refresh all artwork.
-- Main menu label changed from Scrape missing artwork to Fill missing artwork.
-- Settings simplified and artwork type order changed: Poster, Fanart, Extrafanart, Landscape, Banner, Thumb, Clearlogo, Logo, Clearart, Keyart, Discart, Character art.
-- Fanart and Extrafanart are now separate global toggles.
-- Clean legacy icon skips Kodi default fallback icons.
-- Texture cache collection deduplicates URLs and prune includes movie sets while protecting skin/addon/resource URLs.
-- Runs now store elapsed_text in addition to elapsed_ms.
-
-v0.32.1 Library Artwork Curator LRS-style hotfix
-- Fix artwork-cache.db schema creation for artwork_status and queued_items.
-- Add DB self-repair for missing tables and non-fatal DB wrappers.
-- Make diagnostics export fail-safe even when the internal DB is broken.
-- Fix Export diagnostics ZIP menu handling so it is not wrapped as a processing run.
-- Keep queued item DB entries until processing succeeds.
-- Clean legacy icon artwork no longer respects media scope; it intentionally scans all video icon slots.
-- DB failures no longer stop scrape, clean icon, or diagnostics workflows.
-
-v0.32.0 Library Artwork Curator LRS-style menu/db beta
-- Simplify the main menu to LRS-style actions.
-- Remove Identify unmatched movie sets from the menu.
-- Process queued new items now refreshes enabled artwork for queued DBIDs instead of missing-only.
-- Add global artwork-type ON/OFF settings for poster, fanart, keyart, banner, clearlogo, logo, landscape, thumb, clearart, discart, and characterart.
-- Scrape missing artwork records N/A status in artwork-cache.db so unavailable slots are skipped next time until Refresh all artwork.
-- Move cache operations into Texture cache tools and restrict obsolete prune to known movie/TV/season/episode artwork.
-- Clean legacy icon artwork uses a cancellable foreground dialog and ignores library scope, so it can clean all video icon slots intentionally.
-
-v0.31.0 Library Artwork Curator LRS-style core beta
-- Add library scope settings: Include movies, movie sets, TV shows, seasons, and episodes.
-- Fix automatic new-library processing to use Kodi OnUpdate DBID queue instead of scanning the full library after every scan.
-- Normal scans now ignore the legacy Kodi icon art slot completely.
-- Add Clean legacy icon artwork maintenance menu for intentional one-time icon cleanup.
-- Add artwork-cache.db with run, item, artwork-slot, and maintenance history for easier diagnostics.
-- Move Indonesian movie detection to settings with editable folder markers.
-- Add actor thumbnail cache setting, default off; actor thumbnails are not mixed into normal artwork scans.
-
-v0.30.18 Library Artwork Curator runtime-debug beta
-- Add continuous runtime debug logs for every menu command, service signal, provider request, cache operation, item phase, selection decision, and performance timing.
-- Export diagnostics now includes runtime-debug.log, runtime-performance.csv, runtime-items.log, runtime-selection.log, runtime-provider.log, runtime-cache.log, runtime-errors.log, runtime-menu.log, and runtime-service.log.
-- Provider request logs redact API keys and sensitive parameters.
-- Logs rotate automatically when they grow too large.
-
-v0.30.17 Library Artwork Curator diagnostics beta
-- Add Export diagnostics to the main menu.
-- Export Kodi logs, filtered Library Artwork Curator log lines, redacted settings, latest reports, Indonesian refresh log, processed-items state, and Indonesian movie artwork snapshot.
-- Create a ZIP under userdata/addon_data/script.artwork.curator/ for easy upload and analysis.
-- Keep API keys redacted in the settings snapshot.
-
-v0.30.16 Library Artwork Curator movie-only-Indonesian beta
-- Limit Indonesian-language specialization to movies inside Indonesian Movies collection folders.
-- Remove Indonesian-specific handling for movie sets, TV shows, seasons, and episodes.
-- Add explicit details fallback chain: configured/Kodi language, then en-US, then raw details.
-- Keep provider/API index order for /images extras and fallback artwork.
-- Rename the manual command to Refresh Indonesian movie artwork.
-
-v0.30.15 Library Artwork Curator provider-index-order beta
-- Remove rating-based filtering and sorting from automatic artwork selection.
-- Keep ratings and likes only as diagnostic information in logs.
-- Select artwork deterministically by language priority, provider priority, provider/API index order, and minimum resolution.
-- Remove the visible minimum-rating slider because it no longer affects selection.
-- Keep localized Indonesian primary-poster handling and TPDb preservation.
-
-v0.30.14 Library Artwork Curator rating-tier-fix beta
-- Make all explicitly rated non-poster artwork rank above Not rated artwork.
-- Treat the minimum-rating setting as a preferred tier instead of a hard rejection threshold.
-- Sort non-poster artwork as: high-rated, low-rated, then unrated fallback.
-- Keep poster selection independent from vote ratings.
-
-v0.30.13 Library Artwork Curator unrated-fallback beta
-- Treat unrated TMDb, fanart.tv, and TheTVDB artwork as fallback-only candidates instead of assigning a neutral rating of 5.
-- Prefer rated non-poster artwork that meets the configured threshold.
-- Allow unrated candidates only when no viable rated candidate remains.
-- For multi-fanart slots, fill rated candidates first and use unrated rows only for remaining gaps.
-- Keep poster selection independent from vote ratings.
-
-v0.30.12 Library Artwork Curator poster-selection-fix beta
-- Stop applying minimum vote-rating filtering to posters.
-- Select posters by localized language priority, localized-primary promotion, TMDb gallery order, and minimum height.
-- Keep minimum rating filtering for non-poster artwork.
-- Fix cases where an unrated lower-priority poster incorrectly beat the localized TMDb primary poster.
-
-v0.30.11 Library Artwork Curator dialog-fix beta
-- Fix Refresh Indonesian artwork confirmation dialog labels.
-- Move the TPDb preservation note into the message body.
-- Use short Refresh and Cancel button labels.
-
-v0.30.10 Library Artwork Curator debug-log-fix beta
-- Fix Indonesian refresh debug logging on Kodi portable profiles.
-- Replace unsupported xbmcvfs append mode with translated local-path append writes.
-- Keep the full Indonesian poster diagnostic output unchanged.
-
-v0.30.9 Library Artwork Curator Indonesian-debug beta
-- Add a dedicated Indonesian refresh debug log viewer.
-- Log scan inclusion, TMDb IDs, current poster URLs, candidate posters, sizes, ratings, localized-primary flags, selected URL, update URL, and JSON-RPC verification.
-- Recognize Indonesian Movies (Collection) folder names in addition to [Collection] and plain variants.
-- Keep the localized-poster flow unchanged while gathering actionable diagnostics.
-
-v0.30.8 Library Artwork Curator beta
-- For Indonesian media, promote localized TMDb details.poster_path from language=id-ID as the main poster.
-- Reuse /images metadata for the promoted poster so minimum-height filtering still applies.
-- Keep /images gallery order for fallbacks and retain extra-artwork provider logic.
-- Preserve TPDb and other manual non-curator URLs during Indonesian refresh.
-
-v0.30.7 Library Artwork Curator beta
-- Follow TMDb poster-gallery order within the selected language and provider.
-- Stop forcing details-endpoint poster_path ahead of TMDb gallery candidates.
-- Use poster_path only as a fallback when TMDb /images has no poster rows.
-- Retain minimum poster-height filtering and Indonesian language priority.
-
-v0.30.6 Library Artwork Curator beta
-- Enable automatic processing for new library items once after upgrade.
-- Add clear log messages when automatic processing is queued.
-- Write and read the latest-run report through xbmcvfs for better Kodi profile compatibility.
-- Add a configurable minimum poster height and default it to 1000px.
-- Prevent TMDb details-endpoint primary posters from bypassing poster quality filtering.
-
-v0.30.5 Library Artwork Curator report-fix beta
-- Always write a dedicated latest-run summary when processing finishes.
-- Make final notification totals and visible report totals use the same completed-run data.
-- Show artwork counts grouped by type and scanned items grouped by media type.
-- Keep the rolling history report below the latest summary.
-
-v0.30.4 Library Artwork Curator beta
-- Add a new manual menu action: Refresh Indonesian artwork.
-- Re-check Indonesian movies, TV shows, episodes, and the Indonesian Movies Collection using language priority id -> en -> no language.
-- Preserve existing TPDb and other manually chosen non-curator remote URLs while refreshing curator-managed artwork.
-- Keep TV-show season artwork in sync during Indonesian refresh.
-
-v0.30.3 Library Artwork Curator stability beta
-- Prevent screensaver and idle shutdown while artwork scans, cache warming, and pruning are running.
-- Recover from malformed individual library items and provider-response errors without stopping the full scan.
-- Write recovered Python tracebacks clearly to kodi.log.
-- Add top-level service exception recovery.
-
-v0.30.2 Library Artwork Curator beta
-- Automatically migrate legacy profile data after the add-on ID rename.
-- Import old artwork reports, processed-item state, and missing settings such as API keys.
-- Rename the internal Home-window busy property to ArtworkCurator.Status.
-- Show a clear message when no report exists yet.
-
-v0.30.0 Library Artwork Curator beta
-- Renamed the visible add-on from Artwork Beef Video Remote to Library Artwork Curator.
-- Added a new Library Artwork Curator icon.
-- Simplified settings into General, Artwork, Providers, and Advanced.
-- Standard movie, set, TV-show, season, and episode artwork remains enabled automatically.
-- Internal add-on ID changed to script.artwork.curator. Uninstall the older custom build with the old ID to avoid duplicate services.
-
-v0.29.8 custom fast beta
-- Episode artwork is simplified to thumb and landscape only.
-- Legacy episode fanart and fanart# references are removed during the next normal episode scan.
-- Movie, set, TV-show, and season fanart behavior is unchanged.
-
-v0.29.7 custom fast beta
-- Bulk artwork scans now assign remote URLs without downloading texture-cache files by default.
-- Use Cache missing remote artwork separately after the scan when desired.
-- Batch texture-cache downloads now use a bounded four-worker pool.
-- Texture index is reused for the whole run and the artificial per-item delay is reduced.
-
-v0.29.6 custom beta
-- Compact progress actions are now English, title case, and exactly one word: Checking, Reading, Searching, Selecting, Adding, Downloading, Removing, Cleaning, Skipping, Missing, and Done.
-- Artwork type remains visible when relevant, for example: Library Artwork Curator: Downloading Â· fanart3.
-
-v0.29.4 custom beta
-- Detailed compact progress stages: checking slots, remote search, library updates, and texture-cache downloads.
-- Progress headings include artwork types such as poster, fanart3, clearlogo, and landscape.
-
-v0.29.3 custom beta
-- Restore compact persistent Kodi background progress notification.
-
-v0.29.2 custom beta
-- Manual artwork scans now use the original compact persistent Kodi background progress notification.
-- Cache-missing, prune-cache, and force-recache actions use the same visible background progress style.
-
-v0.29.1 custom beta
-- Removed music, music-video, artist, album, and song workflows.
-- Remote-only artwork references. No media-folder artwork downloads or extrafanart folders.
-- Added TMDb TV-show and season artwork provider.
-- Indonesian artwork priority and raster-only filter.
-- Added missing-cache, prune-cache, and force-recache menu actions.
-- Preserve manually selected extensionless remote artwork URLs, including TPDb-style asset URLs.</news>
+        <news>v0.33.1 - Clean fresh-install baseline
+- Creates the final artwork database schema directly.
+- Removes historical schema migration, title-specific repair, collision-repair, and added-event fallback paths.
+- Startup auto-fill uses exact scan DBID delta only.
+- Keeps active DBID handoff so the same movie or episode can move from MKV to STRM without artwork scraping.
+- Keeps normal provider fallback, identity validation, generated local thumbnails, atomic writes, diagnostics, and 58-character family notifications.</news>
         <source>https://github.com/rmrector/script.artwork.curator</source>
         <website>https://rmrector.github.io/script.artwork.curator/</website>
         <license>The MIT License</license>
@@ -481,7 +127,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.kodi.cinema.preroll"
        name="Cinema Pre-roll Indonesia"
-       version="0.1.17"
+       version="0.1.19"
        provider-name="Yu Home Cinema">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
@@ -512,20 +158,23 @@ v0.29.1 custom beta
     <assets>
       <icon>icon.png</icon>
     </assets>
-    <news>v0.1.14 - Fine-tune title positioning to match the Photoshop references: move title block 60 px left, shift it downward, tighten multi-line spacing, and keep the age text close to the certificate number.</news>
+    <news>v0.1.19 - MrGee Kodi Family R7
+- Fresh-install runtime layout with no historical folder or keymap cleanup.
+- Cinema font definitions are installed into Arctic Fuse 3 by Kodi Patch Manager.
+- Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.22" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.24" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
-        <import addon="resource.images.kpm.studiologos" version="1.0.1"/>
+        <import addon="resource.images.kpm.studiologos" version="1.0.2"/>
         <import addon="script.skinshortcuts" version="3.0.0" optional="true"/>
     </requires>
     <extension point="xbmc.python.script" library="default.py"/>
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.17 renders Letterboxd only from the strict LRS DisplaySlot bridge as a whole 1-100 number, with no 0-5 conversion or direct database fallback.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.24 applies only the current Arctic Fuse 3 patch definitions. It keeps idempotent status/apply/remove behavior, validates XML, writes atomically, installs Cinema Pre-roll fonts, and does not run historical patch repair paths.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -535,7 +184,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.5.70"
+       version="1.6.1"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -556,8 +205,8 @@ v0.29.1 custom beta
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.5.70 uses IMDb's official title.ratings dataset for IMDb ratings, performs one batch lookup before online providers, keeps movie/show MDBList with OMDb/TMDb item-not-found fallbacks, and never stores vote counts.</description>
-        <description lang="id_ID">Library Ratings Scraper v1.5.70 memakai dataset resmi title.ratings IMDb untuk rating IMDb, melakukan pencocokan batch sebelum provider online, mempertahankan MDBList movie/series beserta fallback OMDb/TMDb saat item tidak ditemukan, dan tidak menyimpan jumlah vote.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.6.1 uses IMDb's official title.ratings dataset for IMDb ratings, performs one batch lookup before online providers, keeps movie/show MDBList with OMDb/TMDb item-not-found fallbacks, and never stores vote counts.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.6.1 memakai dataset resmi title.ratings IMDb untuk rating IMDb, melakukan pencocokan batch sebelum provider online, mempertahankan MDBList movie/series beserta fallback OMDb/TMDb saat item tidak ditemukan, dan tidak menyimpan jumlah vote.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -597,7 +246,7 @@ v0.29.1 custom beta
 </addon>
 <addon id="service.subtitles.subsource.autosync"
        name="SubSource AutoSync"
-       version="0.1.26"
+       version="0.1.28"
        provider-name="OpenAI">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
