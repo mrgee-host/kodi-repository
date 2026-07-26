@@ -22,9 +22,10 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.30" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.31" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.library.ratings.scraper" version="1.6.4"/>
     </requires>
 
     <extension point="xbmc.python.pluginsource" library="addon.py">
@@ -202,7 +203,7 @@ v0.33.1 - Clean fresh-install baseline
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.6.3"
+       version="1.6.4"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
