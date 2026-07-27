@@ -183,7 +183,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.28" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.29" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.2"/>
@@ -193,7 +193,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.28 keeps committed rating rows visible during container updates and navigation focus, uses KPM Visual.Ready as the replacement gate, and clears rows only when the media context is genuinely closed.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.29 renders Arctic Mirage metadata from independent A/B snapshots. Plot, rating, awards/status, and logo fade in and out together for 400 ms without allowing the outgoing slot to mutate into the incoming item.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -203,7 +203,7 @@ v0.33.1 - Clean fresh-install baseline
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.6.6"
+       version="1.6.7"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -224,8 +224,8 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.6.6 keeps the clean final database, differential writes, active DBID handoff and CropV2 resolver bootstrap, while restoring the live Arctic Mirage bridge so library and screensaver use the same af3_values formatter.</description>
-        <description lang="id_ID">Library Ratings Scraper v1.6.6 mempertahankan database final bersih, differential write, active DBID handoff dan bootstrap resolver CropV2, serta mengembalikan live bridge Arctic Mirage agar library dan screensaver memakai formatter af3_values yang sama.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.6.7 lets strong DBID/media identities override menu-label deny words such as Home, and publishes independent A/B Arctic Mirage snapshots so plot, rating, and logo remain one atomic visual bundle during 400 ms crossfades.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.6.7 membuat identitas DBID/media yang sah mengalahkan deny word menu seperti Home, serta menerbitkan snapshot A/B Arctic Mirage terpisah agar plot, rating, dan logo tetap menjadi satu bundle atomik saat crossfade 400 ms.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
