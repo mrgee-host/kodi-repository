@@ -265,7 +265,7 @@ v0.33.1 - Clean fresh-install baseline
 </addon>
 <addon id="service.subtitles.subsource.autosync"
        name="SubSource AutoSync"
-       version="0.1.30"
+       version="0.1.31"
        provider-name="OpenAI">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
