@@ -22,10 +22,10 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.31" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.32" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
-        <import addon="script.library.ratings.scraper" version="1.6.4"/>
+        <import addon="script.library.ratings.scraper" version="1.6.5"/>
     </requires>
 
     <extension point="xbmc.python.pluginsource" library="addon.py">
@@ -35,7 +35,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>MediaHub widget/list data provider. KPM owns visual integration.</summary>
-        <description>MediaHub Widget v0.1.29 keeps one screensaver slide per item while randomly choosing one cached main or extra fanart for each launch. Stable mediahub_item_key guards remain unchanged.</description>
+        <description>MediaHub Widget v0.1.32 restores the proven live LRS screensaver bridge. It keeps prepared cached fanart, CropV2 quality filtering, stable item identity, game rating slots, diagnostics and all current library/game behavior without reading or reformatting LRS ratings.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -183,7 +183,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.25" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.26" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.2"/>
@@ -193,7 +193,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.24 applies only the current Arctic Fuse 3 patch definitions. It keeps idempotent status/apply/remove behavior, validates XML, writes atomically, installs Cinema Pre-roll fonts, and does not run historical patch repair paths.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.26 preserves all current AF3, Cinema font, pause OSD, studio logo, progress, poster and atomic XML protections while restoring the mature live LRS Arctic Mirage rating and CropV2 renderer.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -203,7 +203,7 @@ v0.33.1 - Clean fresh-install baseline
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.6.4"
+       version="1.6.5"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -224,8 +224,8 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.6.2 uses IMDb's official title.ratings dataset for IMDb ratings, performs one batch lookup before online providers, keeps movie/show MDBList with OMDb/TMDb item-not-found fallbacks, and never stores vote counts.</description>
-        <description lang="id_ID">Library Ratings Scraper v1.6.2 memakai dataset resmi title.ratings IMDb untuk rating IMDb, melakukan pencocokan batch sebelum provider online, mempertahankan MDBList movie/series beserta fallback OMDb/TMDb saat item tidak ditemukan, dan tidak menyimpan jumlah vote.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.6.5 keeps the clean final database, differential writes, active DBID handoff and CropV2 resolver bootstrap, while restoring the live Arctic Mirage bridge so library and screensaver use the same af3_values formatter.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.6.5 mempertahankan database final bersih, differential write, active DBID handoff dan bootstrap resolver CropV2, serta mengembalikan live bridge Arctic Mirage agar library dan screensaver memakai formatter af3_values yang sama.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
