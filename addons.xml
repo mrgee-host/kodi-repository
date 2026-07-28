@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.11" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.12" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.pil" version="1.1.7"/>
@@ -22,10 +22,10 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.35" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.38" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
-        <import addon="script.library.ratings.scraper" version="1.6.6"/>
+        <import addon="script.library.ratings.scraper" version="1.6.8"/>
     </requires>
 
     <extension point="xbmc.python.pluginsource" library="addon.py">
@@ -35,7 +35,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>MediaHub widget/list data provider. KPM owns visual integration.</summary>
-        <description>MediaHub Widget v0.1.35 adds one persistent SQLite master catalog for Movies, TV Series, Games, Mixed widgets, Spotlight slideshows, and the screensaver. Random order is stable on disk, refreshes use the previous catalog until atomic replacement, Kodi updates can refresh individual DBIDs, fanart uses local texture-cache paths when available, and diagnostics report every build phase.</description>
+        <description>MediaHub Widget v0.1.38 commits a verified new random order once per Kodi startup, retries failed shuffles instead of reporting false success, ignores Steam database timestamp-only changes, prevents timestamp-only Steam/resolver refreshes, avoids no-change scan rebuilds, and accelerates real catalog rebuilds through batched texture/CropV2 lookups and fast atomic replacement writes.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -44,7 +44,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="repository.mrgee.kodi" name="MrGee Kodi Repository" version="1.0.3" provider-name="Miftahul Ginda / MrGee">
+<addon id="repository.mrgee.kodi" name="MrGee Kodi Repository" version="1.0.4" provider-name="Miftahul Ginda / MrGee">
     <extension point="xbmc.addon.repository" name="MrGee Kodi Repository">
         <dir minversion="20.0.0">
             <info compressed="false">https://mrgee-host.github.io/kodi-repository/addons.xml</info>
@@ -64,7 +64,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="resource.images.kpm.studiologos" name="KPM Studio &amp; Game Logos" version="1.0.2" provider-name="MrGee">
+<addon id="resource.images.kpm.studiologos" name="KPM Studio &amp; Game Logos" version="1.0.3" provider-name="MrGee">
     <extension point="kodi.resource.images" compile="false" type="studios" />
     <requires>
         <import addon="kodi.resource" version="1.0.0"/>
@@ -79,7 +79,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.33.4" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.33.5" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -111,9 +111,9 @@
     <extension point="xbmc.service" start="login" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
-        <description lang="en">Library Artwork Curator v0.33.4 creates the current artwork schema directly, rejects unsupported schemas, and contains no title-specific repair or historical collision migration. Generic identity validation, active DBID handoff, current provider fallback, local-video thumbnail generation, diagnostics, and atomic writes remain active.</description>
+        <description lang="en">Library Artwork Curator v0.33.5 creates the current artwork schema directly, rejects unsupported schemas, and contains no title-specific repair or historical collision migration. Generic identity validation, active DBID handoff, current provider fallback, local-video thumbnail generation, diagnostics, and atomic writes remain active.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.33.4 - Active DBID handoff recovery
+        <news>v0.33.5 - Automatic no-change DB write suppression
 - Captures a late snapshot when Kodi starts its video scan before the LAC service.
 - Uses only Kodi OnUpdate added=true DBIDs when ScanStarted was missed; generic cache misses remain ignored.
 - Defers OnRemove cache deletion during scan/clean handoff windows.
@@ -146,7 +146,7 @@ v0.33.1 - Clean fresh-install baseline
 </addon>
 <addon id="script.kodi.cinema.preroll"
        name="Cinema Pre-roll Indonesia"
-       version="0.1.19"
+       version="0.1.20"
        provider-name="Yu Home Cinema">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
@@ -177,23 +177,23 @@ v0.33.1 - Clean fresh-install baseline
     <assets>
       <icon>icon.png</icon>
     </assets>
-    <news>v0.1.19 - MrGee Kodi Family R7
+    <news>v0.1.20 - 256x256 family icon
 - Fresh-install runtime layout with no historical folder or keymap cleanup.
 - Cinema font definitions are installed into Arctic Fuse 3 by Kodi Patch Manager.
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.29" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.30" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
-        <import addon="resource.images.kpm.studiologos" version="1.0.2"/>
+        <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
         <import addon="script.skinshortcuts" version="3.0.0" optional="true"/>
     </requires>
     <extension point="xbmc.python.script" library="default.py"/>
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.29 renders Arctic Mirage metadata from independent A/B snapshots. Plot, rating, awards/status, and logo fade in and out together for 400 ms without allowing the outgoing slot to mutate into the incoming item.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.30 renders Arctic Mirage metadata from independent A/B snapshots. Plot, rating, awards/status, and logo fade in and out together for 400 ms without allowing the outgoing slot to mutate into the incoming item.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -203,7 +203,7 @@ v0.33.1 - Clean fresh-install baseline
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.6.7"
+       version="1.6.8"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -224,8 +224,8 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.6.7 lets strong DBID/media identities override menu-label deny words such as Home, and publishes independent A/B Arctic Mirage snapshots so plot, rating, and logo remain one atomic visual bundle during 400 ms crossfades.</description>
-        <description lang="id_ID">Library Ratings Scraper v1.6.7 membuat identitas DBID/media yang sah mengalahkan deny word menu seperti Home, serta menerbitkan snapshot A/B Arctic Mirage terpisah agar plot, rating, dan logo tetap menjadi satu bundle atomik saat crossfade 400 ms.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.6.8 lets strong DBID/media identities override menu-label deny words such as Home, and publishes independent A/B Arctic Mirage snapshots so plot, rating, and logo remain one atomic visual bundle during 400 ms crossfades.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.6.8 membuat identitas DBID/media yang sah mengalahkan deny word menu seperti Home, serta menerbitkan snapshot A/B Arctic Mirage terpisah agar plot, rating, dan logo tetap menjadi satu bundle atomik saat crossfade 400 ms.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -265,7 +265,7 @@ v0.33.1 - Clean fresh-install baseline
 </addon>
 <addon id="service.subtitles.subsource.autosync"
        name="SubSource AutoSync"
-       version="0.1.31"
+       version="0.1.32"
        provider-name="OpenAI">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
