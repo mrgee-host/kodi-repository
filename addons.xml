@@ -183,7 +183,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.30" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.32" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -193,7 +193,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.30 renders Arctic Mirage metadata from independent A/B snapshots. Plot, rating, awards/status, and logo fade in and out together for 400 ms without allowing the outgoing slot to mutate into the incoming item.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.32 keeps Arctic Fuse 3 left/right parity during normal playback and forces the complete metadata panel and vignette to the left while Kodi notifications or progress dialogs are visible. A/B remains a snapshot selector and all metadata fades in and out together for 400 ms.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
