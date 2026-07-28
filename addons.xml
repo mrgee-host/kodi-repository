@@ -22,7 +22,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.38" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.39" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.library.ratings.scraper" version="1.6.8"/>
@@ -35,7 +35,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>MediaHub widget/list data provider. KPM owns visual integration.</summary>
-        <description>MediaHub Widget v0.1.38 commits a verified new random order once per Kodi startup, retries failed shuffles instead of reporting false success, ignores Steam database timestamp-only changes, prevents timestamp-only Steam/resolver refreshes, avoids no-change scan rebuilds, and accelerates real catalog rebuilds through batched texture/CropV2 lookups and fast atomic replacement writes.</description>
+        <description>MediaHub Widget v0.1.39 gates initial widget reads until the current Kodi session shuffle has committed, preventing Mixed and Movies from loading the previous session order. It retains verified once-per-startup randomization, semantic no-change database protection, incremental source refreshes, and fast atomic catalog replacement.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
