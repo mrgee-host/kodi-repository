@@ -79,7 +79,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.33.5" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.33.6" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -111,9 +111,15 @@
     <extension point="xbmc.service" start="login" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
-        <description lang="en">Library Artwork Curator v0.33.5 creates the current artwork schema directly, rejects unsupported schemas, and contains no title-specific repair or historical collision migration. Generic identity validation, active DBID handoff, current provider fallback, local-video thumbnail generation, diagnostics, and atomic writes remain active.</description>
+        <description lang="en">Library Artwork Curator v0.33.6 creates the current artwork schema directly, rejects unsupported schemas, and contains no title-specific repair or historical collision migration. Generic identity validation, active DBID handoff, current provider fallback, local-video thumbnail generation, diagnostics, and atomic writes remain active.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.33.5 - Automatic no-change DB write suppression
+        <news>v0.33.6 - Fail-fast artwork host fallback
+- Probes one preview URL per remote image host before candidates enter Select Artwork.
+- Removes candidates from an unreachable image host and continues with the remaining providers.
+- Shares a five-minute host cooldown across LAC actions to avoid repeated blank previews and timeout queues.
+- Keeps provider APIs, artwork application, protected collections, database behavior, and manual controls unchanged.
+
+v0.33.5 - Automatic no-change DB write suppression
 - Captures a late snapshot when Kodi starts its video scan before the LAC service.
 - Uses only Kodi OnUpdate added=true DBIDs when ScanStarted was missed; generic cache misses remain ignored.
 - Defers OnRemove cache deletion during scan/clean handoff windows.
