@@ -209,7 +209,7 @@ v0.33.1 - Clean fresh-install baseline
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.6.8"
+       version="1.6.9"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -230,8 +230,8 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.6.8 lets strong DBID/media identities override menu-label deny words such as Home, and publishes independent A/B Arctic Mirage snapshots so plot, rating, and logo remain one atomic visual bundle during 400 ms crossfades.</description>
-        <description lang="id_ID">Library Ratings Scraper v1.6.8 membuat identitas DBID/media yang sah mengalahkan deny word menu seperti Home, serta menerbitkan snapshot A/B Arctic Mirage terpisah agar plot, rating, dan logo tetap menjadi satu bundle atomik saat crossfade 400 ms.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.6.9 lets strong DBID/media identities override menu-label deny words such as Home, and publishes independent A/B Arctic Mirage snapshots so plot, rating, and logo remain one atomic visual bundle during 400 ms crossfades.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.6.9 membuat identitas DBID/media yang sah mengalahkan deny word menu seperti Home, serta menerbitkan snapshot A/B Arctic Mirage terpisah agar plot, rating, dan logo tetap menjadi satu bundle atomik saat crossfade 400 ms.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
