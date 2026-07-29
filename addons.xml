@@ -195,7 +195,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.36" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.37" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -205,7 +205,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.36 repairs the AF3 Home and Library rating-row call placement broken by the 0.2.35 current-file refresh. It validates Kodi include ancestry, keeps rating rows visible during background progress, retains the 1 ms Arctic Mirage metadata fade-out, and preserves the subtitle-delay and DialogSlider patches.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.37 repairs the runtime AF3 rating and Steam plot patch, keeps Arctic Mirage current, adds a white IMDb-to-TMDb episode rating in Combined Expanded, and adds a lightweight startup weather fallback property without all folders or whole-file XML replacement.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
