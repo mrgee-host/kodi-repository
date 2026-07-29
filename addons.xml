@@ -195,7 +195,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.40" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.41" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -205,7 +205,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.40 keeps the approved Combined Expanded title boundary, uses AF3 native Object_StarRating, sets the native star-to-rating gap to exactly 14 px, gives the four-digit episode year enough width, preserves silent Full Integration startup restore and the Arctic Mirage A/B bundle flow, and keeps all AF3 changes as partial runtime patches.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.41 widens only the Combined Expanded bullet separator from 12 px to 24 px while preserving its exact center, AF3 native Object_StarRating, the approved title boundary, full four-digit episode year, silent Full Integration startup restore, Arctic Mirage A/B bundle flow, and partial runtime XML patching.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
