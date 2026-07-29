@@ -189,7 +189,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.34" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.35" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -199,7 +199,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.34 retains the 0.2.33 feature base, installs only a dedicated FullscreenVideo LB/RB subtitle-delay keymap, and disables the Arctic Fuse 3 DialogSlider dim overlay. It does not change GUI sounds, guisettings.xml, other add-ons, or unrelated keymaps.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.35 retains the 0.2.33 feature base and the dedicated FullscreenVideo LB/RB subtitle-delay keymap. It keeps Home and Library rating rows visible during background progress, updates Arctic Mirage metadata fade-out to 1 ms, and preserves the DialogSlider dim-overlay patch without changing GUI sounds, guisettings.xml, other add-ons, or unrelated keymaps.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
