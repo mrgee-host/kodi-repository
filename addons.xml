@@ -200,7 +200,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.42" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.43" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -210,7 +210,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.42 equalizes the rendered spacing between AF3 native star, episode rating, bullet, four-digit year, native watched/library indicator, and duration in Combined Expanded while preserving title right=400, silent Full Integration startup restore, Arctic Mirage A/B flow, and partial runtime XML patching.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.43 fixes only the AF3 Unified Integration status audit so current 0189 rating/game metadata, 0240 Combined Expanded episode metadata, 0233 Arctic Mirage six-panel flow, and 0237 startup-weather fallback report as current. Runtime XML patching, visual geometry, startup restore, and every screen flow remain unchanged.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
