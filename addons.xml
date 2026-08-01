@@ -79,7 +79,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.33.8" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.33.9" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -111,9 +111,14 @@
     <extension point="xbmc.service" start="login" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
-        <description lang="en">Library Artwork Curator v0.33.8 creates the current artwork schema directly, rejects unsupported schemas, and contains no title-specific repair or historical collision migration. Generic identity validation, active DBID handoff, current provider fallback, local-video thumbnail generation, diagnostics, and atomic writes remain active.</description>
+        <description lang="en">Library Artwork Curator v0.33.9 adds a read-only diagnostics audit that distinguishes the live run from historical rows still marked RUNNING. It does not alter artwork-cache.db, run history, schema, state, artwork, providers, or ReloadSkin behavior.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.33.8 - Verified cache-notification and ReloadSkin correction
+        <news>v0.33.9 - Read-only run-history diagnostics
+- Adds summary/run-history-audit.txt to diagnostics.
+- Labels non-active RUNNING rows as STALE HISTORY without updating or deleting database rows.
+- Performs no schema, database, state, or artwork migration.
+
+v0.33.8 - Verified cache-notification and ReloadSkin correction
 - Fixes the missing re import that crashed only after Cache Missing Artwork completed.
 - Reports the real checked, cached, and failed texture-cache counts; zero result segments remain hidden.
 - Notification rendering is best-effort and cannot turn completed cache work into a failed run.
