@@ -200,7 +200,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.45" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.46" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -210,7 +210,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.45 uses custom-only AF3 startup artwork for valid, unavailable, unknown, and snow weather states, reads the local clock directly for the first frame, and sets the startup slideshow to 2500 ms with a 1000 ms fade. It also keeps the approved episode rating layout through modal dialogs, applies it to List Expanded and Combined Expanded, renders exact 10.0 ratings as 10, keeps committed rating rows over DialogBusy, and hides stale rows while containers update. Screensaver A/B flow, game plot, Up Next, and database formats are unchanged.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.46 fixes stale lower rating rows during ReloadSkin and MediaHub/widget refresh by passing the exact owner-container loading condition from AF3 media, hub, spotlight, and combined views into the KPM rating row. Custom-only startup artwork, 2500/1000 slideshow timing, episode rating layout, DialogBusy behavior, screensaver A/B flow, game plot, Up Next, and database formats are unchanged.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
