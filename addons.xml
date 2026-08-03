@@ -200,7 +200,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.52" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.53" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -210,7 +210,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.52 removes the geometry-changing 0.2.51 wrapper, keeps AF3's original layout, and uses separate committed info, plot, and rating snapshots while a collection target is pending. The collection panel is released only after the identity-matched aggregate and lower row are complete. No database query, schema, profile, state, or historical-data migration is added.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.53 fixes the service startup order so the geometry-safe collection handoff overrides are defined before the service loop starts. Collection info, tagline, plot, and rating properties can now be published instead of remaining permanently hidden. No database query, schema, profile, state, or historical-data migration is added.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
