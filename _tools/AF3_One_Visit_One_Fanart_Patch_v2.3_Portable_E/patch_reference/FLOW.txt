@@ -1,0 +1,8 @@
+FLOW v2.3
+
+Movies Film A -> fanart1
+Series Series A -> fanart1
+Movies Film A kembali -> satu fanart baru
+Series Series A kembali -> satu fanart baru
+
+Refresh internal pada kunjungan yang sama tidak boleh merandom ulang.

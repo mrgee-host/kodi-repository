@@ -220,7 +220,7 @@ v0.33.1 - Clean fresh-install baseline
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.6.15"
+       version="1.6.16"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -241,8 +241,8 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.6.15 stores only collection aggregate ratings at one decimal precision, leaves ratings-cache.db untouched, keeps the Indonesian three-source coverage exception, and preserves the configured display-slot order.</description>
-        <description lang="id_ID">Library Ratings Scraper v1.6.15 menyimpan hanya rating agregat koleksi dengan presisi satu angka desimal, tidak mengubah ratings-cache.db, mempertahankan pengecualian tiga sumber Indonesia, dan mengikuti urutan slot tampilan yang dikonfigurasi.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.6.16 bundles manual taglines for the known collections, publishes approved Indonesian and Thailand plots independently from Kodi set overviews, preserves stored custom collection text across aggregate refreshes, and leaves ratings-cache.db plus schema version 2 untouched.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.6.16 menyertakan tagline manual untuk koleksi yang dikenal, menerbitkan plot Indonesia dan Thailand secara terpisah dari overview set Kodi, mempertahankan teks koleksi tersimpan saat agregat diperbarui, serta tidak mengubah ratings-cache.db maupun schema versi 2.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>

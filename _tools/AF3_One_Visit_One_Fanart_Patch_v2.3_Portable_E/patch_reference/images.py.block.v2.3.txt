@@ -1,0 +1,158 @@
+    # AF3_ONE_VISIT_ONE_FANART_V2_3
+    def _get_random_hold_item_key(self):
+        """Identify the focused container slot, not volatile item metadata."""
+        parent = self._parent
+
+        def _item_info(name):
+            try:
+                return parent.get_infolabel(name) or ''
+            except (AttributeError, TypeError):
+                return ''
+
+        def _global_info(name):
+            try:
+                return get_infolabel(name) or ''
+            except (AttributeError, TypeError):
+                return ''
+
+        # The container slot is stable while a Home tab enriches its metadata.
+        # Moving to another item changes Position. Switching tabs changes the
+        # widget/container folder path. Returning to an old slot is therefore a
+        # genuine new visit, even if it happens before ten seconds.
+        container = getattr(parent, 'container', '') or 'Container.'
+        widget_id = getattr(parent, 'widget_id', '') or container
+        base_window = getattr(parent, 'cur_base_window', '') or ''
+        folderpath = (
+            _global_info('{}FolderPath'.format(container))
+            or _item_info('folderpath')
+        )
+        position = (
+            _global_info('{}Position'.format(container))
+            or _item_info('Position')
+            or _global_info('{}CurrentItem'.format(container))
+        )
+        if folderpath or position:
+            return 'slot:{}|{}|{}|{}'.format(
+                base_window,
+                widget_id,
+                folderpath,
+                position,
+            )
+
+        # Atomic provider IDs are safe fallbacks when no container slot exists.
+        mediahub_key = _item_info('Property(mediahub_item_key)')
+        if mediahub_key:
+            return 'mediahub:{}'.format(mediahub_key)
+
+        steam_appid = _item_info('Property(steam_appid)') or _item_info('Property(appid)')
+        if steam_appid:
+            return 'steam:{}'.format(steam_appid)
+
+        # Last-resort fallback for static/non-container windows.
+        label = _item_info('label') or _item_info('title') or _item_info('tvshowtitle')
+        label = ' '.join(str(label).split()).casefold()
+        if label:
+            return 'label:{}'.format(label)
+
+    def _select_held_random_artwork(self, artworks):
+        """One visit selects once; internal refreshes reuse that selection."""
+        if not artworks:
+            return
+
+        parent = self._parent
+        item_key = self._get_random_hold_item_key()
+
+        unique = []
+        for artwork in artworks:
+            if artwork and artwork not in unique:
+                unique.append(artwork)
+        artworks = unique or artworks
+
+        import time
+        now = time.monotonic()
+
+        try:
+            state = parent._af3_one_visit_one_fanart_v2_3
+        except AttributeError:
+            state = {
+                'active_key': None,
+                'active_since': 0.0,
+                'current_artwork': None,
+                'last_by_item': {},
+            }
+            parent._af3_one_visit_one_fanart_v2_3 = state
+
+        # During a transient frame with no usable slot, keep the current image.
+        # Do not manufacture a leave-and-return event from incomplete metadata.
+        if not item_key:
+            return state['current_artwork'] or random.choice(artworks)
+
+        new_visit = state['active_key'] != item_key
+        ten_seconds_elapsed = (
+            not new_visit
+            and state['active_since']
+            and now - state['active_since'] >= 10.0
+        )
+
+        if not new_visit and not ten_seconds_elapsed and state['current_artwork']:
+            return state['current_artwork']
+
+        previous = state['last_by_item'].get(item_key)
+        candidates = [artwork for artwork in artworks if artwork != previous]
+        selected = random.choice(candidates or artworks)
+
+        state['active_key'] = item_key
+        state['active_since'] = now
+        state['current_artwork'] = selected
+        state['last_by_item'][item_key] = selected
+
+        if len(state['last_by_item']) > 500:
+            oldest = next(iter(state['last_by_item']))
+            if oldest != item_key:
+                state['last_by_item'].pop(oldest, None)
+
+        return selected
+
+    def get_artwork_item(self, item, prebuilt=False):
+        def _get_artwork_item(i, x=''):
+            if not prebuilt:
+                return self._parent.get_infolabel(i.format(x=x))
+            if not i.startswith('art('):
+                return
+            return self.built_artwork.get(i.format(x=x)[4:-1])
+
+        if '{x}' not in item:
+            return _get_artwork_item(item)
+
+        artwork0 = _get_artwork_item(item)
+        if not artwork0:
+            return
+
+        artwork1 = _get_artwork_item(item, x=1)
+
+        # Keep compatibility with providers publishing extras as properties.
+        if not artwork1 and item == 'art(fanart{x})' and not prebuilt:
+            property1 = self._parent.get_infolabel('Property(fanart1)')
+            if property1:
+                artworks = [
+                    self._parent.get_infolabel('Property(fanart)') or artwork0,
+                    property1,
+                ]
+                for x in range(2, 9):
+                    artwork = self._parent.get_infolabel('Property(fanart{})'.format(x))
+                    if not artwork:
+                        break
+                    artworks.append(artwork)
+                return self._select_held_random_artwork(artworks)
+
+        if not artwork1:
+            return artwork0
+
+        artworks = [artwork0, artwork1]
+        for x in range(2, 9):
+            artwork = _get_artwork_item(item, x=x)
+            if not artwork:
+                break
+            artworks.append(artwork)
+
+        return self._select_held_random_artwork(artworks)
