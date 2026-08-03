@@ -200,7 +200,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.48" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.49" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -210,7 +210,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.46 fixes stale lower rating rows during ReloadSkin and MediaHub/widget refresh by passing the exact owner-container loading condition from AF3 media, hub, spotlight, and combined views into the KPM rating row. Custom-only startup artwork, 2500/1000 slideshow timing, episode rating layout, DialogBusy behavior, screensaver A/B flow, game plot, Up Next, and database formats are unchanged.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.49 appends a collection member-count slot after the numeric ratings using the bundled sets icon, validates the LRS collection identity before display, records the source properties and slot order in diagnostics, and installs all diagnostics ZIPs only after CRC and manifest validation. No database query, schema, profile, or state migration is added.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
