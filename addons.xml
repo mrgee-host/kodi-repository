@@ -220,7 +220,7 @@ v0.33.1 - Clean fresh-install baseline
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.6.13"
+       version="1.6.14"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -241,8 +241,8 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.6.11 formats an exact ten-point score as 10 and removes queued/running scrape notifications while retaining progress and final results. Ratings databases, external ratings, providers, DBID handoff, and Arctic Mirage A/B publishing are unchanged.</description>
-        <description lang="id_ID">Library Ratings Scraper v1.6.11 menampilkan nilai tepat sepuluh sebagai 10 dan menghapus notifikasi antrean/proses awal scrape, sementara progress serta hasil akhir tetap tampil. Database rating, external ratings, provider, DBID handoff, dan publikasi A/B Arctic Mirage tidak berubah.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.6.14 keeps strict full-coverage collection ratings except for Indonesian Movies Collection, which stores its three best-covered sources, publishes fractional collection Letterboxd means as rounded integer scores so configured slots are respected, and preserves the last good diagnostics ZIP until its validated replacement is installed.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.6.14 mempertahankan rating koleksi dengan cakupan penuh, kecuali Indonesian Movies Collection yang menyimpan tiga sumber dengan cakupan terbanyak, menampilkan rata-rata Letterboxd koleksi sebagai skor bulat agar urutan slot mengikuti pengaturan, serta mempertahankan ZIP diagnostics terakhir sampai penggantinya tervalidasi dan berhasil dipasang.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
