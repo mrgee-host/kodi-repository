@@ -220,7 +220,7 @@ v0.33.1 - Clean fresh-install baseline
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.6.18"
+       version="1.6.19"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -241,8 +241,8 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.6.18 keeps the R44 collection presentation, preloads collection-aggregates.db into memory before the visual loop, reuses that runtime cache for collection focus changes, and no longer clears the resident collection payload while movie or series items are focused. Database schema version 2 and ratings-cache.db remain unchanged.</description>
-        <description lang="id_ID">Library Ratings Scraper v1.6.18 mempertahankan tampilan koleksi R44, memuat collection-aggregates.db ke memori sebelum loop visual, memakai cache runtime tersebut saat fokus berpindah ke koleksi, dan tidak lagi menghapus payload koleksi ketika movie atau series sedang difokuskan. Schema database versi 2 dan ratings-cache.db tetap tidak berubah.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.6.19 keeps collection payloads in memory but stages every set change with Ready=false and commits Ready/Visible last. KPM can therefore reject resident metadata from a different set without clearing movie or series data. Database schema version 2 and ratings-cache.db remain unchanged.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.6.19 mempertahankan cache koleksi di memori, tetapi menyiapkan setiap pergantian set dengan Ready=false lalu mengaktifkan Ready dan Visible paling akhir. KPM dapat menolak metadata milik set lain tanpa menghapus data movie atau series. Schema database versi 2 dan ratings-cache.db tetap tidak berubah.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
