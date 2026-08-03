@@ -220,7 +220,7 @@ v0.33.1 - Clean fresh-install baseline
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.6.16"
+       version="1.6.17"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -241,8 +241,8 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.6.16 bundles manual taglines for the known collections, publishes approved Indonesian and Thailand plots independently from Kodi set overviews, preserves stored custom collection text across aggregate refreshes, and leaves ratings-cache.db plus schema version 2 untouched.</description>
-        <description lang="id_ID">Library Ratings Scraper v1.6.16 menyertakan tagline manual untuk koleksi yang dikenal, menerbitkan plot Indonesia dan Thailand secara terpisah dari overview set Kodi, mempertahankan teks koleksi tersimpan saat agregat diperbarui, serta tidak mengubah ratings-cache.db maupun schema versi 2.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.6.17 retains the last complete collection property bundle during movie, series, and collection focus changes, publishes Ready and Generation only after all collection fields are staged, and never clears the prior collection payload merely because the next target is pending. Schema version 2, ratings-cache.db, MyVideos*.db, profile state, and historical data remain unchanged.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.6.17 mempertahankan bundel properti koleksi lengkap terakhir saat fokus berpindah antara movie, series, dan collection, menerbitkan Ready serta Generation hanya setelah semua field koleksi selesai ditulis, dan tidak mengosongkan payload lama hanya karena target berikutnya masih menunggu. Schema versi 2, ratings-cache.db, MyVideos*.db, state profil, dan data historis tetap tidak berubah.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
