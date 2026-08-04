@@ -200,7 +200,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.55" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.56" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -210,7 +210,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.55 keeps the stable R44/R48 AF3 geometry and adds strict focused-set identity gates. Resident collection metadata is shown only when Ready=true and IDSet/title matches the focused set; retained movie and set rating rows cannot cross media types. No database query, schema, profile, or state migration is added.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.56 keeps the stable R44/R48 AF3 geometry and fixes only the lower rating row. A retained row is rendered only when its resolver DBID or title matches the currently displayed poster, LRS bridge slots without target identity are rejected, and collection rows cannot inherit Ends at from a movie. No database query, schema, profile, or state migration is added.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
