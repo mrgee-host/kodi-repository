@@ -200,7 +200,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.59" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.60" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -210,7 +210,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.59 keeps the last fully committed movie information panel visible only during the transient movie-to-set gap, then lets the prefetched collection panel replace it. The patch restores the R44 rating-row contract first and does not reuse R45-R50 handoff logic. No database, schema, profile, state, or historical-data migration is added.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.60 restores the stable R44 AF3 integration after the abandoned R45-R54 experiments. Apply/Verify removes experimental panel-hold and handoff XML, rebuilds the original R44 rating row and collection blocks, and keeps the R44 plot, tagline, rating, and collection-count contract. No database, schema, profile, or historical-data migration is added.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
