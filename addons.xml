@@ -200,7 +200,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.57" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.58" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -210,7 +210,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.57 keeps the R44 visual layout and changes only the lower rating row. A prefetched collection row is activated immediately when the focused set, LRS DisplaySlot ItemKey, and LibraryRatings.Collection ItemKey match exactly, bypassing the generic four-poll stabilizer. Mismatched or Ends-at set rows are refused. Diagnostics record the fast candidate and commit identity. No database, schema, profile, state, plot, logo, fanart, or layout migration is added.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.58 keeps the R44 layout and changes only lower rating-row visibility during movie-to-set navigation. The committed movie row is retained while the prefetched set row is not yet ready, then the normal R44 A/B row replaces it. Set-to-movie behavior, plot, logo, fanart, tagline, geometry, databases, schema, profile, and state are unchanged.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
