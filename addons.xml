@@ -220,7 +220,7 @@ v0.33.1 - Clean fresh-install baseline
 </addon>
 <addon id="script.library.ratings.scraper"
        name="Library Ratings Scraper"
-       version="1.6.21"
+       version="1.6.22"
        provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -241,8 +241,8 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
         <summary lang="id_ID">Scrape, cache and publish library ratings, statuses and IMDb Top 250 rank</summary>
-        <description lang="en_GB">Library Ratings Scraper v1.6.21 keeps the proven R44 collection display contract and preloads AF3 current, left and right movie sets into a process-local memory snapshot before focus changes. It preserves manual collection metadata and leaves ratings-cache.db plus schema version 2 untouched.</description>
-        <description lang="id_ID">Library Ratings Scraper v1.6.21 mempertahankan kontrak tampilan koleksi R44 dan memuat movie set AF3 aktif, kiri, serta kanan ke snapshot memori lokal sebelum fokus berpindah. Metadata manual koleksi tetap dipertahankan dan ratings-cache.db maupun schema versi 2 tidak diubah.</description>
+        <description lang="en_GB">Library Ratings Scraper v1.6.22 stages complete left and right AF3 collection metadata bundles before focus changes. The focused set can therefore render from its matching neighbour bundle immediately while the normal current bundle and rating row commit. It preserves the R44 database contract and does not migrate schema, profile, state or historical data.</description>
+        <description lang="id_ID">Library Ratings Scraper v1.6.22 menyiapkan bundle metadata koleksi AF3 kiri dan kanan secara lengkap sebelum fokus berpindah. Set yang difokuskan dapat langsung memakai bundle tetangga yang identitasnya cocok sambil menunggu bundle aktif dan row rating normal selesai dikomit. Kontrak database R44 tetap dipertahankan tanpa migrasi schema, profil, state, atau data historis.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
