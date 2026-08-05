@@ -200,7 +200,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.65" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.66" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -210,7 +210,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.65 preserves the exact native movie upper panel during the brief movie-to-set transition while keeping the original KPM rating row untouched. The original title, info line, and plot are mutually exclusive with the held movie snapshot, preventing clearlogo overlap, generic set-like movie formatting, and IMDb icon resizing. No database, schema, profile, state, rollback, or migration logic is added.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.66 keeps the original AF3 title, clearlogo, info line, tagline, plot, and panel structure unchanged. Only the KPM-owned rating row is persistent: the last committed row remains visible during movie/set focus changes and is atomically replaced when the next row is ready. No database, schema, profile, state, rollback, repair, or migration logic is added.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
