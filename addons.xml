@@ -200,7 +200,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.69" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.70" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -210,7 +210,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.69 keeps the original AF3 title, clearlogo, panel, artwork, layout, and persistent rating row unchanged. During movie-to-set focus changes, the previous movie information line remains in its native AF3 format together with the existing tagline/plot and rating keep-last until prefetched collection metadata becomes visible. No database, schema, profile, state, rollback, repair, or migration logic is added.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.70 keeps the original AF3 title, clearlogo, panel, artwork, layout, and persistent rating row unchanged. During movie-to-set focus changes, the information-line hold reads resolution and audio from the exact AF3 owner container used by the active Hub or Library panel. The collection information pill now matches the native movie pill width at 60 px. No database, schema, profile, state, rollback, repair, or migration logic is added.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
