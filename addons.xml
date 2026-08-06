@@ -200,7 +200,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.71" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.72" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -210,7 +210,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.71 keeps movie-to-set info, plot, and rating continuity inside MyVideoNav only. Home, Hub, and Spotlight never activate the collection hold and keep the native AF3 HD/audio information line. The collection information pill matches the native movie pill width at 60 px. No database, schema, profile, state, rollback, repair, or migration logic is added.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.72 keeps movie-to-set info, plot, and rating continuity only in MyVideoNav.xml. The broad videos window alias is not used. Includes_Hubs.xml is required to be clean but is not patched or written, so Hub and Spotlight retain the official AF3 information-line path. The collection information pill remains 60 px. No database, schema, profile, state, rollback, repair, or migration logic is added.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
