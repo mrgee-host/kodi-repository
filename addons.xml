@@ -200,7 +200,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.75" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.76" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -210,7 +210,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.75 is based directly on v0.2.74. It keeps the R68 AF3 layout, 60 px collection information-icon pill, persistent rating row, owner-scoped Custom Hub resolver, and movie-to-set information/tagline/plot keep-last behavior. UpperHold PlotlineLabel now controls the two plot layouts with runtime visibility instead of XML include conditions, preventing KEEP_IN_MEMORY Custom Hubs from becoming structurally dependent on that changing property. No MWH, LRS, database, schema, profile, state, rollback, repair, cleanup, or migration logic is added.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.76 is based directly on v0.2.75. It keeps the R68 AF3 layout and movie-to-set keep-last behavior, clears the KPM rating row on explicitly identified non-media items, hides the Spotlight rating row while container 301 is updating, labels collection counts as Movie/Movies, removes the KPM Settings menu, and fixes Arctic Mirage to the MediaHub screensaver_mix path with limit=0, random=true, 5-second item duration, and plot autoscroll OFF. Historical settings state is not migrated or cleaned.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
