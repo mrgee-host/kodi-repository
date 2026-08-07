@@ -79,7 +79,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.33.10" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.33.12" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -111,9 +111,22 @@
     <extension point="xbmc.service" start="login" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
-        <description lang="en">Library Artwork Curator v0.33.10 removes Dry Run from the menu, fixes the family notification import, clarifies cache-attempt counts, preserves the established artwork-type order, and starts AF3 select dialogs on the actual list control. No database or state migration.</description>
+        <description lang="en">Library Artwork Curator v0.33.12 adds manual local-file browsing and native-style Movie Set Information Folder artwork candidates to Select artwork while preserving direct artwork-cache write-through. No database or state migration.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.33.10 - Menu, notification, cache-report, and AF3 dialog-focus fixes
+        <news>v0.33.12 - Unified local artwork selection
+- Select artwork always includes Browse... for choosing a local image file.
+- Movie sets read Kodi's videolibrary.moviesetsfolder and show Local art only when matching MSIF files actually exist.
+- No art action is not added; an absent local file produces no Local art entry.
+- Local manual choices write through to artwork-cache.db as source Local and status MANUAL.
+- Automatic artwork processing remains remote-only; no filesystem migration, repair, or historical-data scan.
+
+v0.33.11 - Manual artwork cache write-through
+- TPDb movie and collection poster selections are mirrored directly into artwork-cache.db as MANUAL.
+- Kodi native/local artwork edits are mirrored only when the exact focused media type + DBID can be resolved; ambiguous DBIDs are skipped instead of guessed.
+- Artwork removals are mirrored as MISSING so DB-first cannot restore removed artwork.
+- No database, schema, state, profile, or historical-data migration.
+
+v0.33.10 - Menu, notification, cache-report, and AF3 dialog-focus fixes
 - Adds summary/run-history-audit.txt to diagnostics.
 - Labels non-active RUNNING rows as STALE HISTORY without updating or deleting database rows.
 - Performs no schema, database, state, or artwork migration.
