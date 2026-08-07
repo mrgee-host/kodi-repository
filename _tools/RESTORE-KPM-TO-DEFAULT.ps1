@@ -1,6 +1,6 @@
 ﻿<#
 Kodi Patch Manager hard restore script
-Restores all 17 current AF3 XML targets patched by Kodi Patch Manager 0.2.46, plus the legacy Python targets already supported by this script, back to clean/default addon files where possible.
+Restores all 18 current AF3 XML targets modified by Kodi Patch Manager 0.2.73, plus the legacy Python targets already supported by this script, back to clean/default addon files where possible.
 Default Kodi root: E:\Kodi
 
 Current restore policy:
@@ -10,7 +10,7 @@ Current restore policy:
 - If GitHub/internet is unavailable, restores from the local clean-source cache.
 - If both GitHub and cache are unavailable for a target, performs marker cleanup only for that target.
 - Deletes Python __pycache__/*.pyc files after restore so old compiled KPM code cannot survive.
-- Restores the exact 17 current AF3 XML patch targets listed by KPM 0.2.46.
+- Restores the exact 18 current AF3 XML patch targets, including the service-managed DialogSlider.xml target.
 - Does not restore AF3 XML files that are diagnostics-only and not patched by current KPM.
 - Validates downloaded/cached XML before replacing an active XML file.
 - Reports remaining KPM markers after restore.
@@ -259,7 +259,10 @@ $af3Files = @(
     'Includes_Furniture.xml',
 
     # F. Poster Ratio 2:3
-    'Includes_Constants.xml'
+    'Includes_Constants.xml',
+
+    # G. Subtitle Delay Slider
+    'DialogSlider.xml'
 )
 
 # Read/export-only AF3 files intentionally NOT restored because current KPM 0.2.46 does not patch them:
