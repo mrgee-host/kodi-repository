@@ -270,7 +270,7 @@ v0.33.1 - Clean fresh-install baseline
         </assets>
     </extension>
 </addon>
-<addon id="service.episode.to.strm" name="Episode to Empty STRM" version="1.0.0" provider-name="Yu custom">
+<addon id="service.episode.to.strm" name="Episode to STRM" version="1.0.1" provider-name="Yu custom">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -282,18 +282,19 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Replace a completed local episode with an empty STRM placeholder.</summary>
         <summary lang="id_ID">Ganti episode lokal yang selesai ditonton dengan placeholder STRM kosong.</summary>
-        <description lang="en_GB">After a library episode ends normally, this service removes the source video, creates an empty STRM with the same basename, rebuilds the Kodi episode, restores watched state and artwork, and preserves Library Artwork Curator and Library Ratings Scraper cache identity.</description>
-        <description lang="id_ID">Setelah episode library selesai diputar normal, service menghapus file video, membuat STRM kosong dengan nama dasar yang sama, memasukkan ulang episode ke Kodi, memulihkan status tontonan dan artwork, serta menjaga identitas cache Library Artwork Curator dan Library Ratings Scraper.</description>
+        <description lang="en_GB">After a library episode ends normally, this service removes the source video, creates an empty STRM with the same basename, rebuilds the Kodi episode, restores watched state and artwork, and hands off LAC/LRS cache migration to each add-on and restores Kodi watched state safely.</description>
+        <description lang="id_ID">Setelah episode library selesai diputar normal, service menghapus file video, membuat STRM kosong dengan nama dasar yang sama, memasukkan ulang episode ke Kodi, memulihkan status tontonan dan artwork, dan menyerahkan migrasi cache Library Artwork Curator serta Library Ratings Scraper kepada masing-masing addon.</description>
         <disclaimer lang="en_GB">The source video is permanently deleted. Only normal playback completion is processed. Virtual streams and existing STRM files are ignored.</disclaimer>
         <disclaimer lang="id_ID">File video sumber dihapus permanen. Hanya playback yang selesai normal yang diproses. Stream virtual dan file STRM yang sudah ada akan diabaikan.</disclaimer>
-        <news>v1.0.0
+        <news>v1.0.1
 - Automatic conversion only after onPlayBackEnded.
 - No hardcoded source video extension.
 - No Kodi Clean Library operation.
-- Shared auto-scan lock prevents LAC/LRS racing before cache migration.
-- Preserves watched state, last played, resume, date added, unique IDs, and episode artwork.
-- Migrates LAC episode cache and LRS rating rows when Kodi assigns a different episode DBID.
-- Uses cached data only. It does not start a full LAC or LRS internet scrape.
+- Aligns with LAC/LRS ownership: this addon no longer writes their databases directly.
+- LAC and LRS now handle DBID handoff themselves after Kodi re-adds the STRM episode.
+- Restores watched state, last played, resume, date added, unique IDs, and safe Kodi artwork only.
+- Skips stale generated video artwork when the replacement item is an empty STRM.
+- Shared lock stale time aligned to 180 seconds.
 - Writes a recoverable pending job before destructive operations.</news>
         <assets>
             <icon>resources/media/icon.png</icon>
