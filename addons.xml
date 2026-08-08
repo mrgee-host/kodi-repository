@@ -219,7 +219,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.77" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.78" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -230,7 +230,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.77 is based directly on v0.2.76. It keeps the R68 visual behavior and adds one optional top-level AF2 Colour Style switch. OFF preserves native AF3 solid highlights. ON uses the original AF2 two-colour preset pairs and AF2 TextureMaker highlight mapping while keeping AF3 layout, controls, fonts, blur, widgets, KPM rating behavior, MWH, and LRS unchanged. Preset changes while ON regenerate the AF2-style textures and intentionally ReloadSkin. No database, schema, profile, cache, or historical state migration is performed.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.78 is based directly on v0.2.77. It keeps the R68 visual behavior and optional AF2 Colour Style, and adds canonical Home Hub extra-fanart synchronization. In AF3 Custom Hubs only, KPM reuses the same stable canonical owner, ItemKey, and Generation already used by the rating resolver, selects one extra fanart per committed visit, keeps it for at least 10 seconds, and rejects stale blur results. MyVideoNav, MyPrograms, TMDbHelper source files, LRS, MWH, databases, schemas, profiles, and historical state are not modified or migrated.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
