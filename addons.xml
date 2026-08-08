@@ -14,7 +14,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library v0.4.16 keeps SteamEdit Name/SortAs synchronized for existing games during startup only when appinfo actually changed, and adds approved local taglines for seven games that previously used N/A. Unchanged startup sync remains write-free.</description>
+        <description>Steam Library v0.4.16 keeps SteamEdit Name/SortAs synchronized for existing games during startup only when appinfo actually changed. Unchanged startup sync remains write-free.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
