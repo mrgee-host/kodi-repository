@@ -219,7 +219,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.79" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.80" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -230,7 +230,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.79 is based directly on v0.2.77. It keeps the R68 visuals and optional AF2 Colour Style, and adds a validated partial TMDbHelper images.py patch for AF3 random {x} fanart. The same focused item holds its native random fanart for 10 seconds; a real item change selects immediately, and returning to a prior item is a new random visit. Games Property(fanart1-fanart8), AF3 blur/crop/effects, and all other TMDbHelper files remain untouched. The patch is limited to AF3 3.2.15 + TMDbHelper 6.16.2 and validates the stock target digest before first modification. No complete TMDbHelper add-on or target file is bundled.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.80 is based directly on v0.2.77. It keeps the R68 visuals and optional AF2 Colour Style, and adds a validated partial TMDbHelper images.py patch for AF3 random {x} fanart. The same focused item holds its native random fanart for 10 seconds; a real item change selects immediately, and returning to a prior item is a new random visit. Games Property(fanart1-fanart8), AF3 blur/crop/effects, and all other TMDbHelper files remain untouched. The patch is limited to AF3 3.2.15 + TMDbHelper 6.16.2 and validates the stock target digest plus unique anchors and native-span structure before first modification. No complete TMDbHelper add-on or target file is bundled.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
