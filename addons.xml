@@ -79,7 +79,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.33.12" provider-name="rmrector + Library Artwork Curator custom fork">
+<addon id="script.artwork.curator" name="Library Artwork Curator" version="0.33.13" provider-name="rmrector + Library Artwork Curator custom fork">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.json" version="6.20.0" />
@@ -111,9 +111,15 @@
     <extension point="xbmc.service" start="login" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Remote-only artwork curator for Kodi video libraries.</summary>
-        <description lang="en">Library Artwork Curator v0.33.12 adds manual local-file browsing and native-style Movie Set Information Folder artwork candidates to Select artwork while preserving direct artwork-cache write-through. No database or state migration.</description>
+        <description lang="en">Library Artwork Curator v0.33.13 sends protected custom movie sets without a TMDb id directly to local artwork selection, skipping TMDb name search and empty result dialogs. No database or state migration.</description>
         <disclaimer lang="en">Remote artwork sources: The Movie Database, fanart.tv, and TheTVDB.</disclaimer>
-        <news>v0.33.12 - Unified local artwork selection
+        <news>v0.33.13 - Custom sets without TMDb id go directly to local artwork selection
+- Indonesian Movies Collection, Thailand Movies Collection, and Animation Short Films Collection skip TMDb name search when no TMDb id is known.
+- Local-only picker shows MSIF Local art only when a real file exists, plus Browse.
+- Search for item is hidden for these local-only custom sets.
+- Empty TMDb result dialogs are suppressed.
+
+v0.33.12 - Unified local artwork selection
 - Select artwork always includes Browse... for choosing a local image file.
 - Movie sets read Kodi's videolibrary.moviesetsfolder and show Local art only when matching MSIF files actually exist.
 - No art action is not added; an absent local file produces no Local art entry.
