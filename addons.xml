@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.15" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.16" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.pil" version="1.1.7"/>
@@ -14,7 +14,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library v0.4.14 moves the fanart-picker Flipped row and candidate rail down 24 pixels so they no longer overlap the item/page heading. Artwork selection, preview geometry, databases, collections, diagnostics, and KPM integration are unchanged.</description>
+        <description>Steam Library v0.4.16 keeps SteamEdit Name/SortAs synchronized for existing games during startup only when appinfo actually changed, and adds approved local taglines for seven games that previously used N/A. Unchanged startup sync remains write-free.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
