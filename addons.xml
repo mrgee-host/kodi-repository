@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.16" provider-name="OpenAI">
+<addon id="plugin.program.steam.library" name="Steam Library" version="0.4.17" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.pil" version="1.1.7"/>
@@ -14,7 +14,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>Steam game database/scraper owner. AF3 visual integration is owned by KPM.</summary>
-        <description>Steam Library v0.4.16 keeps SteamEdit Name/SortAs synchronized for existing games during startup only when appinfo actually changed. Unchanged startup sync remains write-free.</description>
+        <description>Steam Library v0.4.17 keeps the existing SteamEdit Name/SortAs synchronization and publishes game extra fanart through Kodi native Art(fanart1-fanart4). The old custom Property(fanart*) output is removed; the Steam database artwork schema is unchanged.</description>
         <platform>windows</platform>
         <license>MIT</license>
         <assets>
@@ -22,7 +22,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.41" provider-name="OpenAI">
+<addon id="plugin.video.mediahub.widget" name="MediaHub Widget" version="0.1.42" provider-name="OpenAI">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.library.ratings.scraper" version="1.6.8"/>
@@ -35,7 +35,7 @@
 
     <extension point="xbmc.addon.metadata">
         <summary>MediaHub widget/list data provider. KPM owns visual integration.</summary>
-        <description>MediaHub Widget v0.1.41 returns a valid committed catalog immediately, keeps session shuffle atomic in the service, and exports current readiness, catalog integrity, counts, file digests, and filtered runtime logs. Catalog schema and rebuild rules are unchanged.</description>
+        <description>MediaHub Widget v0.1.42 keeps the persistent catalog and direct Steam DB metadata reader, but game fanart is sourced from Steam Library ListItem Art through Files.GetDirectory. All validated game fanart candidates are retained in the master catalog and republished as native Art(fanartN); Movies and Series behavior is unchanged.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
@@ -219,7 +219,7 @@ v0.33.1 - Clean fresh-install baseline
 - Existing playback, rating detection, diagnostics, and Kodi 22 compatibility remain active.</news>
   </extension>
 </addon>
-<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.80" provider-name="MrGee">
+<addon id="script.kodi.patch.manager" name="Kodi Patch Manager" version="0.2.81" provider-name="MrGee">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="resource.images.kpm.studiologos" version="1.0.3"/>
@@ -230,7 +230,7 @@ v0.33.1 - Clean fresh-install baseline
     <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Safe patch manager for Kodi skin and helper add-ons</summary>
-        <description lang="en_GB">Kodi Patch Manager v0.2.80 is based directly on v0.2.77. It keeps the R68 visuals and optional AF2 Colour Style, and adds a validated partial TMDbHelper images.py patch for AF3 random {x} fanart. The same focused item holds its native random fanart for 10 seconds; a real item change selects immediately, and returning to a prior item is a new random visit. Games Property(fanart1-fanart8), AF3 blur/crop/effects, and all other TMDbHelper files remain untouched. The patch is limited to AF3 3.2.15 + TMDbHelper 6.16.2 and validates the stock target digest plus unique anchors and native-span structure before first modification. No complete TMDbHelper add-on or target file is bundled.</description>
+        <description lang="en_GB">Kodi Patch Manager v0.2.81 keeps the R68 visual baseline and the validated partial TMDbHelper random {x} 10-second hold. Games now follow the native Art(fanart1-fanart8) contract. It also adds a partial AF3 3.2.15 Custom Hub fanart fresh-visit patch that clears retained per-window BlurImage state on Hub entry and blocks the previous Home Current fanart fallback only while the new Hub fanart is pending. Titles, plot, ratings, metadata timing, TMDbHelper random choice, AF3 blur processing, colors, fade timing, and unrelated XML remain untouched. No complete AF3 or TMDbHelper target file is bundled or replaced.</description>
         <platform>all</platform>
         <license>MIT</license>
         <assets>
